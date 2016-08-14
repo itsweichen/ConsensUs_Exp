@@ -589,8 +589,7 @@ Template.individualPage.onRendered(function() {
 
                         /* checkbox */
                         var check_box = d3
-                        .select("body")
-                        .select("div")
+                        .select("#checkbox_panel")
                         .classed("checkbox", true)
                         .style("position", "absolute")
                         .style("left", 1077  + "px")
