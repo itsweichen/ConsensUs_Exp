@@ -9,8 +9,6 @@ Template.individualPage.onRendered(function() {
 
     var r = 10;
 
-
-
     var svg = d3
     .select('#main_panel')
     .attr("height", height)
@@ -559,7 +557,7 @@ Template.individualPage.onRendered(function() {
                     var candid = [{candid: "Sam"}, {candid: "Adam"}, {candid: "Jim"}];
                     var legend_height = 15;
                     var legend_padding = 17;
-                    var legend = d3.select('body')
+                    var legend = d3
                     .select("#main_panel")
                     .append("g")
                     .selectAll("g")
