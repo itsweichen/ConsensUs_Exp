@@ -1,5 +1,7 @@
 Template.individualPage.onRendered(function() {
 
+    console.log("D3 code is running...");
+
     var criteria_num = 4;
     var candidate_num = 3;
     var user_num = 6;
@@ -8,6 +10,8 @@ Template.individualPage.onRendered(function() {
     var height = 450, width = 1050;
 
     var r = 10;
+
+    console.log(d3.select('#main_panel'));
 
     var svg = d3
     .select('#main_panel')
@@ -634,7 +638,6 @@ Template.individualPage.onRendered(function() {
                                 d3.selectAll(".axis").style("visibility", "hidden");
                             }
                         })
-
 });
 
 
