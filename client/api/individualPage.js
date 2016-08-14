@@ -1,4 +1,5 @@
 Template.individualPage.onRendered(function() {
+
     var criteria_num = 4;
     var candidate_num = 3;
     var user_num = 6;
@@ -637,4 +638,14 @@ Template.individualPage.onRendered(function() {
                             }
                         })
 
-                    });
+});
+
+
+Template.individualPage.helpers({
+  authInProcess: function() {
+    return Meteor.loggingIn();
+  },
+  loggedIn: function() {
+    return !!Meteor.user(); // **
+  }
+});

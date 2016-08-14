@@ -1,31 +1,40 @@
 <template name="individualPage">
+    {{#if authInProcess}}
+        <p>
+            loading...
+        </p>
+    {{else}}
+        {{#if loggedIn}}
+            <p style="padding-left: 120px">
+                <!-- php -->
+                <b>Individual Voting page for who????</b><br>
+                Rank the Candidates. Click and drag the colored circles onto the line<br>
+                Please click the button "Next" when you finish this page's task.
+                <br>
+            </p>
+            <svg id="left_side_panel"></svg>
+            <svg id="main_panel"></svg>
+            <div></div>
 
-    <p style="padding-left: 120px">
-
-        <!-- php -->
-        <b>Individual Voting page for who????</b><br>
-        Rank the Candidates. Click and drag the colored circles onto the line<br>
-        Please click the button "Next" when you finish this page's task.
-        <br>
-    </p>
-    <svg id="left_side_panel"></svg>
-    <svg id="main_panel"></svg>
-    <div></div>
-
-    <br>
-    <br>
-    <br>
-    <div style="padding-left: 435px; margin-top: 200px; margin-bottom: 30px">
-        <!-- php onkeyup onkeydown-->
-        <textarea  name="argument" placeholder="Reasons for your scores..." id="argu_id_argu" onkeyup="" onkeydown="" style="width: 500px; height: 100px;"></textarea>
-        <span id="word_counter">0</span>Words<br/>
-    </div>
+            <br>
+            <br>
+            <br>
+            <div style="padding-left: 435px; margin-top: 200px; margin-bottom: 30px">
+                <!-- php onkeyup onkeydown-->
+                <textarea  name="argument" placeholder="Reasons for your scores..." id="argu_id_argu" onkeyup="" onkeydown="" style="width: 500px; height: 100px;"></textarea>
+                <span id="word_counter">0</span>Words<br/>
+            </div>
 
 
-    <div style="width:1200px;float:left">
-        <!-- php href -->
-        <a href="" class="button button-rounded button-raised" style="margin-left: 1050px;  margin-top: 0px; float:left">Next</a>
+            <div style="width:1200px;float:left">
+                <!-- php href -->
+                <a href="" class="button button-rounded button-raised" style="margin-left: 1050px;  margin-top: 0px; float:left">Next</a>
 
-    </div>
+            </div>
+        {{else}}
+          <p>You are not authorized to view this page.</p>
+          <p>Please <a href="/login">login</a> to view this page</p>
+        {{/if}}
+    {{/if}}
 
 </template>
