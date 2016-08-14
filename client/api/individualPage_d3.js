@@ -111,15 +111,12 @@ Template.individualPage.onRendered(function() {
     }
 
     scores = [
-        [0, 8.20, 7.14, 8.60],
-        [0, 9.2, 8.28, 8.12],
+        [0, 8.20, 7.14, 8.60], // overall [invalid, candidate1, candidate2, candidate 3]
+        [0, 9.2, 8.28, 8.12],  //criteria 1
         [0, 9.2, 8.12, 8.5],
         [0, 6.38, 5.3, 8.78],
         [0, 8.02, 6.84, 9.03]
     ];
-
-    //php data2
-
 
     var str = "[";
 
@@ -195,9 +192,6 @@ Template.individualPage.onRendered(function() {
     .style("text-anchor", "middle")
     .style("font-size", "14px")
     .text('');
-
-
-
 
     var defs = svg.append("defs");
 
