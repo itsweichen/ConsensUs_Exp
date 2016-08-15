@@ -1,9 +1,58 @@
 <template name="Admin">
     <div class="container">
-        <h1>ConsensUs Admin</h1>
-        <h2>Add New Voters</h2>
+        <h1>ConsensUs_Exp Admin</h1>
+        <h2>Tasks</h2>
+        <div class="new-task-container">
+            {{#autoForm collection="Tasks" id="insertBookForm" type="insert"}}
+              <fieldset>
+                <h4>Create a task</h4>
+                <table class="admin-form">
+                    <tr>
+                        <th>Condition</th>
+                        <th>Voter Num</th>
+                        <th>Biased Type</th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <td>{{> afFieldInput name='condition'}}</td>
+                        <td>{{> afFieldInput name='voterNum'}}</td>
+                        <td>{{> afFieldInput name='biasedType'}}</td>
+                        <button type="submit" class="btn btn-primary">Create</button>
+                    </tr>
+                </table>
+              </fieldset>
+            {{/autoForm}}
+        </div>
+
+        <h4>Created Tasks</h4>
+        <div class="task-container">
+            <table class="admin-form">
+                <tr>
+                    <th>id</th>
+                    <th>Condition</th>
+                    <th>Voter Num</th>
+                    <th>Biased Type</th>
+                    <th></th>
+                </tr>
+                {{#each tasks}}
+                    {{> TaskList}}
+                {{/each}}
+            </table>
+        </div>
+
+
+        <h3>Add New Voters</h3>
         <div class="new-voter-container">
             {{> quickForm collection="Voters" id="insertVoterForm" type="insert" class="new-voter-form"}}
         </div>
     </div>
+</template>
+
+<template name="TaskList">
+    <tr>
+        <td>{{_id}}</td>
+        <td>{{condition}}</td>
+        <td>{{voterNum}}</td>
+        <td>{{biasedType}}</td>
+    </tr>
 </template>
