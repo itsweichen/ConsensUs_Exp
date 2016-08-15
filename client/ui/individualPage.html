@@ -5,30 +5,33 @@
         </p>
     {{else}}
         {{#if loggedIn}} -->
-            <p style="padding-left: 120px">
-                <!-- php -->
-                <b>Individual Voting page for who????</b><br>
-                Rank the Candidates. Click and drag the colored circles onto the line<br>
-                Please click the button "Next" when you finish this page's task.
 
-                <br>
+            <div class="container" style="height:500px">
+                <div class="row">
+                    <p>
+                        <!-- php -->
+                        <h2>Individual page</h2><br>
+                        Rank the Candidates. Click and drag the colored circles onto the line.<br>
+                        Please click the button "Next" when you finish this page's task.
+                        <br>
+                    </p>
+                </div>
+                <div class="row" style="background-color: Gainsboro">
+                    <div class="col-md-12">
+                        <svg id="main_panel"></svg>
+                        <div id="checkbox_panel"></div>
+                    </div>
+                </div>
 
-            </p>
-            <svg id="left_side_panel"></svg>
-            <svg id="main_panel"></svg>
-            <div id="checkbox_panel"></div>
-
-            <br>
-            <br>
-            <br>
-            <div style="padding-left: 435px; margin-top: 200px; margin-bottom: 30px">
-                <textarea  name="arguments" placeholder="Reasons for your scores..." id="arguments"></textarea>
-                <span id="word_counter">0</span>Words<br/>
+            <div class="row" style="background-color: Gainsboro">
+                <textarea  class="col-md-8" style="margin-left:50px; margin-bottom:10px; width: 590px" name="arguments" placeholder="Reasons for your scores..."></textarea>
+                <p class="col-md-1" style="margin-bottom:10px"><span id="word_counter">0</span>Words</p>
+                <a href="./GroupPage.html" style="margin-bottom:10px" class="col-md-1 col-md-offset-3 btn btn-lg btn-default">Next</a>
             </div>
 
-            <div>
-                <a id="next-btn">Next</a>
             </div>
+
+           
         <!-- {{else}}
           <p>You are not authorized to view this page.</p>
           <p>Please <a href="/login">login</a> to view this page</p>
