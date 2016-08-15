@@ -15,20 +15,14 @@ Template.individualPage.events({
           console.log(scores);
 
           // save scores
-          var userId = Meteor.userId();
           const FLAG = 1;
-          for (var i = 0; i < scores.length; i++) {
-              for (var j = 1; j < scores[i].length; j++) {
-                  Scores.insert({userId: userId, criteriaId: i, candidateId: j, score: scores[i][j], flag: FLAG});
-              }
-          }
+          Scores.insert({userId:  Meteor.userId(), score: scores, flag: FLAG });
 
           // save Arguments
-          var argu = $('textarea#arguments').val();
-          console.log("argu: " + argu);
-          Arguments.insert({userId: userId, arguments: argu});
+          //var argu = $('textarea#arguments').val();
+          //console.log("argu: " + argu);
+          //Arguments.insert({userId: userId, arguments: argu});
 
-          var taskId = FlowRouter.getParam("taskId");
-          FlowRouter.go('/'+taskId+'/group');
+          FlowRouter.go('/' + FlowRouter.getParam("taskId") + '/group');
       }
 });
