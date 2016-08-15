@@ -1,10 +1,5 @@
 <template name="individualPage">
-    <!-- {{#if authInProcess}}
-        <p>
-            loading...
-        </p>
-    {{else}}
-        {{#if loggedIn}} -->
+    {{> TaskHeader}}
 
             <div class="container" style="height:500px">
                 <div class="row">
@@ -26,12 +21,12 @@
             <div class="row" style="background-color: Gainsboro">
                 <textarea  class="col-md-8" style="margin-left:50px; margin-bottom:10px; width: 590px" name="arguments" placeholder="Reasons for your scores..."></textarea>
                 <p class="col-md-1" style="margin-bottom:10px"><span id="word_counter">0</span>Words</p>
-                <a href="./GroupPage.html" style="margin-bottom:10px" class="col-md-1 col-md-offset-3 btn btn-lg btn-default">Next</a>
+                <a href="#" style="margin-bottom:10px" class="col-md-1 col-md-offset-3 btn btn-lg btn-default" id="btn-next">Next</a>
             </div>
 
             </div>
 
-           
+
         <!-- {{else}}
           <p>You are not authorized to view this page.</p>
           <p>Please <a href="/login">login</a> to view this page</p>

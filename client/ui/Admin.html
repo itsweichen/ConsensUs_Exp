@@ -32,7 +32,7 @@
                     <th>Condition</th>
                     <th>Voter Num</th>
                     <th>Biased Type</th>
-                    <th></th>
+                    <th>Link</th>
                 </tr>
                 {{#each tasks}}
                     {{> TaskList}}
@@ -54,5 +54,6 @@
         <td>{{condition}}</td>
         <td>{{voterNum}}</td>
         <td>{{biasedType}}</td>
+        <td><a href="/{{_id}}">open</a></td>
     </tr>
 </template>

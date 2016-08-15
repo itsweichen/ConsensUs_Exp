@@ -9,8 +9,8 @@ Template.individualPage.helpers({
  });
 
 
-  Template.individualPage.events({
-      'click #next-btn': (event) => {
+Template.individualPage.events({
+      'click #btn-next': (event) => {
           console.log("Next Button clicked.");
           console.log(scores);
 
@@ -28,6 +28,7 @@ Template.individualPage.helpers({
           console.log("argu: " + argu);
           Arguments.insert({userId: userId, arguments: argu});
 
-          
+          var taskId = FlowRouter.getParam("taskId");
+          FlowRouter.go('/'+taskId+'/group');
       }
-  });
+});
