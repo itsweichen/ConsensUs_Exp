@@ -14,17 +14,16 @@ Template.individualPage.onRendered(function() {
     .select('#main_panel')
     .attr("height", height)
     .attr("width", width)
-    .style("position", "absolute")
     ;
 
     svg.append("text")
     .text("Not suitable")
-    .attr("transform", "translate(160, 50)");
+    .attr("transform", "translate(210, 50)");
 
     svg.append("text")
     .text("Suitable")
     .style("text-anchor", "end")
-    .attr("transform", "translate(560, 50)");
+    .attr("transform", "translate(610, 50)");
 
     svg.append("text")
     .text("Candidates")
@@ -38,7 +37,7 @@ Template.individualPage.onRendered(function() {
 
     var data1 = [{rect:0, name:"Overall"},{rect:1, name:"Academic"},{rect:2, name:"Activities"},{rect:3, name:"Recommendation Letter"},{rect:4, name:"Readiness for Engineering"}];
 
-    var title_width = 150;
+    var title_width = 200;
     var rect_height = 2, rect_width=400;
     var padding_x = 10;
     var padding_y = 70;
@@ -57,7 +56,6 @@ Template.individualPage.onRendered(function() {
     .attr("x", title_width)
     .attr("y", function(d){return (d.rect + 1) * padding_y + 5})
     .attr("text-anchor", "end")
-    .style("font-size", "12px")
     .text(function(d){return d.name;});
     rect
     .append('rect')
@@ -111,11 +109,11 @@ Template.individualPage.onRendered(function() {
     }
 
     scores = [
-        [0, 8.20, 7.14, 8.60], // overall [invalid, candidate1, candidate2, candidate 3]
-        [0, 9.2, 8.28, 8.12],  //criteria 1
-        [0, 9.2, 8.12, 8.5],
-        [0, 6.38, 5.3, 8.78],
-        [0, 8.02, 6.84, 9.03]
+        [0, -1, -1, -1], // overall [invalid, candidate1, candidate2, candidate 3]
+        [0, -1, -1, -1],  //criteria 1
+        [0, -1, -1, -1],
+        [0, -1,  -1, -1],
+        [0, -1, -1, -1]
     ];
 
     var str = "[";
@@ -155,7 +153,7 @@ Template.individualPage.onRendered(function() {
     .attr("r", r)
     .attr("cx", function(d) {
         if(d.score == -1) {
-            return d.x = 550 + d.col * 30;
+            return d.x = 600 + d.col * 30;
         }else {
             return d.x = title_width + padding_x + d.score * rect_width /10;
         }
@@ -182,7 +180,7 @@ Template.individualPage.onRendered(function() {
     .attr("x", function(d){
 
         if(d.score == -1){
-            return 550 + d.col * 30;
+            return 600 + d.col * 30;
         }
         else{
             return title_width + padding_x + d.score * rect_width / 10;
@@ -432,7 +430,7 @@ Template.individualPage.onRendered(function() {
                             var overall_id = "#a0" + d.col.toString();
                             d3.select(overall_id).select("circle").attr("cx", function(d) {
                                 if(overall == -1){
-                                    d.x = 550 + d.col * 30
+                                    d.x = 600 + d.col * 30
                                     return d.x;
                                 }
                                 else{
@@ -487,7 +485,7 @@ Template.individualPage.onRendered(function() {
                         var overall_id = "#a0" + d.col.toString();
                         d3.select(overall_id).select("circle").attr("cx", function(d) {
                             if(overall == -1){
-                                d.x = 550 + d.col * 30;
+                                d.x = 600 + d.col * 30;
                                 return d.x;
                             }
                             else{
@@ -562,7 +560,7 @@ Template.individualPage.onRendered(function() {
                     .attr('class', 'legend')
                     .attr("x", 0)
                     .attr("y", function(d, i) {return i * legend_height + 0;})
-                    .attr("transform", "translate(" + (title_width + rect_width + 200) + "," + 65 + ")")
+                    .attr("transform", "translate(" + (title_width + rect_width + 150) + "," + 65 + ")")
                     ;
 
                     legend.append('circle')
@@ -585,7 +583,7 @@ Template.individualPage.onRendered(function() {
                         .select("#checkbox_panel")
                         .classed("checkbox", true)
                         .style("position", "absolute")
-                        .style("left", 1077  + "px")
+                        .style("left", 790  + "px")
                         .style("top", function() { return 260 + "px";})
                         .append('input')
                         .attr('type','checkbox')

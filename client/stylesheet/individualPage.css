@@ -1,3 +1,4 @@
+
 .faded {
     opacity: 0;
 }
@@ -21,5 +22,9 @@
 text {
     font-size: 14px;
     stroke: none;
-    font-family: sans-serif;
+    font-family: 'Lato', sans-serif;
+}
+
+* {
+    font-family: 'Lato', sans-serif;
 }

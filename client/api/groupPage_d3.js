@@ -81,14 +81,14 @@ Template.GroupPage.onRendered(function() {
     //php
 
     var color = new Array("green", "blue", "orange", "BlueViolet", "brown", "Chartreuse", "Cyan");
-    var criteria_num = 4, candidate_num = 3, user_num = 6;
+    var criteria_num = 4, candidate_num = 3, user_num = 6; // input
     var voter=[
         [[0,0,0,0,0,0,0],[0,1.1,2.2,3.3,4.4,5.5,6.6],[0,1.1,2.2,3.3,4.4,5.5,6.6],[0,1.1,2.2,3.3,4.4,5.5,6.6]],
         [[0,0,0,0,0,0,0],[0,1.1,2.2,3.3,4.4,5.5,6.6],[0,1.1,2.2,3.3,4.4,5.5,6.6],[0,1.1,2.2,3.3,4.4,5.5,6.6]],
         [[0,0,0,0,0,0,0],[0,1.1,2.2,3.3,4.4,5.5,6.6],[0,1.1,2.2,3.3,4.4,5.5,6.6],[0,1.1,2.2,3.3,4.4,5.5,6.6]],
         [[0,0,0,0,0,0,0],[0,1.1,2.2,3.3,4.4,5.5,6.6],[0,1.1,2.2,3.3,4.4,5.5,6.6],[0,1.1,2.2,3.3,4.4,5.5,6.6]],
         [[0,0,0,0,0,0,0],[0,1.1,2.2,3.3,4.4,5.5,6.6],[0,1.1,2.2,3.3,4.4,5.5,6.6],[0,1.1,2.2,3.3,4.4,5.5,6.6]]
-    ];
+    ]; // input
 
     var overall = new Array(criteria_num + 1);
     var conflict = new Array(criteria_num + 1);
@@ -97,7 +97,7 @@ Template.GroupPage.onRendered(function() {
         conflict[i]=new Array(candidate_num + 1);
     }
 
-    var argu = new Array(user_num + 1);
+    var argu = new Array(user_num + 1); // input
 
     calculateAvg();
     calculateConflict();
