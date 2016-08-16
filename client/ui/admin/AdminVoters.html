@@ -7,6 +7,7 @@
 
     <div class="container">
         <div class="row">
+            <!-- {{> reactiveTable collection=Voters}} -->
             <h4>Created Voters</h4>
             <div class="voters-container">
                 <table class="admin-form">
@@ -21,7 +22,7 @@
                         <th>Action</th>
                     </tr>
                     {{#each voters}}
-                    {{> CreatedVoters}}
+                        {{> CreatedVoters}}
                     {{/each}}
                 </table>
             </div>

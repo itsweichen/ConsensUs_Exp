@@ -59,8 +59,8 @@ Template.GroupPage.onRendered(function() {
         // end backend code
 
 
-        $("#vis-row").empty();
-        $("#vis-row").html("<div class='col-md-9'><svg id='left_side_panel'></svg><svg id='main_panel'></svg><div id ='right_side_div'></div><div id= 'checkbox1_div'></div></div><div class='col-md-3'><div id ='argument_div' style='margin-top: 37px;'></div></div>");
+        // $("#vis-row").empty();
+        // $("#vis-row").html("<div class='col-md-9'><svg id='left_side_panel'></svg><svg id='main_panel'></svg><div id ='right_side_div'></div><div id= 'checkbox1_div'></div></div><div class='col-md-3'><div id ='argument_div' style='margin-top: 37px;'></div></div>");
 
         var height = 450, width = 750;
         var r = 10;
@@ -153,7 +153,7 @@ Template.GroupPage.onRendered(function() {
 
         var argu = new Array(user_num + 1);
 
-        argu[1] = "This is an average of everyone's score.Difference between committee and you indicates the amount of disagreement between you and other voters.Click on the dots to see others' votes. Hover over voters to see their score and arguments.Your task is to answer the questions below the visualization."
+        argu[1] = "This is an average of everyone's score.Difference between committee and you indicates the amount of disagreement between you and other voters.Click on the dots to see others' votes. Hover over voters to see their score and arguments.Your task is to answer the questions below the visualization.This is an average of everyone's score.Difference between committee and you indicates the amount of disagreement between you and other voters.Click on the dots to see others' votes. Hover over voters to see their score and arguments.Your task is to answer the questions below the visualization.Your task is to answer the questions below the visualization.This is an average of everyone's scoreThis is an average of everyone's score.Difference between committee and you indicates the amount of disagreement between you and other voters.Click on the dots to see others' votes. Hover over voters to see their score and arguments.Your task is to answer the questions below the visualization.This is an average of everyone's score.Difference between committee and you indicates the amount of disagreement between you and other voters.Click on the dots to see others' votes. Hover over voters to see their score and arguments.Your task is to answer the questions below the visualization.Your task is to answer the questions below the visualization.This is an average of everyone's score.Difference between committee and you indicates the amount of disagreement between you and other voters.Click on the dots to see others' votes. Hover over voters to see their score and arguments.Your task is to answer the questions below the visualization."
 
         calculateAvg();
         calculateConflict();
@@ -529,6 +529,7 @@ Template.GroupPage.onRendered(function() {
 
                                 });
 
+
                                 function recover1(){
                                     d3.select(".voter_panel").select("rect").style("filter", undefined);
                                     d3.selectAll(".bar").classed("faded", false);
@@ -539,16 +540,11 @@ Template.GroupPage.onRendered(function() {
                                     d3.selectAll(".legend").attr("opacity", 1);
                                     d3.selectAll(".checkbox").style("visibility", "visible");
 
+
                                 }
 
 
-
-
                                 var float_height = 15;
-
-
-
-
 
                                 var drag1 = d3.behavior.drag()
                                 .origin(Object)
@@ -960,5 +956,6 @@ Template.GroupPage.onRendered(function() {
                                             }
 
     });
+
 
 });

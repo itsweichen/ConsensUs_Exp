@@ -36,6 +36,12 @@ Template.AdminVoters.onRendered(function() {
     }
 });
 
+Template.AdminVoters.helpers({
+    voters: function() {
+        return Voters.find();
+    }
+});
+
 Template.CreatedVoters.helpers({
     updateVotersId: function() {
         return this._id;
