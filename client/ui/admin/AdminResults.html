@@ -1,0 +1,29 @@
+<template name="AdminResults">
+    <div class="container">
+        <table class="admin-form">
+            <tr>
+                <th>_id</th>
+                <th>name</th>
+                <th>taskId</th>
+                <th>Adam</th>
+                <th>Jim</th>
+                <th>Argu</th>
+                <th>Flag</th>
+                <th>Action</th>
+            </tr>
+            {{#each users}}
+                {{> ResultRow}}
+            {{/each}}
+        </table>
+    </div>
+</template>
+
+<template name="ResultRow">
+    <tr>
+        <td>{{_id}}</td>
+        <td>{{username}}</td>
+        <td>{{profile.taskId}}</td>
+        <td>{{scores _id}}</td>
+
+    </tr>
+</template>
