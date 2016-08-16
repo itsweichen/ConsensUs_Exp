@@ -1,0 +1,62 @@
+<template name="AdminVoters">
+    <style media="screen">
+    .form-control {
+
+    }
+    </style>
+
+    <div class="container">
+        <div class="row">
+            <h4>Created Voters</h4>
+            <div class="voters-container">
+                <table class="admin-form">
+                    <tr>
+                        <th>_id</th>
+                        <th>name</th>
+                        <th>Sam</th>
+                        <th>Adam</th>
+                        <th>Jim</th>
+                        <th>Argu</th>
+                        <th>Flag</th>
+                        <th>Action</th>
+                    </tr>
+                    {{#each voters}}
+                    {{> CreatedVoters}}
+                    {{/each}}
+                </table>
+            </div>
+
+        </div>
+        <hr>
+        <div class="row">
+            <h4>Add New Voters</h4>
+            <div class="new-voter-container">
+                {{> quickForm collection="Voters" id="insertVoterForm" type="insert" class="new-voter-form"}}
+            </div>
+        </div>
+    </div>
+</template>
+
+
+<template name="CreatedVoters">
+    <tr>
+        <td>{{_id}}</td>
+        <td>{{name}}</td>
+        <td>{{scoresSam}}</td>
+        <td>{{scoresAdam}}</td>
+        <td>{{scoresJim}}</td>
+        <td>{{argu}}</td>
+        <td>{{flag}}</td>
+        <td>
+            <span class="glyphicon glyphicon-pencil"></span> &nbsp;
+            <span class="glyphicon glyphicon-trash"></span>
+        </td>
+    </tr>
+    {{#if $.Session.get 'editVoter'}}
+    <tr>
+        <td colspan="8">
+            {{> quickForm collection="Voters" doc=this id=updateVotersId type="update" autosave=true class="updateVoterForm"}}
+        </td>
+    </tr>
+    {{/if}}
+</template>
