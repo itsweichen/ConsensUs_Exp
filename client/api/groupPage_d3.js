@@ -1,5 +1,7 @@
 Template.GroupPage.onRendered(function() {
-       var height = 450, width = 750;
+   
+
+                    var height = 400, width = 750;
                     var r = 10;
                     var i, j, k;
 
@@ -108,7 +110,7 @@ Template.GroupPage.onRendered(function() {
 
                     var argu = new Array(user_num + 1);
 
-                    argu[1] = "This is an average of everyone's score.Difference between committee and you indicates the amount of disagreement between you and other voters.Click on the dots to see others' votes. Hover over voters to see their score and arguments.Your task is to answer the questions below the visualization."
+                    argu[1] = "This is an average of everyone's score.Difference between committee and you indicates the amount of disagreement between you and other voters.Click on the dots to see others' votes. Hover over voters to see their score and arguments.Your task is to answer the questions below the visualization.This is an average of everyone's score.Difference between committee and you indicates the amount of disagreement between you and other voters.Click on the dots to see others' votes. Hover over voters to see their score and arguments.Your task is to answer the questions below the visualization.Your task is to answer the questions below the visualization.This is an average of everyone's scoreThis is an average of everyone's score.Difference between committee and you indicates the amount of disagreement between you and other voters.Click on the dots to see others' votes. Hover over voters to see their score and arguments.Your task is to answer the questions below the visualization.This is an average of everyone's score.Difference between committee and you indicates the amount of disagreement between you and other voters.Click on the dots to see others' votes. Hover over voters to see their score and arguments.Your task is to answer the questions below the visualization.Your task is to answer the questions below the visualization.This is an average of everyone's score.Difference between committee and you indicates the amount of disagreement between you and other voters.Click on the dots to see others' votes. Hover over voters to see their score and arguments.Your task is to answer the questions below the visualization."
 
                     calculateAvg();
                     calculateConflict();
@@ -629,18 +631,21 @@ Template.GroupPage.onRendered(function() {
 
                     score_variance_image
                         .append("text")
-                        .attr("x", 5)
+                        .attr("x", 0)
                         .attr("y", function(d, i){ return candidate_num * legend_height + legend_padding * 4 + 8;})
+                        .style("font-size", "12px")
                         .text("Difference");
                     score_variance_image
                         .append("text")
-                        .attr("x", 5)
+                        .attr("x", 0)
                         .attr("y", function(d, i){ return candidate_num * legend_height + legend_padding * 4 + 20;})
+                        .style("font-size", "12px")
                         .text("between");
                     score_variance_image
                         .append("text")
-                        .attr("x", 5)
+                        .attr("x", 0)
                         .attr("y", function(d, i){ return candidate_num * legend_height + legend_padding * 4 + 32;})
+                        .style("font-size", "12px")
                         .text("committee & you");
 
 
@@ -657,7 +662,7 @@ Template.GroupPage.onRendered(function() {
                         .style("position", "absolute")
                         .style("left", 720 +"px")
                         .style("top", function(d, i) {
-                            return  (53 +  legend_height * i).toString() + "px";})
+                            return  (55 +  legend_height * i).toString() + "px";})
                         .append('input')
                         .attr("type", "checkbox")
                         .property("checked", true)
@@ -716,7 +721,7 @@ Template.GroupPage.onRendered(function() {
                         .classed("side_panel", true)
                         .style("position", "absolute")
                         .style("left", (720).toString() + "px")
-                        .style("top", function() { return (100 + legend_height * candidate_num).toString() + "px";})
+                        .style("top", function() { return (125 + legend_height * candidate_num).toString() + "px";})
                         .append('input')
                         .attr('type','checkbox')
                         .property("checked", false);
@@ -855,7 +860,7 @@ Template.GroupPage.onRendered(function() {
 
                             d3.select("#argument_div")
                                 .classed("argument", true)
-                                .html(argu[d.code]);
+                                .html("argument</br>" + argu[d.code]);
 
                         })
                         .on("mouseout", function(d){
@@ -917,6 +922,7 @@ Template.GroupPage.onRendered(function() {
 
 
     }
+
 
 
 
