@@ -16,13 +16,16 @@ Template.individualPage.events({
 
           // save scores
           const FLAG = 1;
-          Scores.insert({userId:  Meteor.userId(), score: scores, flag: FLAG });
+          var order = FlowRouter.getQueryParam("order");
+          console.log(order);
+
+          Scores.insert({userId:  Meteor.userId(), score: scores, order: order });
 
           // save Arguments
           //var argu = $('textarea#arguments').val();
           //console.log("argu: " + argu);
           //Arguments.insert({userId: userId, arguments: argu});
 
-          FlowRouter.go('/' + FlowRouter.getParam("taskId") + '/group');
+          FlowRouter.go('/' + FlowRouter.getParam("taskId") + '/confidence?order='+order);
       }
 });

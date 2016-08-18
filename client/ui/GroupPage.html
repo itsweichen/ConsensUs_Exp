@@ -1,6 +1,6 @@
 <template name="GroupPage">
 
-    <div class="container" style="height:500px">
+    <div class="container">
     <div class="row">
         <p style="padding-left: 10px">
         <h2>
@@ -15,7 +15,7 @@
     </div>
 
 
-    <div class="row" style="background-color: Gainsboro">
+    <div class="row" style="background-color: Gainsboro; height:450px">
             <div class="col-lg-9 col-md-12 col-sm-12">
                 <svg id="left_side_panel"></svg>
                 <svg id="main_panel"></svg>
@@ -29,11 +29,22 @@
 
     </div>
 
-<div class="row">
-    {{> task1}}
-</div>
-</div>
 
+    <hr>
+    </div>
 
+    <div class="row">
+        {{#if type}}
+            {{> Questions}}
+        {{else}}
+            <div class="container">
+                <h3>Arguments</h3>
+                <textarea name="argu" rows="8" cols="40" class="form-control"></textarea>
+                <div align="right" style="padding-top: 20px">
+                    <button type="button" class="btn btn-primary" style="padding: 6px 20px;" id="submitArgu">Submit</button>
+                </div>
 
+            </div>
+        {{/if}}
+    </div>
 </template>

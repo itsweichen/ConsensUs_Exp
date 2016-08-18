@@ -1,0 +1,238 @@
+<template name="NonVis">
+<style>
+table {
+}
+th, td {
+    border: 1px solid black;
+    text-align: center;
+}
+
+td {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+* {
+    font-family: 'Lato', sans-serif;
+}
+
+.row {
+    font-size: 16px;
+}
+</style>
+
+
+<div class="container" style="height:500px">
+    <div class="row">
+        <h2>Group Page</h2>
+    </div>
+    <div class="row" style="background-color: Gainsboro">
+        <svg class="side_panel col-md-3">
+        </svg>
+        <div class="main_panel col-md-4">
+        </div>
+        <div class="argument_panel col-md-4" style="margin-top: 40px;"></div>
+    </div>
+</div>
+
+
+<script>
+
+
+var height = 400, width = 750;
+var i, j, k;
+
+//data
+
+var criteria_num = 4, candidate_num = 3, user_num = 6;
+
+var data1 = [{rect:0, name:"Overall"},{rect:1, name:"Academic"},{rect:2, name:"Activities"},{rect:3, name:"Recommendation Letter"},{rect:4, name:"Readiness for Engineering"}];
+
+var voter = [[[0, 0, 0, 0, 0, 0, 0], [0, 1.1, 2.2, 3.2, 4, 5, 6], [0, 1, 2, 3, 4, 5, 6],  [0, 1, 2, 3, 4, 5, 6]],
+[[0, 0, 0, 0, 0, 0, 0], [0, 1, 2, 3, 4, 5, 6], [0, 1, 2, 3, 4, 5, 6],  [0, 1, 2, 3, 4, 5, 6]],
+[[0, 0, 0, 0, 0, 0, 0], [0, 1, 2, 3, 4, 5, 6], [0, 1, 2, 3, 4, 5, 6],  [0, 1, 2, 3, 4, 5, 6]],
+[[0, 0, 0, 0, 0, 0, 0], [0, 1, 2, 3, 4, 5, 6], [0, 1, 2, 3, 4, 5, 6],  [0, 1, 2, 3, 4, 5, 6]],
+[[0, 0, 0, 0, 0, 0, 0], [0, 1, 2, 3, 4, 5, 6], [0, 1, 2, 3, 4, 5, 6],  [0, 1, 2, 3, 4, 5, 6]]];
+
+var overall = new Array(criteria_num + 1);
+for(i = 0; i <=criteria_num; i++){
+    overall[i]=new Array(candidate_num + 1);
+}
+
+calculateAvg();
+
+var argu = new Array(user_num + 1);
+
+var voter_info  = [{ code:1,  name:"Yuan"}, { code:2,  name:"Brian"},
+{ code:3,  name:"Tom"}, { code:4,  name:"Rose"},
+{ code:5,  name:"Cindy"}, { code:6,  name:"Jake"}];
+
+var candidate_info = [{code:1, name:" "}, {code:2, name: "Sam"}, {code:3, name: "Adam"}, {code:4, name: "Jim"}];
+
+//data
+var table = d3.select('.main_panel')
+.append('table')
+.style("margin-top", "40px")
+;
+var tr = table.selectAll('tr')
+.data(data1)
+.enter()
+.append('tr')
+.html(function(d){ return d.name;})
+.attr("id", function(d, i){ return "tr" + i.toString();})
+.style("border", "1px solid black");
+
+tr.selectAll("td")
+.data(d3.range(0, candidate_num))
+.enter()
+.append('td')
+.attr('id', function(d, i){
+    return "td" + this.parentNode.id[2] + (i + 1).toString();})
+    .style("border", "1px solid black")
+    .html(function(d) {
+        return overall[this.id[2]][this.id[3]].toString() + "&nbsp"; });
+
+        table.insert('tr', ":first-child")
+        .selectAll('td')
+        .data(candidate_info)
+        .enter()
+        .append('td')
+        .style("border", "1px solid black")
+        .html(function(d){ return d.name; })
+
+
+        //indivudial page hover
+
+        var left_padding_x = 70;
+        var left_padding_y = 20;
+        var svg = d3
+        .select(".side_panel")
+        .attr("width", 100)
+        .attr("height", height);
+
+        svg
+        .append("text")
+        .text("Voters")
+        .style("text-anchor", "middle")
+        .attr("transform", "translate(" + (left_padding_x + 25) + ", 50)");
+
+        var voter_list_all =
+        svg
+        .append("g")
+        .attr("id", "v0");
+
+        voter_list_all
+        .append("rect")
+        .attr("x", left_padding_x + 25 - 15)
+        .attr("y", function(d, i){
+            return 63;
+        })
+        .attr("height", 20)
+        .attr("width", 30)
+        .attr("fill", "grey")
+        .style("border-radius", "100px")
+        ;
+        voter_list_all
+        .append("text")
+        .attr("x", function(d){ return  left_padding_x + 25;})
+        .attr("y", function(d, i) {
+            return 78;
+        })
+        .text(function(d){
+            return "ALL";
+        })
+        .style("text-anchor", "middle")
+        .style("fill", "White")
+        .style("font-size", "15px");
+
+        var voter_list =
+        svg
+        .append("g")
+        .selectAll("rect")
+        .data(voter_info)
+        .enter()
+        .append("g")
+        .attr("id", function(d, i){
+            return "v" + (i + 1).toString();
+        })
+        ;
+
+        voter_list
+        .append("rect")
+        .attr("x", function(d){
+            return left_padding_x + 25 - d.name.length * 10 / 2;
+        })
+        .attr("y", function(d, i){
+            return 63 + left_padding_y * (i + 1);
+        })
+        .attr("height", left_padding_y)
+        .attr("width", function(d){
+            return d.name.length * 10;
+        })
+        .style("opacity", 0)
+        .style("border-radius", "100px")
+        ;
+        voter_list
+        .append("text")
+        .attr("x", function(d){ return  left_padding_x + 25;})
+        .attr("y", function(d, i) {
+            return 78 + left_padding_y * (i + 1);
+        })
+        .text(function(d){
+            return d.name;
+        })
+        .style("text-anchor", "middle")
+        .style("fill", "grey")
+        .style("font-size", "15px")
+        .on("mouseover", function(d){
+            d3.select(this).style("fill", "white");
+            var id = "#v" + d.code.toString();
+            d3.selectAll(id).select("rect").style("fill", "grey").style("opacity", 1);
+
+            d3.select("#v0").select("rect").style("opacity", 0);
+            d3.select("#v0").select("text").style("fill", "grey");
+            for(i = 0; i <= criteria_num; i++)
+            for(j = 1; j <= candidate_num; j++){
+                var score = voter[i][j][d.code];
+                d3.select("#td" + i.toString() + j.toString()).html(score);
+            }
+            d3.select(".argument_panel").html("argument</br>" + argu[d.code]);
+
+        })
+        .on("mouseout", function(d){
+
+            d3.select(this).style("fill", "grey");
+            var id = "#v" + d.code.toString();
+            d3.selectAll(id).select("rect").style("opacity", 0);
+
+            d3.select("#v0").select("rect").style("fill", "grey").style("opacity", 1);
+            d3.select("#v0").select("text").style("fill", "white");
+
+            for(i = 0; i <= criteria_num; i++)
+            for(j = 1; j <= candidate_num; j++){
+                var score = overall[i][j];
+                d3.select("#td" + i.toString() + j.toString()).html(score);
+            }
+            d3.select(".argument_panel").html("");
+
+        });
+
+        
+
+
+        function calculateAvg(){
+            for(i = 0; i <= criteria_num; i++)
+            for(j = 1; j <= candidate_num; j++){
+                var sum = 0;
+                for(k = 1; k <= user_num; k++){
+                    sum += voter[i][j][k];
+                }
+                sum /= user_num;
+                overall[i][j] = d3.round(sum, 1);
+            }
+        }
+
+
+        </script>
+
+    </template>
