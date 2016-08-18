@@ -1,6 +1,36 @@
 <template name="Questions">
     <div class="container">
-        <h1>Questions</h1>
-        {{> quickForm collection="Questions" id="insertQuestionForm" type="insert" class="new-question-form"}}
+        <h3>Questions</h3>
+
+        {{#autoForm collection="Questions" id="insertQuestionForm" type="insert"}}
+            {{> afObjectField name='q1'}}
+            {{> afObjectField name='q2'}}
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{afFieldLabelText name='q3'}}</h3>
+                </div>
+                <div class="panel-body">
+                    {{> afFieldInput name='q3' type="select-checkbox-inline" options=voterOptions}}
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{afFieldLabelText name='q4'}}</h3>
+                </div>
+                <div class="panel-body">
+                    {{> afFieldInput name="q4" options=ccOptions}}
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{afFieldLabelText name='q5'}}</h3>
+                </div>
+                <div class="panel-body">
+                    {{> afFieldInput name="q5"}}
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        {{/autoForm}}
+
     </div>
 </template>

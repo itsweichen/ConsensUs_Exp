@@ -56,6 +56,13 @@ Template.GroupPage.onRendered(function() {
             voter_info[i] = {code: i+1, name: taskInfo.voters[i-1]};
         }
 
+        // arguments
+        var argu = new Array(user_num + 1);
+        argu[1] = "";
+        for (var i = 2; i <= user_num; i++) {
+            argu[i] = voters[i-1].argu;
+        }
+
         // end backend code
 
 
@@ -150,10 +157,6 @@ Template.GroupPage.onRendered(function() {
             overall[i]=new Array(candidate_num + 1);
             conflict[i]=new Array(candidate_num + 1);
         }
-
-        var argu = new Array(user_num + 1);
-
-        argu[1] = "This is an average of everyone's score.Difference between committee and you indicates the amount of disagreement between you and other voters.Click on the dots to see others' votes. Hover over voters to see their score and arguments.Your task is to answer the questions below the visualization.This is an average of everyone's score.Difference between committee and you indicates the amount of disagreement between you and other voters.Click on the dots to see others' votes. Hover over voters to see their score and arguments.Your task is to answer the questions below the visualization.Your task is to answer the questions below the visualization.This is an average of everyone's scoreThis is an average of everyone's score.Difference between committee and you indicates the amount of disagreement between you and other voters.Click on the dots to see others' votes. Hover over voters to see their score and arguments.Your task is to answer the questions below the visualization.This is an average of everyone's score.Difference between committee and you indicates the amount of disagreement between you and other voters.Click on the dots to see others' votes. Hover over voters to see their score and arguments.Your task is to answer the questions below the visualization.Your task is to answer the questions below the visualization.This is an average of everyone's score.Difference between committee and you indicates the amount of disagreement between you and other voters.Click on the dots to see others' votes. Hover over voters to see their score and arguments.Your task is to answer the questions below the visualization."
 
         calculateAvg();
         calculateConflict();

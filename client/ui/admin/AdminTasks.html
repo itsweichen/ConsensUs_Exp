@@ -1,0 +1,56 @@
+<template name="AdminTasks">
+    <div class="container">
+        <h2>Tasks</h2>
+        <div class="new-task-container">
+            {{#autoForm collection="Tasks" id="insertBookForm" type="insert"}}
+            <fieldset>
+                <h4>Create a task</h4>
+                <table class="admin-form">
+                    <tr>
+                        <th>Condition</th>
+                        <th>Voter Num</th>
+                        <th>Voters</th>
+                        <th>Biased Type</th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <td>{{> afFieldInput name='condition'}}</td>
+                        <td>{{> afFieldInput name='voterNum'}}</td>
+                        <td>{{> afFieldInput name='voters' type='select-checkbox-inline' options=voterOptions}}</td>
+                        <td>{{> afFieldInput name='biasedType'}}</td>
+                        <button type="submit" class="btn btn-primary">Create</button>
+                    </tr>
+                </table>
+            </fieldset>
+            {{/autoForm}}
+        </div>
+        <hr>
+        <h4>Created Tasks</h4>
+        <div class="task-container">
+            <table class="admin-form">
+                <tr>
+                    <th>id</th>
+                    <th>Condition</th>
+                    <th>Voter Num</th>
+                    <th>Voters</th>
+                    <th>Biased Type</th>
+                    <th>Link</th>
+                </tr>
+                {{#each tasks}}
+                {{> TaskList}}
+                {{/each}}
+            </table>
+        </div>
+    </div>
+</template>
+
+<template name="TaskList">
+    <tr>
+        <td>{{_id}}</td>
+        <td>{{condition}}</td>
+        <td>{{voterNum}}</td>
+        <td>{{voters}}</td>
+        <td>{{biasedType}}</td>
+        <td><a href="/{{_id}}">open</a></td>
+    </tr>
+</template>

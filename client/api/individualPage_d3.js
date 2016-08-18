@@ -246,7 +246,7 @@ Template.individualPage.onRendered(function() {
             .attr('y',function(d){ return d.y + 5;})
             .attr('width', 20)
             .attr('height', 24)
-            .attr("xlink:href","forbidden-sign.png");
+            .attr("xlink:href","../forbidden-sign.png");
         })
         .on('dragend', function(d){
             d3.select(this).select("image").remove();

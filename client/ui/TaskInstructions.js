@@ -3,12 +3,14 @@ Template.TaskInstructions.events({
         e.preventDefault();
         var taskId = FlowRouter.getParam("taskId");
         var username = $('#inputUsername').val();
+        var nickname = $('#inputNickname').val();
         var password = "123456";
         Accounts.createUser({
             username: username,
             password: password,
             profile: {
-                taskId: taskId
+                taskId: taskId,
+                nickname: nickname
             }
         }, function(error){
             if(error){
@@ -16,7 +18,7 @@ Template.TaskInstructions.events({
                 console.log(errorHTML);
                 $('.form-signin').prepend(errorHTML);
             } else {
-                FlowRouter.go('/'+taskId+'/individual'); // Redirect user if registration succeeds
+                FlowRouter.go('/'+taskId+'/individual?order=1'); // Redirect user if registration succeeds
             }
         });
     }
