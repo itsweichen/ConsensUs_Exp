@@ -14,16 +14,11 @@ Template.GroupPage.onRendered(function() {
 
         var criteria_num = taskInfo.criteriaNum, candidate_num = taskInfo.candidateNum, user_num = taskInfo.voterNum + 1;
 
-        console.log(taskInfo);
-        console.log(chairScores);
-
         var voters = new Array(user_num + 1);
 
         for (var i = 1; i < user_num; i++) {
             var voterName = taskInfo.voters[i-1];
-            console.log(voterName);
             voters[i] = Voters.findOne({"name": voterName});
-            console.log(voters[i]);
         }
 
 
