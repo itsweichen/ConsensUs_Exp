@@ -7,25 +7,37 @@ Template.Admin.helpers({
 Template.Admin.events({
     'click #get-result': function(e) {
         var chairs = Meteor.users.find({'username': {$ne : "weichen"}});
-        var mturk_id, name, taskId, voterNum, biasedType, confi_1, confi_2, will_1, will_2, score_1, score_2, argu;
+        var mturk_id, name, taskId, voterNum, biasedType, confi_1, confi_2, will_1, will_2, score_1, score_2, argu, success;
         chairs.forEach(function(chair) {
             id = chair._id;
             mturk_id = chair.username;
+            if (Results.findOne({mturk_id: mturk_id})) {
+                console.log(mturk_id + " already exists.");
+                return;
+            }
             name = chair.profile.nickname;
             taskId = chair.profile.taskId;
             var task = Tasks.findOne({_id: taskId});
             voterNum = task.voterNum;
             biasedType = task.biasedType;
             var confidence_1 = Confidence.findOne({userId: id, order: "1"});
+            if (confidence_1 === undefined) {
+                confidence_1 = {confidence: -1, willingness: -1};
+            }
             confi_1 = confidence_1.confidence;
             will_1 = confidence_1.willingness;
             var confidence_2 = Confidence.findOne({userId: id, order: "2"});
+            if (confidence_2 === undefined) {
+                confidence_2 = {confidence: -1, willingness: -1};
+            }
             confi_2 = confidence_1.confidence;
             will_2 = confidence_1.willingness;
+            console.log(confi_1);
             score_1 = Scores.findOne({userId: id, order: "1"}).score;
             score_2 = Scores.findOne({userId: id, order: "2"}).score;
             argu = Arguments.findOne({userId: id}).argu;
             Results.insert({
+                userId: id,
                 mturk_id: mturk_id,
                 name: name,
                 taskId: taskId,

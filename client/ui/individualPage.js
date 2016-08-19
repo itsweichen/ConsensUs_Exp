@@ -26,6 +26,7 @@ Template.individualPage.events({
           //console.log("argu: " + argu);
           //Arguments.insert({userId: userId, arguments: argu});
 
+          timerEnd(1);
           FlowRouter.go('/' + FlowRouter.getParam("taskId") + '/confidence?order='+order);
       }
 });

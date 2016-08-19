@@ -18,6 +18,7 @@ Template.TaskInstructions.events({
                 console.log(errorHTML);
                 $('.form-signin').prepend(errorHTML);
             } else {
+                timerStart(1);
                 FlowRouter.go('/'+taskId+'/individual?order=1'); // Redirect user if registration succeeds
             }
         });

@@ -3,20 +3,23 @@
     <div class="container">
     <div class="row">
         <p style="padding-left: 10px">
-        <h2>
-            Group Page
-        </h2>
-        This is an average of everyone's score.<br>
+        <h3>Committee's scores</h3>
+        <ol class="task-desc">
+            <li>As committee chair, please look over their scores and reasons.</li>
+            <li>Answer the questions below.</li>
+        </ol>
+
+        <!-- This is an average of everyone's score.<br>
         "Difference between committee and you” indicates the amount of disagreement between you and other voters.
         <br>
         Click on the dots to see others' votes. Hover over voters to see their score and arguments.<br>
-        Your task is to answer the questions below the visualization.
+        Your task is to answer the questions below the visualization. -->
         </p>
     </div>
 
 
     <div class="row" style="background-color: Gainsboro; height:450px">
-            <div class="col-lg-9 col-md-12 col-sm-12">
+            <div class="col-lg-9 col-md-12 col-sm-12" id="div-vis">
                 <svg id="left_side_panel"></svg>
                 <svg id="main_panel"></svg>
                 <div id ="right_side_div"></div>

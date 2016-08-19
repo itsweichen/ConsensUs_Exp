@@ -476,7 +476,8 @@ Template.GroupPage.onRendered(function() {
                                     //button1
                                     var button1 = d3.select(".voter_panel")
                                     .append("g")
-                                    .attr("id", "r1");
+                                    .attr("id", "r1")
+                                    .on("mousedown", recover1);
 
 
                                     button1
@@ -502,7 +503,7 @@ Template.GroupPage.onRendered(function() {
                                     .style("font-size", "18px")
                                     .style("text-anchor", "middle")
                                     .style("fill", "white")
-                                    .on("mousedown", recover1)
+
                                     .on("mouseover", function(d){
                                         d3.select(this).style("fill", "grey");
                                         d3.select("#r1").select("rect").attr("fill", "white");
