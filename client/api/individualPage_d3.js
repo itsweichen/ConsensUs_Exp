@@ -553,11 +553,11 @@ Template.individualPage.onRendered(function() {
                     var legend = d3
                     .select("#main_panel")
                     .append("g")
+                    .attr('id', 'legend')
                     .selectAll("g")
                     .data(candid)
                     .enter()
                     .append('g')
-                    .attr('class', 'legend')
                     .attr("x", 0)
                     .attr("y", function(d, i) {return i * legend_height + 0;})
                     .attr("transform", "translate(" + (title_width + rect_width + 150) + "," + 65 + ")")

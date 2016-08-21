@@ -45,7 +45,7 @@ Template.GroupPage.onRendered(function() {
         }
 
         var voter_info = new Array(user_num);
-        voter_info[0] = {code: 1, name: Meteor.user().username};
+        voter_info[0] = {code: 1, name: Meteor.user().profile.nickname};
 
         for (var i = 1; i < user_num; i++) {
             voter_info[i] = {code: i+1, name: taskInfo.voters[i-1]};
