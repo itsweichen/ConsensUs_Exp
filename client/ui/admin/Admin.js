@@ -23,28 +23,36 @@ Template.Admin.events({
             voterNum = task.voterNum;
             biasedType = task.biasedType;
             condition = task.condition;
-            var confidence_1 = Confidence.findOne({userId: id, order: "1"});
-            if (confidence_1 === undefined) {
-                confidence_1 = {confidence: -1, willingness: -1};
-            }
+
+            // confidence
+            var confidence_1 = Confidence.findOne({userId: id, order: "1"}) || {confidence: -1, willingness: -1};
             confi_1 = confidence_1.confidence;
             will_1 = confidence_1.willingness;
-            var confidence_2 = Confidence.findOne({userId: id, order: "2"});
-            if (confidence_2 === undefined) {
-                confidence_2 = {confidence: -1, willingness: -1};
-            }
+            var confidence_2 = Confidence.findOne({userId: id, order: "2"}) || {confidence: -1, willingness: -1};
             confi_2 = confidence_1.confidence;
             will_2 = confidence_1.willingness;
-            console.log(confi_1);
-            score_1 = Scores.findOne({userId: id, order: "1"}).score;
-            score_2 = Scores.findOne({userId: id, order: "2"}).score;
-            argu = Arguments.findOne({userId: id}).argu;
-            for (var i = 0; i < 4; i++)
-                time[i] = Timer.findOne({userId: id, stage: i+1}).time;
-            questions = Questions.findOne({userId: id});
+
+            // score
+            score_1 = Scores.findOne({userId: id, order: "1"}) || {score: -1};
+            score_2 = Scores.findOne({userId: id, order: "2"}) || {score: -1};
+            score_1 = score_1.score;
+            score_2 = score_2.score;
+
+            // argu
+            argu = Arguments.findOne({userId: id}) || {argu: "null"};
+            argu = argu.argu;
+
+            for (var i = 0; i < 4; i++){
+                var tmp = Timer.findOne({userId: id, stage: i+1}) || {time: -1};
+                time[i] = tmp.time;
+            }
+
+            questions = Questions.findOne({userId: id}) || {q: null};
             questions = JSON.stringify(questions);
-            questionsR = QuestionsR.findOne({userId: id});
+
+            questionsR = QuestionsR.findOne({userId: id}) || {q:null};
             questionsR = JSON.stringify(questionsR);
+
             Results.insert({
                 userId: id,
                 mturk_id: mturk_id,
