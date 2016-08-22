@@ -46,25 +46,27 @@ Template.GroupPageTemplate.events({
 });
 
 Template.GroupPageTemplate.onRendered(function() {
-    var type = FlowRouter.getQueryParam("type");
-    if (type == "2") {
-        $('body').pagewalkthrough({
-            name: 'groupPageIntro2',
-            steps: [{
-                popup: {
-                    content: "As committee chair, your job is to take into account the perspective of the committee and integrate everyone’s reasoning to come to the best decision possible.",
-                    type: 'modal'
+    this.autorun(function() {
+        var type = FlowRouter.getQueryParam("type");
+        if (type == "2") {
+            $('body').pagewalkthrough({
+                name: 'groupPageIntro2',
+                steps: [{
+                    popup: {
+                        content: "As committee chair, your job is to take into account the perspective of the committee and integrate everyone’s reasoning to come to the best decision possible.",
+                        type: 'modal'
+                    }
+                }, {
+                    wrapper: '#argu-textarea',
+                    popup: {
+                        content: "In the textbox below, please write arguments for your decision, which will be sent to the committee. Provide as many details as possible so that your committee members will understand your reasoning.",
+                        type: 'tooltip',
+                        position: 'top'
+                    }
                 }
-            }, {
-                wrapper: '#argu-textarea',
-                popup: {
-                    content: "In the textbox below, please write arguments for your decision, which will be sent to the committee. Provide as many details as possible so that your colleagues will understand your reasoning.",
-                    type: 'tooltip',
-                    position: 'top'
-                }
-            }
-            ]
-        });
-        $('body').pagewalkthrough('show');
-    }
+                ]
+            });
+            $('body').pagewalkthrough('show');
+        };
+    });
 });
