@@ -1,5 +1,5 @@
 timerStart = function(stage) {
-    Session.setPersistent("timer", Date.now());
+    Session.set("timer", Date.now());
     console.log("timer - stage: " + stage);
 }
 

@@ -1,9 +1,13 @@
 Template.GroupPageTemplate.helpers({
     cond1_2: function() {
         var taskId = FlowRouter.getParam("taskId");
-        console.log(taskId);
         var task = Tasks.findOne({_id: taskId});
         return (task.condition === 1) || (task.condition === 2);
+    },
+    cond5_6: function() {
+        var taskId = FlowRouter.getParam("taskId");
+        var task = Tasks.findOne({_id: taskId});
+        return (task.condition === 5) || (task.condition === 6);
     },
     cond3: function() {
         var taskId = FlowRouter.getParam("taskId");
