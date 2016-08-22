@@ -60,7 +60,8 @@ Template.GroupPageBothConflicts.onRendered(function() {
 
         // end backend code
 
-
+        $("#div-vis").empty();
+        $("#div-vis").html('<svg id="left_side_panel"></svg><svg id="main_panel"></svg><div id ="right_side_div"></div><div id= "checkbox1_div"></div>');
 
 
         var height = 400, width = 750;
