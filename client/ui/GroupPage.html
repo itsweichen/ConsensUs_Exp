@@ -1,11 +1,23 @@
 <template name="GroupPage">
+
+    <script type="text/javascript">
+        function countWord(){
+            s = document.getElementById("argu-textarea").value;
+            s = s.replace(/(^\s*)|(\s*$)/gi,"");
+            s = s.replace(/[ ]{2,}/gi," ");
+            s = s.replace(/\n /,"\n");
+            var numm = s.split(' ').length;
+            document.getElementById("word_counter").innerText = numm;
+        }
+    </script>
+
     <div class="container">
     <div class="row">
         <p style="padding-left: 10px">
         <h3>Committee's scores</h3>
         <ol class="task-desc">
             <li>As committee chair, please look over their scores and reasons.</li>
-            <li>Answer the questions below.</li>
+            <li>Answer the questions below and then provide your arguments.</li>
         </ol>
         </p>
     </div>
@@ -33,7 +45,7 @@
         <h3>Committee's scores</h3>
         <ol class="task-desc">
             <li>As committee chair, please look over their scores and reasons.</li>
-            <li>Answer the questions below.</li>
+            <li>Answer the questions below and then provide your arguments.</li>
         </ol>
         </p>
     </div>
@@ -61,7 +73,7 @@
         <h3>Committee's scores</h3>
         <ol class="task-desc">
             <li>As committee chair, please look over their scores and reasons.</li>
-            <li>Answer the questions below.</li>
+            <li>Answer the questions below and then provide your arguments.</li>
         </ol>
         </p>
     </div>
@@ -89,7 +101,7 @@
         <h3>Committee's scores</h3>
         <ol class="task-desc">
             <li>As committee chair, please look over their scores and reasons.</li>
-            <li>Answer the questions below.</li>
+            <li>Answer the questions below and then provide your arguments.</li>
         </ol>
         </p>
     </div>
