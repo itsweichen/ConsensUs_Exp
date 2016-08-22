@@ -39,6 +39,8 @@ Template.individualPage.events({
 
         if (order == "1") {
             timerEnd(1);
+        } else {
+            timerEnd(4);
         }
         FlowRouter.go('/' + FlowRouter.getParam("taskId") + '/confidence?order='+order);
     }

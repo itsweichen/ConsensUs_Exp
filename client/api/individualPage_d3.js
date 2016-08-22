@@ -424,7 +424,7 @@ Template.individualPage.onRendered(function() {
                                 //                                    Math.max(title_width + padding_x, Math.min(title_width + padding_x + rect_width, d3.event.x)) );
 
 
-                                var score_num = d3.round((d.x - title_width - padding_x)/rect_width * 10, 100);
+                                var score_num = d3.round((d.x - title_width - padding_x)/rect_width * 10, 1);
                                 if(score_num > 10) score_num = -1;
                                 scores[d.row][d.col] = score_num;
                                 //php
@@ -479,7 +479,7 @@ Template.individualPage.onRendered(function() {
 
 
 
-                            var score_num = d3.round((d.x - title_width - padding_x)/rect_width * 10, 10);
+                            var score_num = d3.round((d.x - title_width - padding_x)/rect_width * 10, 1);
                             if(score_num > 10) score_num = -1;
                             scores[d.row][d.col] = score_num;
                             //php
@@ -495,7 +495,7 @@ Template.individualPage.onRendered(function() {
                             else
                             overall = -1;
 
-                            scores[0][d.col] = overall;
+                            scores[0][d.col] = d3.round(overall, 1);
                             var overall_id = "#a0" + d.col.toString();
                             d3.select(overall_id).select("circle").attr("cx", function(d) {
                                 if(overall == -1){

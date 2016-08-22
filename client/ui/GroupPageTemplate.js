@@ -30,6 +30,8 @@ Template.GroupPageTemplate.events({
             return;
         }
         Arguments.insert({userId: Meteor.userId(), argu: argu});
+        timerEnd(3);
+        timerStart(4);
         FlowRouter.go('/' + FlowRouter.getParam("taskId") + '/individual?order=2');
     },
     'keydown textarea': function(e) {

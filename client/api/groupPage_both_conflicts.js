@@ -180,6 +180,8 @@ Template.GroupPageBothConflicts.onRendered(function() {
             calculateAvg();
             calculateConflict();
 
+            Conflict.insert({userId: Meteor.userId(), conflict: conflict});
+
 
             var str = "[";
 
@@ -1111,8 +1113,6 @@ Template.GroupPageBothConflicts.onRendered(function() {
 
                                                                     data = parseFloat(voter[criteria_id][candidate_id][user_id]);
                                                                     avg = parseFloat(overall[criteria_id][candidate_id]);
-
-
                                                                     temp = temp + (data - avg) * (data - avg);
 
 
@@ -1125,8 +1125,73 @@ Template.GroupPageBothConflicts.onRendered(function() {
                                                         }
                                                     }
 
+    function q1(){
+       var scores = new Array(candidate_num + 1);
+       for(var i = 1; i <= candidate_num; i++){
+           scores[i] = overall[0][i];
+       }
+       return scores;
+    }
 
+    function q2(){
+       var scores = new Array(candidate_num + 1);
+       for(var i = 1; i <= candidate_num; i++){
+           scores[i] = overall[3][i];
+       }
+       return scores;
+    }
 
+    function q3(){
+   var scores = new Array(candidate_num + 1);
+   for(var i = 1; i <= user_num; i++)
+       scores[i] = voter[0][1][i];
+   return scores;
+   }
+
+function q4(){
+   var scores = new Array(candidate_num + 1);
+   for(var i = 1; i <= user_num; i++) {
+       scores[i] = voter[0][2][i];
+   }
+   return scores;
+}
+
+function q5(){
+   var scores = new Array(candidate_num + 1);
+   for(var i = 1; i <= user_num; i++) {
+       scores[i] = voter[0][3][i];
+   }
+   return scores;
+}
+
+function q6(){
+   var scores = new Array(criteria_num + 1);
+   for(var i = 0; i <= criteria_num; i++){
+       scores[i] = new Array(candidate_num + 1);
+   }
+
+   for(var i = 1; i <= criteria_num; i++)
+       for(var j = 1; j <= candidate_num; j++){
+           scores[i][j] = Math.abs(voter[i][j][0] - overall[i][j]);
+       }
+   return scores;
+}
+
+function q7(){
+   return overall[0];
+}
+
+var q1A = q1();
+var q2A = q2();
+var q3A = q3();
+var q4A = q4();
+var q5A = q5();
+var q6A = q6();
+var q7A = q7();
+console.log("q1A" + q1A);
+if (QuestionsR.findOne({userId: Meteor.userId()}) === undefined){
+    QuestionsR.insert({q1: q1A, q2: q2A, q3: q3A, q4: q4A, q5: q5A, q6: q6A, q7: q7A, userId: Meteor.userId()});
+}
 
 
 

@@ -45,3 +45,17 @@ Template.Questions.helpers({
         ];
     }
 });
+
+AutoForm.hooks({
+  insertQuestionForm: {
+      onSubmit: function(insertDoc, updateDoc, currentDoc) {
+          console.log("onsubmit");
+          console.log(insertDoc);
+      },
+      onSuccess: function (insertDoc, updateDoc, currentDoc) {
+          timerEnd(2);
+          timerStart(3);
+          FlowRouter.go('/' + FlowRouter.getParam("taskId") + '/group?type='+2);
+        }
+  }
+});

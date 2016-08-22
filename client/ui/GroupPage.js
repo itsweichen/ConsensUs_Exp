@@ -43,29 +43,35 @@ Template.GroupPageBothConflicts.onRendered(function() {
             }, {
                 wrapper: '#div-vis',
                 popup: {
-                    content: "The big dots represent the average scores across your committee, while the small dots represent your socres.",
+                    content: "The big dots represent the average scores across your committee, while the small dots represent your scores.",
                     type: 'tooltip',
-                    position: 'top'
+                    position: 'bottom'
                 }
             }, {
-                wrapper: '#a13 .large_dot',
+                wrapper: '#a23 .large_dot',
                 popup: {
                     content: "When you hover on the big dots, the red horizontal line above the dot represent the conflict among committee. A longer line means there is a bigger conflict.",
                     type: 'tooltip',
-                    position: 'top'
+                    position: 'top',
+                    overlayWidth: 70,
+                    overlayHeight: 70,
+                    offsetVertical: -30,
+                    offsetHorizontal: 20
                 },
                 onEnter: function() {
-                    $('#a13 .large_dot').triggerSVGEvent('mouseover');
+                    $('#a23 .large_dot').triggerSVGEvent('mouseover');
                 },
                 onLeave: function() {
-                    $('#a13 .large_dot').triggerSVGEvent('mouseout');
+                    $('#a23 .large_dot').triggerSVGEvent('mouseout');
                 }
             }, {
                 wrapper: '#a33 .small_dot',
                 popup: {
                     content: "When you hover on the small dots, the red line indicates the conflict between the committee and you.",
                     type: 'tooltip',
-                    position: 'top'
+                    position: 'top',
+                    offsetVertical: -40,
+                    offsetHorizontal: 20
                 },
                 onEnter: function() {
                     $('#a33 .small_dot').triggerSVGEvent('mouseover');
@@ -78,7 +84,8 @@ Template.GroupPageBothConflicts.onRendered(function() {
                 popup: {
                     content: "You can uncheck the candidate here to hide the related dots if you want to see a cleaner comparison.",
                     type: 'tooltip',
-                    position: 'top'
+                    position: 'top',
+                    offsetVertical: -20
                 },
                 onEnter: function() {
                     $($('.side_panel input')[0]).triggerSVGEvent('mousedown');
@@ -91,7 +98,11 @@ Template.GroupPageBothConflicts.onRendered(function() {
                 popup: {
                     content: "You can click the dots to see every member's scores regarding to the specific candidate and criterion.",
                     type: 'tooltip',
-                    position: 'top'
+                    position: 'top',
+                    overlayWidth: 80,
+                    overlayHeight: 50,
+                    offsetVertical: -30,
+                    offsetHorizontal: 30
                 },
                 onEnter: function() {
                     // $('#a22 .large_dot').triggerSVGEvent('click');
@@ -105,10 +116,14 @@ Template.GroupPageBothConflicts.onRendered(function() {
                 popup: {
                     content: "Hovering on a dot shows the name of the member who gave the score.",
                     type: 'tooltip',
-                    position: 'top'
+                    position: 'top',
+                    overlayWidth: 600,
+                    overlayHeight: 100,
+                    offsetHorizontal: 100,
+                    offsetVertical: -50
                 },
                 onEnter: function() {
-                    $('#a221').triggerSVGEvent('mouseover');
+                    // $('#a221').triggerSVGEvent('mouseover');
                 },
                 onLeave: function() {
                     $('#r1 text').triggerSVGEvent('mousedown');
@@ -118,7 +133,8 @@ Template.GroupPageBothConflicts.onRendered(function() {
                 popup: {
                     content: "This is a list of names of your committee. ",
                     type: 'tooltip',
-                    position: 'top'
+                    position: 'top',
+                    overlayWidth: 180
                 },
                 onEnter: function() {
                     // $('#a221').triggerSVGEvent('mouseover');
@@ -131,7 +147,8 @@ Template.GroupPageBothConflicts.onRendered(function() {
                 popup: {
                     content: "You can hover on their names to see their individual scores.",
                     type: 'tooltip',
-                    position: 'top'
+                    position: 'top',
+                    overlayWidth: 180
                 },
                 onEnter: function() {
                     $('#v2 text').triggerSVGEvent('mouseover');

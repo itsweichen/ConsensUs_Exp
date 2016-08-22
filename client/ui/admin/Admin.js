@@ -7,7 +7,9 @@ Template.Admin.helpers({
 Template.Admin.events({
     'click #get-result': function(e) {
         var chairs = Meteor.users.find({'username': {$ne : "weichen"}});
-        var mturk_id, name, taskId, voterNum, biasedType, confi_1, confi_2, will_1, will_2, score_1, score_2, argu, success;
+        var mturk_id, name, taskId, voterNum, biasedType, confi_1, confi_2, will_1, will_2, score_1, score_2, argu;
+        var time = new Array(4);
+        var questions, questionsR, condition;
         chairs.forEach(function(chair) {
             id = chair._id;
             mturk_id = chair.username;
@@ -20,6 +22,7 @@ Template.Admin.events({
             var task = Tasks.findOne({_id: taskId});
             voterNum = task.voterNum;
             biasedType = task.biasedType;
+            condition = task.condition;
             var confidence_1 = Confidence.findOne({userId: id, order: "1"});
             if (confidence_1 === undefined) {
                 confidence_1 = {confidence: -1, willingness: -1};
@@ -36,11 +39,18 @@ Template.Admin.events({
             score_1 = Scores.findOne({userId: id, order: "1"}).score;
             score_2 = Scores.findOne({userId: id, order: "2"}).score;
             argu = Arguments.findOne({userId: id}).argu;
+            for (var i = 0; i < 4; i++)
+                time[i] = Timer.findOne({userId: id, stage: i+1}).time;
+            questions = Questions.findOne({userId: id});
+            questions = JSON.stringify(questions);
+            questionsR = QuestionsR.findOne({userId: id});
+            questionsR = JSON.stringify(questionsR);
             Results.insert({
                 userId: id,
                 mturk_id: mturk_id,
                 name: name,
                 taskId: taskId,
+                condition: condition,
                 voterNum: voterNum,
                 biasedType: biasedType,
                 confi_1: confi_1,
@@ -49,7 +59,10 @@ Template.Admin.events({
                 will_2: will_2,
                 score_1: score_1,
                 score_2: score_2,
-                argu: argu
+                argu: argu,
+                time: time,
+                questions: questions,
+                questionsR: questionsR
             });
         });
         $(e.target).hide();
