@@ -1,10 +1,15 @@
 <template name="GroupPageTemplate">
-    {{#if cond1}}
-        {{> GroupPage}}
-    {{else}}
-        {{#if cond3}}
-            {{> NonVis}}
-        {{/if}}
+
+    {{#if cond1_2}}
+        {{> GroupPageBothConflicts}}
+    {{/if}}
+
+    {{#if cond3}}
+        {{> GroupPageCommNYou}}
+    {{/if}}
+
+    {{#if cond4}}
+        {{> GroupPageInComm}}
     {{/if}}
 
     <hr>
@@ -13,9 +18,17 @@
         {{#if type}}
             {{> Questions}}
         {{else}}
-            <div class="container">
+            <div class="container" id="argu-textarea">
                 <h3>Arguments</h3>
-                <textarea name="argu" rows="8" cols="40" class="form-control"></textarea>
+                <ol>
+                    <li>Please look over your committee members' opinions and choose one candidate to admit.</li>
+                    <li>Write arguments for your decision. Provide as many details as possible so that your colleagues will understand your reasoning (At least 80 words).</li>
+                </ol>
+                <div id="div-alert"></div>
+                <textarea name="argu"  rows="8" cols="40" class="form-control" placeholder="At least 80 words"></textarea>
+                <div align="right">
+                    <span id="word_counter">0</span> Words<br/>
+                </div>
                 <div align="right" style="padding-top: 20px">
                     <button type="button" class="btn btn-primary" style="padding: 6px 20px;" id="submitArgu">Submit</button>
                 </div>

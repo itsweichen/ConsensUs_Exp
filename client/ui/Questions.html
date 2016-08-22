@@ -4,7 +4,14 @@
 
         {{#autoForm collection="Questions" id="insertQuestionForm" type="insert"}}
             {{> afObjectField name='q1'}}
-            {{> afObjectField name='q2'}}
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{afFieldLabelText name='q2'}}</h3>
+                </div>
+                <div class="panel-body">
+                    {{> afFieldInput name='q2'}}
+                </div>
+            </div>
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">{{afFieldLabelText name='q3'}}</h3>
@@ -18,7 +25,7 @@
                     <h3 class="panel-title">{{afFieldLabelText name='q4'}}</h3>
                 </div>
                 <div class="panel-body">
-                    {{> afFieldInput name="q4" options=ccOptions}}
+                    {{> afFieldInput name="q4" type="select-radio-inline" options=voterOptions}}
                 </div>
             </div>
             <div class="panel panel-default">
@@ -26,7 +33,23 @@
                     <h3 class="panel-title">{{afFieldLabelText name='q5'}}</h3>
                 </div>
                 <div class="panel-body">
-                    {{> afFieldInput name="q5"}}
+                    {{> afFieldInput name="q5" type="select-radio-inline" options=voterOptions}}
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{afFieldLabelText name='q6'}}</h3>
+                </div>
+                <div class="panel-body">
+                    {{> afFieldInput name="q6" options=ccOptions}}
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{afFieldLabelText name='q7'}}</h3>
+                </div>
+                <div class="panel-body">
+                    {{> afFieldInput name='q7'}}
                 </div>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>

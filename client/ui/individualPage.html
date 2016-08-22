@@ -7,12 +7,20 @@
             <div class="container">
                 <div class="row">
                     <p>
-                        <h3>Evaluate three candidates</h3>
-                        <ol>
-                            <li>Read through the candidates' information: click here.</li>
-                            <li>Provide scores for each candidate on each criterion.</li>
-                            <li>Click "Next" if you finish the task.</li>
-                        </ol>
+                        {{#if ord1}}
+                            <h3>Evaluate three candidates</h3>
+                            <ol>
+                                <li>Read through the candidates' information: <a target="_blank" id="click-info" href="https://docs.google.com/spreadsheets/d/1tXTdFMQ_VPg8Qzc5m_CFC10pN7UP3S1Xj03uPmY85CU/edit#gid=0">click here</a> (please keep it open).</li>
+                                <li>Provide scores for each candidate on each criterion.</li>
+                                <li>Click "Next" after you finish the task.</li>
+                            </ol>
+                        {{else}}
+                            <h3>Re-evaluate three candidates</h3>
+                            <ul>
+                                <li>Here are your original scores before seeing others’ opinions.</li>
+                                <li>Please make changes to your scores if you have different opinions now.</li>
+                            </ul>
+                        {{/if}}
                     </p>
                 </div>
                 <div class="row" style="background-color: Gainsboro; height:450px">
@@ -22,10 +30,10 @@
                     </div>
                 </div>
 
-            <div class="row">
+            <div class="row" style="text-align: right;">
                 <!-- <textarea  class="col-md-8" style="margin-left:50px; margin-bottom:10px; width: 590px" name="arguments" placeholder="Reasons for your scores..."></textarea> -->
                 <!-- <p class="col-md-1" style="margin-bottom:10px"><span id="word_counter">0</span>Words</p> -->
-                <a href="" style="margin-bottom:10px" class="btn btn-lg btn-default" id="btn-next">Next</a>
+                <a href="" class="btn btn-lg btn-default" id="btn-next">Next</a>
             </div>
 
             </div>

@@ -29,3 +29,8 @@
 .task-desc {
     font-size: medium;
 }
+
+#btn-next {
+    margin: 10px 10px;
+    padding: 10px 40px;
+}
