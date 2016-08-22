@@ -1,7 +1,7 @@
 Template.TaskInstructions.events({
     'submit form': function(e) {
         e.preventDefault();
-        e.target.disable(true);
+        $(e.target).disable(true);
         var taskId = FlowRouter.getParam("taskId");
         var username = $('#inputUsername').val();
         var nickname = $('#inputNickname').val();
