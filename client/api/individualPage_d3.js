@@ -629,7 +629,9 @@ Template.individualPage.onRendered(function() {
                                 return "translate(" + 0 + "," + y + ")"
 
                             })
-                            .classed("axis",true).call(xAxis).style("visibility", "hidden");
+                            .classed("axis",true).call(xAxis).style("visibility", "visible");
+                            d3.selectAll(".axis").selectAll("text").style("font-size", "10px");
+
 
 
                             check_box.on("click", function(d){
