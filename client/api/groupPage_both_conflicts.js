@@ -884,7 +884,7 @@ Template.GroupPageBothConflicts.onRendered(function() {
                                                         return "translate(" + 0 + "," + y + ")"
 
                                                     })
-                                                    .classed("axis",true).call(xAxis).style("visibility", "visible");
+                                                    .classed("axis",true).call(xAxis).style("visibility", "hidden");
                                                     d3.selectAll(".axis").selectAll("text").style("font-size", "10px");
 
                                                     check_box.on("click", function(d){
@@ -917,7 +917,7 @@ Template.GroupPageBothConflicts.onRendered(function() {
                                                     .style("top", function() { return (80 + legend_height * candidate_num).toString() + "px";})
                                                     .append('input')
                                                     .attr('type','checkbox')
-                                                    .property("checked", true);
+                                                    .property("checked", false);
 
                                                     d3.select(".checkbox1")
                                                     .append("text")

@@ -629,7 +629,7 @@ Template.individualPage.onRendered(function() {
                                 return "translate(" + 0 + "," + y + ")"
 
                             })
-                            .classed("axis",true).call(xAxis).style("visibility", "visible");
+                            .classed("axis",true).call(xAxis).style("visibility", "hidden");
                             d3.selectAll(".axis").selectAll("text").style("font-size", "10px");
 
 
