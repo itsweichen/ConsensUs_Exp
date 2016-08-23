@@ -54,14 +54,9 @@ Template.individualPage.onRendered(function() {
         $('body').pagewalkthrough({
             name: 'individualPageIntro',
             steps: [{
-                popup: {
-                    content: "First, you need to read through the candidate's information and give your own evaluation scores.",
-                    type: 'modal'
-                }
-            }, {
                 wrapper: '#click-info',
                 popup: {
-                    content: "Click here to open the information document.",
+                    content: "Click here to read through the candidate's information and give your own evaluation scores.",
                     type: 'tooltip',
                     position: 'bottom',
                     overlayWidth: 110,

@@ -51,6 +51,8 @@ Template.GroupPageBothConflicts.onRendered(function() {
             voter_info[i] = {code: i+1, name: taskInfo.voters[i-1]};
         }
 
+        console.log(JSON.stringify(voter_info));
+
         // arguments
         var argu = new Array(user_num + 1);
         argu[1] = "";
