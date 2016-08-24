@@ -3,3 +3,9 @@ Template.TaskHeader.helpers({
         return Meteor.user().profile.nickname;
     }
 });
+
+Template.TaskHeader.events({
+    'click #tour-start': (event) => {
+        tour.restart();
+    }
+});

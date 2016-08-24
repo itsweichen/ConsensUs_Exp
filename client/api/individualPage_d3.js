@@ -9,8 +9,6 @@ Template.individualPage.onRendered(function() {
 
         var r = 10;
 
-        console.log(document.getElementById("main_panel"));
-
         var svg = d3
         .select('#main_panel')
         .attr("height", height)

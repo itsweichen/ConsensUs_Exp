@@ -46,111 +46,129 @@ Template.individualPage.events({
     }
 });
 
+tour = new Tour({
+  steps: [
+  {
+    element: "#a3",
+    title: "Title of my step",
+    content: "Content of my step",
+    placement: 'bottom'
+}],
+template: "<div class='popover tour'><div class='arrow'></div><h3 class='popover-title'></h3>\
+<div class='popover-content'></div><div class='popover-navigation'><button class='btn btn-default' data-role='prev'>« Prev</button><span data-role='separator'>|</span><button class='btn btn-default' data-role='next'>Next »</button></div></div>"
+});
+
 Template.individualPage.onRendered(function() {
-    // Set up tour
 
     var order = FlowRouter.getQueryParam("order");
-    if (order == "1") {
-        $('body').pagewalkthrough({
-            name: 'individualPageIntro',
-            steps: [{
-                wrapper: '#click-info',
-                popup: {
-                    content: "Click here to read through the candidate's information and give your own evaluation scores.",
-                    type: 'tooltip',
-                    position: 'bottom',
-                    overlayWidth: 110,
-                    overlayHeight: 60,
-                    offsetHorizontal: -20
-                }
-            }, {
-                wrapper: '#legend',
-                popup: {
-                    content: "Each color represents a candidate",
-                    type: 'tooltip',
-                    position: 'bottom',
-                    offsetVertical: 10,
-                    overlayWidth: 100,
-                    overlayHeight: 80
-                }
-            }, {
-                wrapper: '#a1',
-                popup: {
-                    content: "Click and drag these colored dots onto the line to rate them according to the criteria. (The leftmost side is for 'not suitable' while the rightmost side is for 'suitable').",
-                    type: 'tooltip',
-                    position: 'bottom',
-                    overlayWidth: 600,
-                    overlayHeight: 100,
-                    offsetHorizontal: 100
-                }
-            }, {
-                wrapper: '#a0',
-                popup: {
-                    content: "The overall bar will automatically calculate the average scores for each candidate.",
-                    type: 'tooltip',
-                    position: 'bottom',
-                    overlayWidth: 600,
-                    overlayHeight: 100,
-                    offsetHorizontal: 50
-                }
-            }, {
-                wrapper: '#checkbox_panel',
-                popup: {
-                    content: "Check 'Scale' if you want to see a more quantified view on the line.",
-                    type: 'tooltip',
-                    position: 'bottom',
-                    overlayWidth: 80,
-                    overlayHeight: 60,
-                }
-            }, {
-                wrapper: '#btn-next',
-                popup: {
-                    content: "Click 'next' button after you finish the task",
-                    type: 'tooltip',
-                    position: 'top',
-                    overlayWidth: 160,
-                    overlayHeight: 80
-                }
-            }],
-            buttons: {
-                // ID of the button
-                jpwClose: {
-                    // Translation string for the button
-                    i18n: 'Click here to close',
-                    // Whether or not to show the button.  Can be a boolean value, or a
-                    // function which returns a boolean value
-                    show: showCloseWalkthrough
-                }
-            }
-        });
-        $('body').pagewalkthrough('show');
-    } else {
-        $('body').pagewalkthrough({
-            name: 'individualPageIntro',
-            steps: [{
-                popup: {
-                    content: "Here are your original scores before seeing others’ opinions.",
-                    type: 'modal'
-                }
-            }, {
-                popup: {
-                    content: "Please make changes to your scores if you have different opinions now.",
-                    type: 'modal'
-                }
-            }],
-            buttons: {
-                // ID of the button
-                jpwClose: {
-                    // Translation string for the button
-                    i18n: 'Click here to close',
-                    // Whether or not to show the button.  Can be a boolean value, or a
-                    // function which returns a boolean value
-                    show: showCloseWalkthrough
-                }
-            }
-        });
-        $('body').pagewalkthrough('show');
+    // Instance the tour
 
-    }
 
+// Initialize the tour
+tour.init();
+
+// Start the tour
+tour.start();
 });
+
+
+    //
+    //     $('body').pagewalkthrough({
+    //         name: 'individualPageIntro',
+    //         steps: [{
+    //             wrapper: '#click-info',
+    //             popup: {
+    //                 content: "",
+    //                 type: 'tooltip',
+    //                 position: 'bottom',
+    //                 overlayWidth: 110,
+    //                 overlayHeight: 60,
+    //                 offsetHorizontal: -20
+    //             }
+    //         }, {
+    //             wrapper: '#legend',
+    //             popup: {
+    //                 content: "Each color represents a candidate",
+    //                 type: 'tooltip',
+    //                 position: 'bottom',
+    //                 offsetVertical: 10,
+    //                 overlayWidth: 100,
+    //                 overlayHeight: 80
+    //             }
+    //         }, {
+    //             wrapper: '#a1',
+    //             popup: {
+    //                 content: "Click and drag these colored dots onto the line to rate them according to the criteria. (The leftmost side is for 'not suitable' while the rightmost side is for 'suitable').",
+    //                 type: 'tooltip',
+    //                 position: 'bottom',
+    //                 overlayWidth: 600,
+    //                 overlayHeight: 100,
+    //                 offsetHorizontal: 100
+    //             }
+    //         }, {
+    //             wrapper: '#a0',
+    //             popup: {
+    //                 content: "The overall bar will automatically calculate the average scores for each candidate.",
+    //                 type: 'tooltip',
+    //                 position: 'bottom',
+    //                 overlayWidth: 600,
+    //                 overlayHeight: 100,
+    //                 offsetHorizontal: 50
+    //             }
+    //         }, {
+    //             wrapper: '#checkbox_panel',
+    //             popup: {
+    //                 content: "Check 'Scale' if you want to see a more quantified view on the line.",
+    //                 type: 'tooltip',
+    //                 position: 'bottom',
+    //                 overlayWidth: 80,
+    //                 overlayHeight: 60,
+    //             }
+    //         }, {
+    //             wrapper: '#btn-next',
+    //             popup: {
+    //                 content: "Click 'next' button after you finish the task",
+    //                 type: 'tooltip',
+    //                 position: 'top',
+    //                 overlayWidth: 160,
+    //                 overlayHeight: 80
+    //             }
+    //         }],
+    //         buttons: {
+    //             // ID of the button
+    //             jpwClose: {
+    //                 // Translation string for the button
+    //                 i18n: 'Click here to close',
+    //                 // Whether or not to show the button.  Can be a boolean value, or a
+    //                 // function which returns a boolean value
+    //                 show: showCloseWalkthrough
+    //             }
+    //         }
+    //     });
+    //     $('body').pagewalkthrough('show');
+    // } else {
+    //     $('body').pagewalkthrough({
+    //         name: 'individualPageIntro',
+    //         steps: [{
+    //             popup: {
+    //                 content: "Here are your original scores before seeing others’ opinions.",
+    //                 type: 'modal'
+    //             }
+    //         }, {
+    //             popup: {
+    //                 content: "Please make changes to your scores if you have different opinions now.",
+    //                 type: 'modal'
+    //             }
+    //         }],
+    //         buttons: {
+    //             // ID of the button
+    //             jpwClose: {
+    //                 // Translation string for the button
+    //                 i18n: 'Click here to close',
+    //                 // Whether or not to show the button.  Can be a boolean value, or a
+    //                 // function which returns a boolean value
+    //                 show: showCloseWalkthrough
+    //             }
+    //         }
+    //     });
+        // $('body').pagewalkthrough('show');

@@ -21,7 +21,7 @@ insecure@1.0.7                # Allow all DB writes from clients (for prototypin
 d3js:d3
 kadira:flow-router
 kadira:blaze-layout
-twbs:bootstrap
+mizzao:bootstrap-3
 autopublish                  # for prototyping
 meteortoys:allthings
 aldeed:collection2
@@ -31,3 +31,4 @@ raix:handlebar-helpers
 aslagle:reactive-table
 accounts-password
 accounts-ui
+weicliu:bootstrap-tour

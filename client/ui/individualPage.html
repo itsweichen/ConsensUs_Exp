@@ -4,11 +4,12 @@
             font-size: medium;
         }
     </style>
-            <div class="container">
+            <div class="container" data-intro='Hello step three!' data-step="3">
                 <div class="row">
                     <p>
                         {{#if ord1}}
-                            <h3>Evaluate three candidates</h3>
+                            <h3 data-intro='Hello step one!'>Evaluate three candidates</h3>
+
                             <ol>
                                 <li>Read through the candidates' information: <a target="_blank" id="click-info" href="https://docs.google.com/spreadsheets/d/1tXTdFMQ_VPg8Qzc5m_CFC10pN7UP3S1Xj03uPmY85CU/edit#gid=0">click here</a> (please keep it open).</li>
                                 <li>Provide scores for each candidate on each criterion.</li>
@@ -25,8 +26,8 @@
                 </div>
                 <div class="row" style="background-color: Gainsboro; height:450px">
                     <div class="col-md-12">
-                        <svg id="main_panel"></svg>
-                        <div id="checkbox_panel"></div>
+                        <svg id="main_panel" data-intro='Hello step tow!'></svg>
+                        <div id="checkbox_panel" data-intro='Hello step three!'></div>
                     </div>
                 </div>
 
