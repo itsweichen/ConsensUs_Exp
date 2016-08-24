@@ -27,7 +27,7 @@ $.fn.heightSVG = function(){
     return ($(this).get(0)) ? $(this).get(0).getBBox().height : null;
 };
 
-showCloseWalkthrough = true;
+hideEndTour = true;
 
 jQuery.fn.extend({
     disable: function(state) {

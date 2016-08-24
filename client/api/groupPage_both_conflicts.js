@@ -360,7 +360,7 @@ Template.GroupPageBothConflicts.onRendered(function() {
                                 .classed("argument", true)
                                 .html(argu[d.code]);
 
-                                
+
                                     d3.select(this).select("circle")
                                     .attr("stroke-width", "1px")
                                     .attr("stroke", function(d){
@@ -690,7 +690,7 @@ Template.GroupPageBothConflicts.onRendered(function() {
                                                 d3.select(this.parentNode)
                                                 .append("text")
                                                 .classed("conflict_bar", true)
-                                                .attr("x", function(d) { 
+                                                .attr("x", function(d) {
                                                     var x1 = title_width + padding_x + rect_width / 10 * d.score;
                                                     var x2 = title_width + padding_x + rect_width / 10 * voter[d.id[0]][d.id[1]][1];
                                                     var x = (x1 + x2) / 2;
@@ -811,7 +811,7 @@ Template.GroupPageBothConflicts.onRendered(function() {
                                                 .attr("x", -12)
                                                 .attr("y", function(d, i){ return candidate_num * legend_height + legend_padding * 4 + 58;})
                                                 .style("font-size", "12px")
-                                                .text("Conflict between");
+                                                .text("Disagreement between");
                                                 score_variance_image
                                                 .append("text")
                                                 .attr("x", -12)
@@ -832,7 +832,7 @@ Template.GroupPageBothConflicts.onRendered(function() {
                                                 .attr("x", -12)
                                                 .attr("y", function(d, i){ return candidate_num * legend_height + legend_padding * 4 + 132;})
                                                 .style("font-size", "12px")
-                                                .text("Conflict among");
+                                                .text("Disagreement among");
                                                 score_variance_image
                                                 .append("text")
                                                 .attr("x", -12)
@@ -985,7 +985,7 @@ Template.GroupPageBothConflicts.onRendered(function() {
                                                     .style("fill", "White")
                                                     .style("font-size", "15px");
 
-                                                  
+
                                                     var voter_list =
                                                     svg1
                                                     .append("g")

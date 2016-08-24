@@ -4,11 +4,11 @@
             font-size: medium;
         }
     </style>
-            <div class="container" data-intro='Hello step three!' data-step="3">
+            <div class="container">
                 <div class="row">
                     <p>
                         {{#if ord1}}
-                            <h3 data-intro='Hello step one!'>Evaluate three candidates</h3>
+                            <h3>Evaluate three candidates</h3>
 
                             <ol>
                                 <li>Read through the candidates' information: <a target="_blank" id="click-info" href="https://docs.google.com/spreadsheets/d/1tXTdFMQ_VPg8Qzc5m_CFC10pN7UP3S1Xj03uPmY85CU/edit#gid=0">click here</a> (please keep it open).</li>
@@ -26,24 +26,15 @@
                 </div>
                 <div class="row" style="background-color: Gainsboro; height:450px">
                     <div class="col-md-12">
-                        <svg id="main_panel" data-intro='Hello step tow!'></svg>
-                        <div id="checkbox_panel" data-intro='Hello step three!'></div>
+                        <svg id="main_panel"></svg>
+                        <div id="checkbox_panel"></div>
                     </div>
                 </div>
 
-            <div class="row" style="text-align: right;">
-                <!-- <textarea  class="col-md-8" style="margin-left:50px; margin-bottom:10px; width: 590px" name="arguments" placeholder="Reasons for your scores..."></textarea> -->
-                <!-- <p class="col-md-1" style="margin-bottom:10px"><span id="word_counter">0</span>Words</p> -->
-                <a href="" class="btn btn-lg btn-default" id="btn-next">Next</a>
+                <div class="row" style="text-align: right;">
+                    <!-- <textarea  class="col-md-8" style="margin-left:50px; margin-bottom:10px; width: 590px" name="arguments" placeholder="Reasons for your scores..."></textarea> -->
+                    <!-- <p class="col-md-1" style="margin-bottom:10px"><span id="word_counter">0</span>Words</p> -->
+                    <a href="" class="btn btn-lg btn-default" id="btn-next">Next</a>
+                </div>
             </div>
-
-            </div>
-
-
-        <!-- {{else}}
-          <p>You are not authorized to view this page.</p>
-          <p>Please <a href="/login">login</a> to view this page</p>
-        {{/if}}
-    {{/if}} -->
-
 </template>

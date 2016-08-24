@@ -3,13 +3,20 @@
         <h3>Questions</h3>
 
         {{#autoForm collection="Questions" id="insertQuestionForm" type="insert"}}
-            {{> afObjectField name='q1'}}
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{afFieldLabelText name='q1'}}</h3>
+                </div>
+                <div class="panel-body">
+                    {{> afFieldInput name='q1'}}
+                </div>
+            </div>
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">{{afFieldLabelText name='q2'}}</h3>
                 </div>
                 <div class="panel-body">
-                    {{> afFieldInput name='q2'}}
+                    {{> afFieldInput name='q2' type="select-checkbox-inline" options=voterOptions}}
                 </div>
             </div>
             <div class="panel panel-default">
@@ -17,7 +24,7 @@
                     <h3 class="panel-title">{{afFieldLabelText name='q3'}}</h3>
                 </div>
                 <div class="panel-body">
-                    {{> afFieldInput name='q3' type="select-checkbox-inline" options=voterOptions}}
+                    {{> afFieldInput name='q3' type="select-radio-inline" options=voterOptions}}
                 </div>
             </div>
             <div class="panel panel-default">
@@ -33,7 +40,7 @@
                     <h3 class="panel-title">{{afFieldLabelText name='q5'}}</h3>
                 </div>
                 <div class="panel-body">
-                    {{> afFieldInput name="q5" type="select-radio-inline" options=voterOptions}}
+                    {{> afFieldInput name="q5" options=ccOptions}}
                 </div>
             </div>
             <div class="panel panel-default">
@@ -41,15 +48,7 @@
                     <h3 class="panel-title">{{afFieldLabelText name='q6'}}</h3>
                 </div>
                 <div class="panel-body">
-                    {{> afFieldInput name="q6" options=ccOptions}}
-                </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">{{afFieldLabelText name='q7'}}</h3>
-                </div>
-                <div class="panel-body">
-                    {{> afFieldInput name='q7'}}
+                    {{> afFieldInput name="q6"}}
                 </div>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>

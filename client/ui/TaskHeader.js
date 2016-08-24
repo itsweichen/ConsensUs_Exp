@@ -6,6 +6,12 @@ Template.TaskHeader.helpers({
 
 Template.TaskHeader.events({
     'click #tour-start': (event) => {
-        tour.restart();
+        Session.set('hideEndTour', false);
+        if (FlowRouter.getRouteName() == "individualPage") {
+            individualTour.restart();
+        } else if (FlowRouter.getRouteName() == "groupPage") {
+            groupVisTour.restart();
+        }
+
     }
 });
