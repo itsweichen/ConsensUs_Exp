@@ -628,6 +628,8 @@ Template.individualPage.onRendered(function() {
 
                             })
                             .classed("axis",true).call(xAxis).style("visibility", "hidden");
+                            d3.selectAll(".axis").selectAll("text").style("font-size", "10px");
+
 
 
                             check_box.on("click", function(d){

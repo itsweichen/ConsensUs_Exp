@@ -186,7 +186,7 @@ Template.GroupPageBothConflicts.onRendered(function() {
                 }
             }
         });
-        $('body').pagewalkthrough('show');
+ //       $('body').pagewalkthrough('show');
     }
 
 });

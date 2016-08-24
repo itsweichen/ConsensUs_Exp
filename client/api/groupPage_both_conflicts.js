@@ -51,7 +51,6 @@ Template.GroupPageBothConflicts.onRendered(function() {
             voter_info[i] = {code: i+1, name: taskInfo.voters[i-1]};
         }
 
-        console.log(JSON.stringify(voter_info));
 
         // arguments
         var argu = new Array(user_num + 1);
@@ -93,7 +92,7 @@ Template.GroupPageBothConflicts.onRendered(function() {
 
         svg.append("text")
         .text("Candidates")
-        .attr("transform", "translate(605, 50)");
+        .attr("transform", "translate(610, 50)");
 
 
 
@@ -238,7 +237,7 @@ Template.GroupPageBothConflicts.onRendered(function() {
             circle
             .append("circle")
             .classed("small_dot", true)
-            .attr("r", 4)
+            .attr("r", 4.5)
             .attr("cx", function(d) {
                 return title_width + padding_x + rect_width / 10 * voter[d.id[0]][d.id[1]][1]; })
                 .attr("cy", function(d) { return d.y = padding_y * (d.row + 1); })
@@ -329,14 +328,9 @@ Template.GroupPageBothConflicts.onRendered(function() {
                         .attr("y", function(){
                             d.y = padding_y * (+a + 1);
                             return d.y;
-                        })
-
-                        ;
+                        });
 
                         //enable drag
-
-
-
 
                         //php voter_who
                         var voter_who = 1;
@@ -356,26 +350,25 @@ Template.GroupPageBothConflicts.onRendered(function() {
                             return d.x = title_width + padding_x + rect_width / 10 * score_bar[i + 1]; })
                             .attr("cy", function(d, i) { return d.y = padding_y * (+a + 1); })
                             .attr("fill", color[+b - 1])
-                            .attr("opacity", 0.5)
-                            ;
-                            var refNode1_id = str[0] + str[1] + str[2] + str[3] + "1";
-                            var refNode1 = d3.select(refNode1_id).node().parentNode.firstChild;
-                            d3.selectAll(".voter_dot")
-                            .on("mouseover", function(d){
+                            .attr("opacity", 0.5);
 
+                        var refNode1_id = str[0] + str[1] + str[2] + str[3] + "1";
+                        var refNode1 = d3.select(refNode1_id).node().parentNode.firstChild;
+                        d3.selectAll(".voter_dot")
+                            .on("mouseover", function(d){
                                 d3.select("#argument_div")
                                 .classed("argument", true)
                                 .html(argu[d.code]);
 
-                                if(this.id[3] == str[4]){
+                                
                                     d3.select(this).select("circle")
-                                    .attr("stroke-width", "2px")
+                                    .attr("stroke-width", "1px")
                                     .attr("stroke", function(d){
-                                        return color[+b-1];
+                                        return "black";
                                     })
                                     .attr("opacity", 1);
-                                }
-                                else{
+
+                                if(("#" + this.id) != str){
                                     d3.select(this)
                                     .append("text")
                                     .attr("class", "voter_name_1")
@@ -394,12 +387,9 @@ Template.GroupPageBothConflicts.onRendered(function() {
 
                                     this.parentNode.insertBefore(this, refNode1);
                                     refNode1 = this;
-                                    if(this.id[3] == str[4]){
-
-                                        d3.select(this).select("circle")
+                                    d3.select(this).select("circle")
                                         .attr("stroke-width", 0)
                                         .attr("opacity", 0.5)
-                                        ;}
                                     })
                                     ;
 
@@ -621,7 +611,7 @@ Template.GroupPageBothConflicts.onRendered(function() {
                                                     "L " + x2.toString() + " " + y.toString();
                                                 })
                                                 .attr("stroke", "orangeRed")
-                                                .attr("stroke-width", "2");
+                                                .attr("stroke-width", 2);
 
                                                 d3.select(this.parentNode)
                                                 .append("path")
@@ -634,13 +624,23 @@ Template.GroupPageBothConflicts.onRendered(function() {
                                                     "L " + x.toString() + " " + y2.toString();
                                                 })
                                                 .attr("stroke", "orangeRed")
-                                                .attr("stroke-width", "0.5");
+                                                .attr("stroke-width", 0.5);
+
+                                                d3.select(this.parentNode)
+                                                .append("text")
+                                                .classed("conflict_bar", true)
+                                                .attr("x", function(d) { return title_width + padding_x + rect_width / 10 * d.score; })
+                                                .attr("y", function(d) { return padding_y * (d.row + 1) - 22; })
+                                                .style("text-anchor", "middle")
+                                                .style("font-size", "10px")
+                                                .style("fill", "orangeRed")
+                                                .text(function(d) { return d3.round(d.conflict, 1);});
                                             })
                                             .on("mouseout", function(d){
                                                 d3.selectAll(".conflict_bar").remove();
-                                                d3.select(this).select(".large_dot")
+                                                d3.select(this)
                                                 .attr("stroke-width", 0.5);
-                                                d3.select(this).select(".small_dot")
+                                                d3.select(this.parentNode).select(".small_dot")
                                                 .attr("stroke-width", 0.5);
                                             });
 
@@ -652,7 +652,7 @@ Template.GroupPageBothConflicts.onRendered(function() {
                                                 .attr("d", function(d){
                                                     var x1 = title_width + padding_x + rect_width / 10 * d.score;
                                                     var x2 = title_width + padding_x + rect_width / 10 * voter[d.id[0]][d.id[1]][1];
-                                                    var y = padding_y * (d.row + 1) - 20;
+                                                    var y = padding_y * (d.row + 1) + 30;
                                                     return "M " + x1.toString() + " " + (y).toString() +
                                                     "L " + x2.toString() + " " + (y).toString();
                                                 })
@@ -665,7 +665,7 @@ Template.GroupPageBothConflicts.onRendered(function() {
                                                 .attr("d", function(d){
                                                     var x = title_width + padding_x + rect_width / 10 * d.score;
                                                     var y1 = padding_y * (d.row + 1);
-                                                    var y2 = padding_y * (d.row + 1) - 20;
+                                                    var y2 = padding_y * (d.row + 1) + 30;
 
                                                     return "M " + x.toString() + " " + (y1).toString() +
                                                     "L " + x.toString() + " " + (y2).toString();
@@ -679,20 +679,37 @@ Template.GroupPageBothConflicts.onRendered(function() {
                                                 .attr("d", function(d){
                                                     var x = title_width + padding_x + rect_width / 10 * voter[d.id[0]][d.id[1]][1];
                                                     var y1 = padding_y * (d.row + 1);
-                                                    var y2 = padding_y * (d.row + 1) - 20;
+                                                    var y2 = padding_y * (d.row + 1) + 30;
 
                                                     return "M " + x.toString() + " " + (y1).toString() +
                                                     "L " + x.toString() + " " + (y2).toString();
                                                 })
                                                 .attr("stroke", "orangeRed")
                                                 .attr("stroke-width", "2");
+
+                                                d3.select(this.parentNode)
+                                                .append("text")
+                                                .classed("conflict_bar", true)
+                                                .attr("x", function(d) { 
+                                                    var x1 = title_width + padding_x + rect_width / 10 * d.score;
+                                                    var x2 = title_width + padding_x + rect_width / 10 * voter[d.id[0]][d.id[1]][1];
+                                                    var x = (x1 + x2) / 2;
+                                                    return x;
+                                                 })
+                                                .attr("y", function(d) { return padding_y * (d.row + 1) + 40; })
+                                                .style("text-anchor", "middle")
+                                                .style("font-size", "10px")
+                                                .style("fill", "orangeRed")
+                                                .text(function(d) {
+                                                    return d3.round(Math.abs(d.score - voter[d.id[0]][d.id[1]][1]), 1);
+                                                });
                                             })
                                             .on("mouseout", function(d){
                                                 d3.selectAll(".conflict_bar").remove();
-                                                d3.select(this).select(".large_dot")
-                                                .attr("stroke-width", 0.5);
-                                                d3.select(this).select(".small_dot")
-                                                .attr("stroke-width", 0.5);
+                                                d3.select(this)
+                                                .attr("stroke-width", "0.5");
+                                                d3.select(this.parentNode).select(".large_dot")
+                                                .attr("stroke-width", "0.5");
                                             });
 
 
@@ -739,7 +756,7 @@ Template.GroupPageBothConflicts.onRendered(function() {
 
                                                 little_and_large_circle
                                                 .append("circle")
-                                                .attr('cx', -5)
+                                                .attr('cx', 0)
                                                 .attr('cy', function(d, i) {
                                                     return 125;
                                                 })
@@ -750,14 +767,14 @@ Template.GroupPageBothConflicts.onRendered(function() {
 
                                                 little_and_large_circle
                                                 .append('text')
-                                                .attr('x', 7)
+                                                .attr('x', 12)
                                                 .attr('y', 129)
                                                 .style("font-size", "12px")
                                                 .text("Committee");
 
                                                 little_and_large_circle
                                                 .append("circle")
-                                                .attr('cx', -5)
+                                                .attr('cx', 0)
                                                 .attr('cy', 143)
                                                 .attr("r", 4)
                                                 .style('fill', "Lightgrey")
@@ -766,7 +783,7 @@ Template.GroupPageBothConflicts.onRendered(function() {
 
                                                 little_and_large_circle
                                                 .append('text')
-                                                .attr('x', 8)
+                                                .attr('x', 13)
                                                 .attr('y', 146)
                                                 .style("font-size", "12px")
                                                 .text("You")
@@ -775,7 +792,7 @@ Template.GroupPageBothConflicts.onRendered(function() {
                                                 d3
                                                 .select("#main_panel")
                                                 .append("g")
-                                                .attr("transform", "translate(" + (title_width + rect_width + 50) + "," + 105 + ")")
+                                                .attr("transform", "translate(" + (title_width + rect_width + 55) + "," + 105 + ")")
                                                 .classed("side_panel", true)
                                                 .classed("score_variance", true)
                                                 ;
@@ -791,20 +808,20 @@ Template.GroupPageBothConflicts.onRendered(function() {
 
                                                 score_variance_image
                                                 .append("text")
-                                                .attr("x", -14)
+                                                .attr("x", -12)
                                                 .attr("y", function(d, i){ return candidate_num * legend_height + legend_padding * 4 + 58;})
                                                 .style("font-size", "12px")
                                                 .text("Conflict between");
                                                 score_variance_image
                                                 .append("text")
-                                                .attr("x", -14)
+                                                .attr("x", -12)
                                                 .attr("y", function(d, i){ return candidate_num * legend_height + legend_padding * 4 + 70;})
                                                 .style("font-size", "12px")
                                                 .text("committee & you")
 
                                                 score_variance_image
                                                 .append("image")
-                                                .attr('x',function(d){ return -14;})
+                                                .attr('x',function(d){ return -9;})
                                                 .attr('y',function(d){ return candidate_num * legend_height + legend_padding * 4 + 73;})
                                                 .attr('width', 65)
                                                 .attr('height', 65)
@@ -812,13 +829,13 @@ Template.GroupPageBothConflicts.onRendered(function() {
 
                                                 score_variance_image
                                                 .append("text")
-                                                .attr("x", -14)
+                                                .attr("x", -12)
                                                 .attr("y", function(d, i){ return candidate_num * legend_height + legend_padding * 4 + 132;})
                                                 .style("font-size", "12px")
                                                 .text("Conflict among");
                                                 score_variance_image
                                                 .append("text")
-                                                .attr("x", -14)
+                                                .attr("x", -12)
                                                 .attr("y", function(d, i){ return candidate_num * legend_height + legend_padding * 4 + 147;})
                                                 .style("font-size", "12px")
                                                 .text("committee")
@@ -835,7 +852,7 @@ Template.GroupPageBothConflicts.onRendered(function() {
                                                 .append("div")
                                                 .classed("side_panel", true)
                                                 .style("position", "absolute")
-                                                .style("left", 720 +"px")
+                                                .style("left", 725 +"px")
                                                 .style("top", function(d, i) {
                                                     return  (55 +  legend_height * i).toString() + "px";})
                                                     .append('input')
@@ -868,6 +885,7 @@ Template.GroupPageBothConflicts.onRendered(function() {
 
                                                     })
                                                     .classed("axis",true).call(xAxis).style("visibility", "hidden");
+                                                    d3.selectAll(".axis").selectAll("text").style("font-size", "10px");
 
                                                     check_box.on("click", function(d){
 
@@ -895,7 +913,7 @@ Template.GroupPageBothConflicts.onRendered(function() {
                                                     .classed("checkbox1", true)
                                                     .classed("side_panel", true)
                                                     .style("position", "absolute")
-                                                    .style("left", (720).toString() + "px")
+                                                    .style("left", (725).toString() + "px")
                                                     .style("top", function() { return (80 + legend_height * candidate_num).toString() + "px";})
                                                     .append('input')
                                                     .attr('type','checkbox')
@@ -918,6 +936,8 @@ Template.GroupPageBothConflicts.onRendered(function() {
 
                                                     //indivudial page hover
 
+
+
                                                     var left_padding_x = 35;
                                                     var left_padding_y = 20;
                                                     var svg1 = d3
@@ -926,9 +946,15 @@ Template.GroupPageBothConflicts.onRendered(function() {
                                                     .attr("height", height);
                                                     svg1
                                                     .append("text")
-                                                    .text("Voters")
+                                                    .text("Committee")
                                                     .style("text-anchor", "middle")
                                                     .attr("transform", "translate(" + (left_padding_x + 25) + ", 50)");
+
+                                                    var voter_name_max_length = 7; //length of the word "average"
+                                                    for(i = 0; i < voter_info.length; i++){
+                                                        if((voter_info[i].name).length > voter_name_max_length)
+                                                            voter_name_max_length = (voter_info[i].name).length;
+                                                    }
 
                                                     var voter_list_all =
                                                     svg1
@@ -937,12 +963,12 @@ Template.GroupPageBothConflicts.onRendered(function() {
 
                                                     voter_list_all
                                                     .append("rect")
-                                                    .attr("x", left_padding_x + 25 - 15)
+                                                    .attr("x", left_padding_x + 25 - (voter_name_max_length * 10) / 2)
                                                     .attr("y", function(d, i){
                                                         return 63;
                                                     })
                                                     .attr("height", 20)
-                                                    .attr("width", 30)
+                                                    .attr("width", voter_name_max_length * 10)
                                                     .attr("fill", "grey")
                                                     .style("border-radius", "100px")
                                                     ;
@@ -953,15 +979,13 @@ Template.GroupPageBothConflicts.onRendered(function() {
                                                         return 78;
                                                     })
                                                     .text(function(d){
-                                                        return "ALL";
+                                                        return "Average";
                                                     })
                                                     .style("text-anchor", "middle")
                                                     .style("fill", "White")
                                                     .style("font-size", "15px");
 
-
-
-
+                                                  
                                                     var voter_list =
                                                     svg1
                                                     .append("g")
@@ -979,18 +1003,19 @@ Template.GroupPageBothConflicts.onRendered(function() {
                                                     voter_list
                                                     .append("rect")
                                                     .attr("x", function(d){
-                                                        return left_padding_x + 25 - d.name.length * 10 / 2;
+                                                        return left_padding_x + 25 - voter_name_max_length * 10 / 2;
                                                     })
                                                     .attr("y", function(d, i){
                                                         return 63 + left_padding_y * (i + 1);
                                                     })
                                                     .attr("height", left_padding_y)
                                                     .attr("width", function(d){
-                                                        return d.name.length * 10;
+                                                        return voter_name_max_length * 10;
                                                     })
                                                     .style("opacity", 0)
                                                     .style("border-radius", "100px")
                                                     ;
+
                                                     voter_list
                                                     .append("text")
                                                     .attr("x", function(d){ return  left_padding_x + 25;})
@@ -1002,9 +1027,11 @@ Template.GroupPageBothConflicts.onRendered(function() {
                                                     })
                                                     .style("text-anchor", "middle")
                                                     .style("fill", "grey")
-                                                    .style("font-size", "15px")
+                                                    .style("font-size", "15px");
+
+                                                    voter_list
                                                     .on("mouseover", function(d){
-                                                        d3.select(this).style("fill", "white");
+                                                        d3.select(this).select("text").style("fill", "white");
                                                         var id = "#v" + d.code.toString();
                                                         d3.selectAll(id).select("rect").style("fill", "grey").style("opacity", 1);
 
@@ -1027,7 +1054,10 @@ Template.GroupPageBothConflicts.onRendered(function() {
                                                                     return title_width + padding_x + rect_width / 10 * (voter[i][j][d.code]);
                                                                 })
                                                                 .attr("cy", padding_y * (i + 1))
-                                                                .attr("fill", function(d) {return color[j - 1];});
+                                                                .attr("fill", function(d) {return color[j - 1];})
+                                                                .attr("stroke", "black")
+                                                                .attr("stroke-width", "0.5px")
+                                                                ;
 
                                                             }
                                                         }
@@ -1040,7 +1070,7 @@ Template.GroupPageBothConflicts.onRendered(function() {
                                                     .on("mouseout", function(d){
                                                         d3.selectAll(".indivudial_vote").remove();
 
-                                                        d3.select(this).style("fill", "grey");
+                                                        d3.select(this).select("text").style("fill", "grey");
                                                         var id = "#v" + d.code.toString();
                                                         d3.selectAll(id).select("rect").style("opacity", 0);
 
@@ -1191,7 +1221,6 @@ var q4A = q4();
 var q5A = q5();
 var q6A = q6();
 var q7A = q7();
-console.log("q1A" + q1A);
 if (QuestionsR.findOne({userId: Meteor.userId()}) === undefined){
     QuestionsR.insert({q1: q1A, q2: q2A, q3: q3A, q4: q4A, q5: q5A, q6: q6A, q7: q7A, userId: Meteor.userId()});
 }
