@@ -258,10 +258,27 @@ Template.individualPage.onRendered(function() {
                 .attr('y',function(d){ return d.y + 5;})
                 .attr('width', 20)
                 .attr('height', 24)
-                .attr("xlink:href","../forbidden-sign.png");
+                .attr("xlink:href","../forbidden-sign.png");             
+                
+                d3.selectAll(".handler")
+                    .select("circle")
+                    .style("stroke-width", function(d){
+                        console.log(this.parentNode.id);
+                        if(this.parentNode.id[1] == 0){
+                            return 0;
+                        }
+                        else{
+                            return "2px";
+                        }
+                    })
+                    .style("stroke", function(d){
+                        return color[this.parentNode.id[2]-1];
+                    });
+              
             })
             .on('dragend', function(d){
                 d3.select(this).select("image").remove();
+                d3.selectAll(".handler").select("circle").style("stroke-width", 0);
             });
 
             d3.selectAll(".handler").each(function(d){
