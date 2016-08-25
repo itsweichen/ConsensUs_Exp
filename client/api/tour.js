@@ -109,10 +109,10 @@ groupVisTour = new Tour({
                 $('#v2').triggerSVGEvent('mouseout');
             }
         }, {
-            element: "#insertQuestionForm",
+            element: "#main_panel",
             title: "Next Step (6/6)",
-            content: "Next, please explore the committee's result above and answer these question.",
-            placement: 'top',
+            content: "Now, please spend 2 minutes to explore the visualization and examples below.",
+            placement: 'bottom',
             onShown: function(tour) {
                 $("#tour-end").removeClass("display-none");
             }

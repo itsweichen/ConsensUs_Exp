@@ -1,19 +1,19 @@
 <template name="GroupPageTemplate">
 
     {{#if cond1_2}}
-        {{> GroupPageBothConflicts}}
+    {{> GroupPageBothConflicts}}
     {{/if}}
 
     {{#if cond3}}
-        {{> GroupPageCommNYou}}
+    {{> GroupPageCommNYou}}
     {{/if}}
 
     {{#if cond4}}
-        {{> GroupPageInComm}}
+    {{> GroupPageInComm}}
     {{/if}}
 
     {{#if cond5_6}}
-        {{> NonVis}}
+    {{> NonVis}}
     {{/if}}
 
     <hr>
@@ -25,9 +25,13 @@
             {{#if type1}}
                 {{> Questions}}
             {{else}}
-            <base target="_blank">
-            <div class="container">
-                <iframe id="Example2"
+                <base target="_blank">
+                <div class="container">
+                    <h3>Re-evaluate and Choose Your Best Candidate</h3>
+                    <ul>
+                        <li>Please make changes to your scores if you have different opinions now.</li>
+                    </ul>
+                    <iframe id="Example2"
                     name="Example2"
                     title="Example2"
                     width="100%"
@@ -38,27 +42,61 @@
                     marginwidth="0"
                     src="/{{taskId}}/individual?order=2">
                 </iframe>
+                <hr>
+                <h3>Arguments</h3>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Did you change your scores above?</h3>
+                    </div>
+                    <div class="panel-body">
+                        <select class="form-control" id="change-scores">
+                          <option value="">(Select One)</option>
+                          <option value="yes">Yes</option>
+                          <option value="no">No</option>
+                        </select>
+                    </div>
+                </div>
             </div>
 
-                <div class="container" id="argu-textarea">
-                    <h3>Arguments</h3>
-                    <ol>
-                        <li>Please look over your committee members' opinions and choose one candidate to admit.</li>
-                        <li>Write arguments for your decision. Provide as many details as possible so that your colleagues will understand your reasoning (At least 80 words).</li>
-                    </ol>
-                    <div id="div-alert"></div>
-                    <textarea name="argu"  rows="8" cols="40" class="form-control" placeholder="At least 80 words"></textarea>
-                    <div align="right">
-                        <span id="word_counter">0</span> Words<br/>
-                    </div>
-                    <div align="right" style="padding-top: 20px">
-                        <button type="button" class="btn btn-primary" style="padding: 6px 20px;" id="submitArgu">Submit</button>
-                    </div>
 
+            <div class="container display-none" id="argu-textarea-change">
+                <h4>Explain why you changed your scores and how you reached the final decision</h4>
+                <ul>
+                    <li>Provide as many details as possible so that your committee will understand your reasoning.</li>
+                </ul>
+                <div class="div-alert"></div>
+                <textarea name="argu"  rows="8" cols="40" class="form-control" placeholder="At least 80 words"></textarea>
+                <div align="right">
+                    <span class="word_counter">0</span> Words<br/>
                 </div>
+                <div align="right" style="padding-top: 20px">
+                    <button type="button" class="btn btn-primary submitArgu" style="padding: 6px 20px;">Submit</button>
+                </div>
+
+            </div>
+
+            <div class="container display-none" id="argu-textarea-convince">
+                <h4>Explain how you reached the final decision</h4>
+                <ul>
+                    <li>Show how you integrate everyone’s reasoning.</li>
+                    <li>Provide as many details as possible so that your committee will understand your reasoning.</li>
+                </ul>
+                <div class="div-alert"></div>
+                <textarea name="argu"  rows="8" cols="40" class="form-control" placeholder="At least 80 words"></textarea>
+                <div align="right">
+                    <span class="word_counter">0</span> Words<br/>
+                </div>
+                <div align="right" style="padding-top: 20px">
+                    <button type="button" class="btn btn-primary submitArgu" style="padding: 6px 20px;">Submit</button>
+                </div>
+
+            </div>
+
+
+
             {{/if}}
         {{/if}}
 
 
     </div>
-</template>
+    </template>

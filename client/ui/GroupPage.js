@@ -6,7 +6,7 @@ Template.GroupPage.onRendered(function() {
 Template.GroupPageBothConflicts.onRendered(function() {
     var type = FlowRouter.getQueryParam("type");
 
-    if (type == "1") {
+    if (type == "0") {
         console.log("groupVisTour should start.");
         Session.set('hideEndTour', hideEndTour);
         groupVisTour.init();
