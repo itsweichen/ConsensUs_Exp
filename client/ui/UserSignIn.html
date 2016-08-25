@@ -1,0 +1,70 @@
+<template name="UserSignIn">
+
+    <style media="screen">
+        .form-signin {
+          max-width: 330px;
+          padding: 15px;
+          margin: 0 auto;
+        }
+        .form-signin .form-signin-heading,
+        .form-signin .checkbox {
+          margin-bottom: 10px;
+        }
+        .form-signin .checkbox {
+          font-weight: normal;
+        }
+        .form-signin .form-control {
+          position: relative;
+          height: auto;
+          -webkit-box-sizing: border-box;
+             -moz-box-sizing: border-box;
+                  box-sizing: border-box;
+          padding: 10px;
+          font-size: 16px;
+        }
+        .form-signin .form-control:focus {
+          z-index: 2;
+        }
+        .form-signin input[type="username"] {
+          margin-bottom: -1px;
+          border-bottom-right-radius: 0;
+          border-bottom-left-radius: 0;
+        }
+        .form-signin input[type="password"] {
+          margin-bottom: 10px;
+          border-top-left-radius: 0;
+          border-top-right-radius: 0;
+        }
+        ul {
+            font-size: large;
+        }
+    </style>
+
+
+    <div class="jumbotron">
+        <div class="container">
+            <h2>Task Overview</h2>
+            <h3>Task</h3>
+            <ul>
+                <li>Imagine you are the chair of an admissions committee for a School of Engineering. Your committee must choose one more student to admit to the engineering program and there are three finalists. Your committee members have already given their opinions and you need to make a final decision on behalf of the committee.</li>
+            </ul>
+            <h3>Time</h3>
+            <ul>
+                <li>About 30 minutes</li>
+            </ul>
+            <h3>Next Step</h3>
+            <ul>
+                <li>Please sign in with your Mechnical Turk ID and the nickname you want to use.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="container">
+        <form class="form-signin">
+            <input type="username" id="inputUsername" class="form-control" placeholder="MTurk ID" required autofocus>
+            <input type="nickname" id="inputNickname" class="form-control" placeholder="Nickname" required autofocus>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Start</button>
+        </form>
+    </div> <!-- /container -->
+
+</template>

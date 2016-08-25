@@ -15,7 +15,7 @@ Template.ConfidenceSurvey.events({
 
         if (order == "1") {
             timerStart(2);
-            FlowRouter.go('/' + FlowRouter.getParam("taskId") + '/group?type=1');
+            FlowRouter.go('/' + FlowRouter.getParam("taskId") + '/group?type=0');
         }
         else {
             FlowRouter.go('/' + FlowRouter.getParam("taskId") + '/done');

@@ -832,7 +832,7 @@ Template.GroupPageBothConflicts.onRendered(function() {
                                                 .attr("x", -12)
                                                 .attr("y", function(d, i){ return candidate_num * legend_height + legend_padding * 4 + 132;})
                                                 .style("font-size", "12px")
-                                                .text("Disagreement among");
+                                                .text("Disagreement within");
                                                 score_variance_image
                                                 .append("text")
                                                 .attr("x", -12)

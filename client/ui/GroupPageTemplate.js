@@ -1,4 +1,7 @@
 Template.GroupPageTemplate.helpers({
+    taskId: function() {
+        return FlowRouter.getParam("taskId");
+    },
     cond1_2: function() {
         var taskId = FlowRouter.getParam("taskId");
         var task = Tasks.findOne({_id: taskId});
@@ -19,10 +22,14 @@ Template.GroupPageTemplate.helpers({
         var task = Tasks.findOne({_id: taskId});
         return task.condition === 4;
     },
-    'type': () => {
+    'type1': () => {
         var type = FlowRouter.getQueryParam("type");
         return type === '1';
-    }
+    },
+    'type0': () => {
+        var type = FlowRouter.getQueryParam("type");
+        return type === '0';
+    },
 });
 
 Template.GroupPageTemplate.events({

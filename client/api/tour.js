@@ -21,7 +21,7 @@ individualTour = new Tour({
         }, {
             element: "#a12",
             title: "Step 2 (2/3)",
-            content: "Click and drag these colored dots onto the left line to rate each candidate.",
+            content: "Click and drag these colored dots onto the left line (for each criterion) to rate each candidate.",
             placement: 'bottom'
         }, {
             element: "#checkbox_panel",
@@ -51,12 +51,12 @@ groupVisTour = new Tour({
         }, {
             element: "#a12",
             title: "Dots (2/6)",
-            content: "Big dots: Average scores across your committee. || Small dots: Your scores.",
+            content: "Big dots: Average scores across the committee. || Small dots: Your scores.",
             placement: 'bottom'
         }, {
             element: "#a12 .large_dot",
             title: "Hovering on BIG dots (3/6)",
-            content: "Red horizontal line (on hover): <b>disagreement within your committee</b>. (A longer line means there is a bigger disagreement.)",
+            content: "Red horizontal line (on hover): <b>disagreement within the committee</b>. (A longer line means there is a bigger disagreement.)",
             placement: 'bottom',
             onShown: function(tour) {
                 $('#a12 .large_dot').triggerSVGEvent('mouseover');
@@ -67,7 +67,7 @@ groupVisTour = new Tour({
         }, {
             element: "#a12 .small_dot",
             title: "Hovering on SMALL dots (4/6)",
-            content: "Red line: <b>disagreement between your committee and you</b>.",
+            content: "Red line: <b>disagreement between the committee and you</b>.",
             placement: 'top',
             onShown: function(tour) {
                 $('#a12 .small_dot').triggerSVGEvent('mouseover');
@@ -111,7 +111,7 @@ groupVisTour = new Tour({
         }, {
             element: "#insertQuestionForm",
             title: "Next Step (6/6)",
-            content: "Next, please explore your committee's result above and answer these question.",
+            content: "Next, please explore the committee's result above and answer these question.",
             placement: 'top',
             onShown: function(tour) {
                 $("#tour-end").removeClass("display-none");
@@ -124,5 +124,5 @@ groupVisTour = new Tour({
             $("#tour-end").removeClass("display-none");
         }
     },
-    storage: false
+    storage: window.sessionStorage
     });
