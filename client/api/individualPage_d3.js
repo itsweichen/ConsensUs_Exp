@@ -100,7 +100,6 @@ Template.individualPage.onRendered(function() {
 
 
         var order = FlowRouter.getQueryParam("order");
-        console.log("order: " + order);
         if (order == "1") {
             scores = new Array();
             for(k=0;k<=criteria_num;k++){
@@ -123,7 +122,6 @@ Template.individualPage.onRendered(function() {
                 return;
             }
             scores = scores.score;
-            console.log(scores);
         }
 
 
@@ -258,8 +256,8 @@ Template.individualPage.onRendered(function() {
                 .attr('y',function(d){ return d.y + 5;})
                 .attr('width', 20)
                 .attr('height', 24)
-                .attr("xlink:href","../forbidden-sign.png");             
-                
+                .attr("xlink:href","../forbidden-sign.png");
+
                 d3.selectAll(".handler")
                     .select("circle")
                     .style("stroke-width", function(d){
@@ -274,7 +272,7 @@ Template.individualPage.onRendered(function() {
                     .style("stroke", function(d){
                         return color[this.parentNode.id[2]-1];
                     });
-              
+
             })
             .on('dragend', function(d){
                 d3.select(this).select("image").remove();

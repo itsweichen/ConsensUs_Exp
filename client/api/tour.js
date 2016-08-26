@@ -46,7 +46,7 @@ groupVisTour = new Tour({
         {
             element: "#main_panel",
             title: "Overview (1/6)",
-            content: "In this page, you will see an aggregation of every committee member's scores and reasons.",
+            content: "In this page, you will see an aggregation of every committee member's scores.",
             placement: "top"
         }, {
             element: "#a12",
@@ -100,7 +100,7 @@ groupVisTour = new Tour({
         }, {
             element: "#v2",
             title: "Hoving on the NAME (5/6)",
-            content: "You'll see his/her scores and <b>arguments (on the right)</> on hovering.",
+            content: "You'll see his/her scores on hovering.",
             placement: 'top',
             onShown: function(tour) {
                 $('#v2').triggerSVGEvent('mouseover');
@@ -109,10 +109,10 @@ groupVisTour = new Tour({
                 $('#v2').triggerSVGEvent('mouseout');
             }
         }, {
-            element: "#main_panel",
+            element: "#vis-example",
             title: "Next Step (6/6)",
-            content: "Now, please spend 2 minutes to explore the visualization and examples below.",
-            placement: 'bottom',
+            content: "Now, please spend 2 minutes to explore the visualization above and examples below.",
+            placement: 'top',
             onShown: function(tour) {
                 $("#tour-end").removeClass("display-none");
             }
@@ -125,4 +125,46 @@ groupVisTour = new Tour({
         }
     },
     storage: window.sessionStorage
-    });
+});
+
+questionTour = new Tour({
+    steps: [
+        {
+            element: "#insertQuestionForm",
+            title: "Task",
+            content: "Please answer the questions using the result above.",
+            placement: 'bottom'
+        }
+    ],
+    template: tourTemplate,
+    onShown: function() {
+        if (!Session.get("hideEndTour")) {
+            $("#tour-end").removeClass("display-none");
+        }
+    }
+});
+
+revoteTour = new Tour({
+    steps: [
+        {
+            element: "#main_panel",
+            title: "Step 1 (1/3)",
+            content: "Explore the visualization.",
+            placement: 'bottom'
+        }, {
+            element: "iframe",
+            title: "Step 2 (2/3)",
+            content: "Re-evalutate the three candidates from the perspective of the committee.",
+            placement: 'bottom',
+            onShown: function(tour) {
+                $("#tour-end").removeClass("display-none");
+            }
+        }
+    ],
+    template: tourTemplate,
+    onShown: function() {
+        if (!Session.get("hideEndTour")) {
+            $("#tour-end").removeClass("display-none");
+        }
+    }
+});

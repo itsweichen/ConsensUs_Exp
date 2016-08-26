@@ -10,11 +10,9 @@ Template.ConfidenceSurvey.events({
         }
 
         var order = FlowRouter.getQueryParam("order");
-        console.log(confidence, willingness, order);
         Confidence.insert({userId: Meteor.userId(), confidence: confidence, willingness: willingness, order: order});
 
         if (order == "1") {
-            timerStart(2);
             FlowRouter.go('/' + FlowRouter.getParam("taskId") + '/group?type=0');
         }
         else {

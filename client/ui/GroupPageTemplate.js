@@ -34,64 +34,39 @@ Template.GroupPageTemplate.helpers({
 
 Template.GroupPageTemplate.events({
     'click .submitArgu': function() {
-        var argu = $('textarea').val();
-        var numm = s.split(/[^\s]+/).length - 1;
-        if (numm < 80) {
-            $('.div-alert').html('<div class="alert alert-danger" role="alert">Your arguments should be at least 80 words.</div>');
+        var argu1 = $('#argu-textarea-1 textarea').val();
+        var argu1Len = argu1.split(/[^\s]+/).length - 1;
+        var argu2 = $('#argu-textarea-2 textarea').val();
+        var argu2Len = argu2.split(/[^\s]+/).length - 1;
+
+        if (argu1Len < 30 || argu2Len < 30) {
+            $('.div-alert').html('<div class="alert alert-danger" role="alert">Your arguments should be at least 30 words for each question.</div>');
             return;
         }
-        var flag = $("#change-scores").val();
-        console.log("flag " + flag);
-        Arguments.insert({userId: Meteor.userId(), argu: argu, flag: flag});
+        Arguments.insert({userId: Meteor.userId(), argu1: argu1, argu2: argu2});
+        Scores.insert({userId:  Meteor.userId(), score: document.getElementById('indi2').contentWindow.scores, order: "2" });
         timerEnd(3);
-        timerStart(4);
         FlowRouter.go('/' + FlowRouter.getParam("taskId") + '/confidence?order=2');
     },
     'keydown textarea': function(e) {
         s = e.target.value;
         var numm = s.split(/[^\s]+/).length - 1;
-        $(".word_counter").html(numm);
-    },
-    'change #change-scores': function(e) {
-        var value = $(e.target).val();
-        if (value === "yes") {
-            $("#argu-textarea-change").show()
-
+        if (e.target.name === "argu1") {
+            $("#argu-textarea-1 .word_counter").html(numm);
         } else {
-            $("#argu-textarea-change").hide()
+            $("#argu-textarea-2 .word_counter").html(numm);
+        }
 
-        }
-        if (value === "no") {
-            $("#argu-textarea-convince").show()
-        } else {
-            $("#argu-textarea-convince").hide()
-        }
     }
 
 });
 
-// Template.GroupPageTemplate.onRendered(function() {
-//     this.autorun(function() {
-//         var type = FlowRouter.getQueryParam("type");
-//         if (type == "2") {
-//             $('body').pagewalkthrough({
-//                 name: 'groupPageIntro2',
-//                 steps: [{
-//                     popup: {
-//                         content: "As committee chair, your job is to take into account the perspective of the committee and integrate everyone’s reasoning to come to the best decision possible.",
-//                         type: 'modal'
-//                     }
-//                 }, {
-//                     wrapper: '#argu-textarea',
-//                     popup: {
-//                         content: "In the textbox below, please write arguments for your decision, which will be sent to the committee. Provide as many details as possible so that your committee members will understand your reasoning.",
-//                         type: 'tooltip',
-//                         position: 'top'
-//                     }
-//                 }
-//                 ]
-//             });
-//             $('body').pagewalkthrough('show');
-//         };
-//     });
-// });
+Template.GroupPageTemplate.onRendered(function() {
+    var type = FlowRouter.getQueryParam("type");
+
+    if (type === "2") {
+        Session.set('hideEndTour', hideEndTour);
+        revoteTour.init();
+        revoteTour.start(true);
+    }
+});

@@ -28,6 +28,7 @@ $.fn.heightSVG = function(){
 };
 
 hideEndTour = true;
+devMode = false;
 
 jQuery.fn.extend({
     disable: function(state) {

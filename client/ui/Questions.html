@@ -1,7 +1,9 @@
 <template name="Questions">
     <div class="container">
         <h3>Questions</h3>
-
+        <ul>
+            <li>Please answer the questions using the result above.</li>
+        </ul>
         {{#autoForm collection="Questions" id="insertQuestionForm" type="insert"}}
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -48,7 +50,23 @@
                     <h3 class="panel-title">{{afFieldLabelText name='q6'}}</h3>
                 </div>
                 <div class="panel-body">
-                    {{> afFieldInput name="q6"}}
+                    {{> afFieldInput name="q6" type="select-checkbox-inline" options=voterOptions}}
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{afFieldLabelText name='q7'}}</h3>
+                </div>
+                <div class="panel-body">
+                    {{> afFieldInput name="q7" }}
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{afFieldLabelText name='q8'}}</h3>
+                </div>
+                <div class="panel-body">
+                    {{> afFieldInput name="q8"}}
                 </div>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>

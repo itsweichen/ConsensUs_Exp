@@ -1,6 +1,24 @@
+function startIndiTimer(duration, display) {
+    var timer = duration, minutes, seconds;
+    var countdown = setInterval(function () {
+        minutes = parseInt(timer / 60, 10)
+        seconds = parseInt(timer % 60, 10);
+
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        display.textContent = minutes + ":" + seconds;
+
+        if (--timer < 0) {
+            timer = 0;
+            $('#time').css("color", "red");
+            clearInterval(countdown);
+        }
+    }, 1000);
+}
+
 Template.individualPage.helpers({
     authInProcess: function() {
-        console.log(Scores.find().fetch());
         return Meteor.loggingIn();
     },
     loggedIn: function() {
@@ -8,7 +26,6 @@ Template.individualPage.helpers({
     },
     ord1: function() {
         var ord = FlowRouter.getQueryParam("order");
-        console.log(ord);
         return ord == "1";
     }
 });
@@ -16,7 +33,6 @@ Template.individualPage.helpers({
 
 Template.individualPage.events({
     'click #btn-next': (event) => {
-        console.log("Next Button clicked.");
 
         // check scores
         for (var i = 1; i < 4; i++) {
@@ -40,7 +56,7 @@ Template.individualPage.events({
         if (order == "1") {
             timerEnd(1);
         } else {
-            timerEnd(4);
+            //timerEnd(4);
         }
         FlowRouter.go('/' + FlowRouter.getParam("taskId") + '/confidence?order='+order);
     }
@@ -54,6 +70,10 @@ Template.individualPage.onRendered(function() {
         Session.set('hideEndTour', hideEndTour);
         individualTour.init();
         individualTour.start(true);
+
+        // var time = 60 * 10,
+        //     display = document.querySelector('#time');
+        // startIndiTimer(time, display);
     }
 
 });

@@ -9,6 +9,14 @@ Meteor.startup(function() {
     		argu: "I feel like it was tough to decide on these scores.  I think Sam is taking better, tough classes to prepare him, but then Jim actually has experience working for an engineering company.  I would like to say that Sam is the best candidate, but I think due to his poor letter of recommendation, undecided major, and school suspension, I would have to get the nod to Jim. ",
     		flag: 3
     	   },
+           {
+            name: "Leo",
+            scoresSam: [8.4,9.4,8.5,8.9,6.6],
+            scoresAdam: [7.2,7.9,7,6.6,7.5],
+            scoresJim: [7.4,8.9,7.3,5.3,8],
+            argu: "All 3 candidates are adequately if not extremely suited for an engineering program. They all have a high GPA, exceptional SAT scores in Math, notable extracurricular activities, and recommendations from teachers and adults, although both Adam and Jim have some slightly unfavorable remarks on one of their letters. Their parents’ careers or any siblings activities should not be considered. Although he has not been involved in any engineering-specific activities outside of class like Adam and Jim, Sam has the better overall grades and scores. Participation in AP courses (Sam and Jim) and/or science fairs (Adam) are an additional benefit.",
+            flag: 1
+        },
     		{
     		name: "Mike",
     		scoresSam: [8.6,8.9,8.3,9,8],
@@ -17,6 +25,14 @@ Meteor.startup(function() {
     		argu: "Sam Smith  is taking three Science/Engineering related AP classes including Calculus, Statistics and Computer Science. Both of Adam Adam’s parents are senior engineers in a big technology company. Jim’s  high school principal has written a letter of recommendation saying that her high school has a strong academic reputation, and describes him as a hard working student. Jim’s math teacher has written a letter of recommendation saying that Jim is extremely good at math and he is well prepared for any math-related majors. ",
     		flag: 2
     	   },
+           {
+            name: "Ruby",
+            scoresSam: [9,9.4,8.9,9.4,8.2],
+            scoresAdam: [9,8.3,9.4,8.9,9.3],
+            scoresJim: [8.5,8.8,8.3,8.4,8.7],
+            argu: "Upon viewing the candidate information, I gave all three candidates the score of suitable overall, in academic, in activity, in recommendation letter, and in readiness for engineering. Sam Smith is taking three Science/Engineering related AP classes including Calculus, Statistics and Computer Science. Adampps physics teacher has written a letter of recommendation saying that he is a proactive student who is able to successfully develop plans and implement them. And Jim Jones intends to major in math-related majors. ",
+            flag: 1
+        },
     	      {
     		name: "Wesley",
     		scoresSam: [5.6,9.8,8.5,2,2],
@@ -25,6 +41,14 @@ Meteor.startup(function() {
     		argu: "Sam scored the lowest in recommendation, he got a recommendation letter for acting. Adam got a recommendation letter but the letter lacked detail. Jim received a letter claiming he was well prepared for math related subjects.  The most ready student is Jim. Sam doesn’t know what he wants to study. Adam seems to know what he wants and goes for it and is very responsible but isn’t taking the necessary classes. Jim’s teachers see this and have recommended him to the course though he has not chosen what subject he wants to major in and has many choices to choose from.",
     		flag: 3
         	},
+            {
+             name: "Scott",
+             scoresSam: [9.8,9.8,9.6,9.8,10],
+             scoresAdam: [8.8,9.2,9,9.3,7.7],
+             scoresJim: [8.4,8.1,7.9,9,8.5],
+             argu: "I chose the way i chose because i felt as if sam was the most well rounded individual. He has the highest GPA and i felt like he was the most suitable for whatever placement he is to be placed in. He would fit the description a tad bit better than the others. ON top of this , he even has references and recommendations from his teacher claiming he is a well rounded student. Which is what is mostly needed from students. Well roundedness is key. That’s why i feel like he has an advantage to the other students.",
+             flag: 1
+         },
         	{
     		name: "Cindy",
     		scoresSam: [7.5,8.2,7,5,10],
@@ -33,6 +57,14 @@ Meteor.startup(function() {
     		argu: "Sam’s application looks best initially but part of that is just having the best high school opportunity. His recommendation letter is irrelevant; well-rounded is good, but I’d rather see a recommendation from someone who knows his ability in STEM classes. He’s also undecided in his major, so engineering school may not be the best place for him. Adam’s academics aren’t as great, but he’s a hard worker with an interest in engineering. He has potential. Jim is also a hard worker. I’m not sure engineering school is the *best* school for maths majors, but it’s good enough and he’s academically ready.",
     		flag: 2
         	},
+            {
+             name: "Sara",
+             scoresSam: [8,8.5,9.6,4,9.8],
+             scoresAdam: [3.9,3.5,2,8,2],
+             scoresJim: [6.2,8,5,3,9],
+             argu: "Sam Smith is a well-rounded student who is not only maintaining a high GPA, but is also taking part in extracurricular activities. The courses he is taking shows he would be successful as an engineering student. Jim Jones would be my second choice in a candidate because he has also maintained a good GPA while attending a school that may not have as many advantages as the private school that Sam Smith attends. Jones could be a bit more active outside of the classroom. Adam Adams doesn’t seem as dedicated as the other two and maybe not committed to engineering.",
+             flag: 1
+         },
         	{
     		name: "Mary",
     		scoresSam: [6.4,9.5,6.1,5,5],
@@ -81,6 +113,14 @@ Meteor.startup(function() {
     		argu: "I feel like Jim may have the least perfect experience but from his parents divorcing and his studies and his recommendation letters he is the best candidate. I feel like Sam feels like he can gain easy access especially since his parents have close occupations and he attended private school.I also feel that his alcohol suspension is completely unacceptable. I feel like Adam is average. He is the mediocre one and is okay but not better than Jim. Adam would probably succeed but not better than Jim because of tough background.",
     		flag: 3
         	},
+            {
+                        name: "Bonnie",
+                        scoresSam: [9.7,9.6,9.5,9.7,9.8],
+                        scoresAdam: [5.5,7,5,5.2,5],
+                        scoresJim: [5.9,8.4,5.6,4,5.7],
+                        argu: "I looked at GPA and test scores to rank them academically. I saw that Sam performed better than both Adam and Jim. Overall Jim also performed better than Adam and he took more advanced courses. Only Sam stood out in terms of recommendations and activity. Jim had a negative recommendation letter from a teacher. Overall Sam separates himself from the others and is the most ready for engineering.",
+                        flag: 1
+                       },
         	{
     		name: "George",
     		scoresSam: [8.2,9,7.5,9,7.5],
@@ -104,47 +144,9 @@ Meteor.startup(function() {
             scoresJim: [7.9,8,6.5,8.5,8.5],
             argu: "On Academic scoring, all three candidates have relatively similar GPAs. Sam, though, shines with his near perfect GPA of 3.8, taking 3 AP classes, And managing to keep on his studies while on the football team, in the drama club, and on the debate team.Jim is barely behind him, having a similar class load, taking college classes during the summer and focusing on engineering. However, his lack of practical classes shows and unrealistic view of the real world and his issues with English shows trouble that needs addressed.",
             flag: 1
-           },
-           {
-            name: "Bonnie",
-            scoresSam: [9.7,9.6,9.5,9.7,9.8],
-            scoresAdam: [5.5,7,5,5.2,5],
-            scoresJim: [5.9,8.4,5.6,4,5.7],
-            argu: "I looked at GPA and test scores to rank them academically. I saw that Sam performed better than both Adam and Jim. Overall Jim also performed better than Adam and he took more advanced courses. Only Sam stood out in terms of recommendations and activity. Jim had a negative recommendation letter from a teacher. Overall Sam separates himself from the others and is the most ready for engineering.",
-            flag: 1
-           },
-           {
-            name: "Scott",
-            scoresSam: [9.8,9.8,9.6,9.8,10],
-            scoresAdam: [8.8,9.2,9,9.3,7.7],
-            scoresJim: [8.4,8.1,7.9,9,8.5],
-            argu: "I chose the way i chose because i felt as if sam was the most well rounded individual. He has the highest GPA and i felt like he was the most suitable for whatever placement he is to be placed in. He would fit the description a tad bit better than the others. ON top of this , he even has references and recommendations from his teacher claiming he is a well rounded student. Which is what is mostly needed from students. Well roundedness is key. That’s why i feel like he has an advantage to the other students.",
-            flag: 1
-           },
-           {
-            name: "Sara",
-            scoresSam: [8,8.5,9.6,4,9.8],
-            scoresAdam: [3.9,3.5,2,8,2],
-            scoresJim: [6.2,8,5,3,9],
-            argu: "Sam Smith is a well-rounded student who is not only maintaining a high GPA, but is also taking part in extracurricular activities. The courses he is taking shows he would be successful as an engineering student. Jim Jones would be my second choice in a candidate because he has also maintained a good GPA while attending a school that may not have as many advantages as the private school that Sam Smith attends. Jones could be a bit more active outside of the classroom. Adam Adams doesn’t seem as dedicated as the other two and maybe not committed to engineering.",
-            flag: 1
-           },
-           {
-            name: "Leo",
-            scoresSam: [8.4,9.4,8.5,8.9,6.6],
-            scoresAdam: [7.2,7.9,7,6.6,7.5],
-            scoresJim: [7.4,8.9,7.3,5.3,8],
-            argu: "All 3 candidates are adequately if not extremely suited for an engineering program. They all have a high GPA, exceptional SAT scores in Math, notable extracurricular activities, and recommendations from teachers and adults, although both Adam and Jim have some slightly unfavorable remarks on one of their letters. Their parents’ careers or any siblings activities should not be considered. Although he has not been involved in any engineering-specific activities outside of class like Adam and Jim, Sam has the better overall grades and scores. Participation in AP courses (Sam and Jim) and/or science fairs (Adam) are an additional benefit.",
-            flag: 1
-           },
-           {
-            name: "Ruby",
-            scoresSam: [9,9.4,8.9,9.4,8.2],
-            scoresAdam: [9,8.3,9.4,8.9,9.3],
-            scoresJim: [8.5,8.8,8.3,8.4,8.7],
-            argu: "Upon viewing the candidate information, I gave all three candidates the score of suitable overall, in academic, in activity, in recommendation letter, and in readiness for engineering. Sam Smith is taking three Science/Engineering related AP classes including Calculus, Statistics and Computer Science. Adampps physics teacher has written a letter of recommendation saying that he is a proactive student who is able to successfully develop plans and implement them. And Jim Jones intends to major in math-related majors. ",
-            flag: 1
            }
+
+
         ];
         _.each(voters, function(voter) {
             Voters.insert(voter);
