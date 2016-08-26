@@ -76,10 +76,7 @@ Template.GroupPageBothConflicts.onRendered(function() {
         .select('#main_panel')
         .attr("height", height)
         .attr("width", width)
-        .style("position", "absolute")
-        //                       .style("margin-left", "300px")
-        //                        .attr("transform", "translate(100, 0)")
-        ;
+        .style("position", "absolute");
 
         svg.append("text")
         .text("Not suitable")
