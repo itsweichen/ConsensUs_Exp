@@ -80,12 +80,12 @@ Template.GroupPageBothConflicts.onRendered(function() {
 
         svg.append("text")
         .text("Not suitable")
-        .style("fill", "grey")
+        .style("fill", "#c0c0c0")
         .attr("transform", "translate(180, 50)");
 
         svg.append("text")
         .text("Suitable")
-        .style("fill", "grey")
+        .style("fill", "#c0c0c0")
         .style("text-anchor", "end")
         .attr("transform", "translate(580, 50)");
 
@@ -357,8 +357,7 @@ Template.GroupPageBothConflicts.onRendered(function() {
         var refNode1 = d3.select(refNode1_id).node().parentNode.firstChild;
         d3.selectAll(".voter_dot")
             .on("mouseover", function(d){
-//cursor
-                d3.select(this).style("cursor", "auto");
+
                 d3.select("#argument_div")
                 .classed("argument", true)
                 .html(argu[d.code]);
@@ -531,7 +530,7 @@ Template.GroupPageBothConflicts.onRendered(function() {
         d3.selectAll(".legend").attr("opacity", 1);
         d3.selectAll(".checkbox").style("visibility", "visible");
         //cursor
-
+        d3.selectAll(".handler").style("cursor", "zoom-in");
     }
 
 
@@ -573,8 +572,9 @@ Template.GroupPageBothConflicts.onRendered(function() {
     .on("mouseover", function(d){
         //do it on purpose: in order to click small dot behind big dot. The problem only exist in two conflicts condition.
         //                            this.parentNode.appendChild(this);
-
-    d3.select(this).style("cursor", "zoom-in");
+    if(d3.select(".checkbox").style("visibility") == "visible"){        
+        d3.select(this).style("cursor", "zoom-in");
+    }
     d3.select(this).append("text")
         .text(function(d){
             return candid[d.col-1].candid;})
