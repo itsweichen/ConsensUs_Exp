@@ -137,17 +137,17 @@ Template.GroupPageBothConflicts.onRendered(function() {
         })
         .attr("height", function(d, i){
             if(i == 0)
-            return r * 2;
+                return r * 2;
             return rect_height;
         })
         .attr("rx", function(d, i){
             if(i == 0)
-            return r;
+                return r;
             return 0;
         })
         .attr("ry", function(d, i){
             if(i == 0)
-            return r;
+                return r;
             return 0;
         })
         ;
@@ -291,6 +291,8 @@ Template.GroupPageBothConflicts.onRendered(function() {
         var refNode = d3.select("#a01").node();
         //revote panel part
         circle.on("click", function(d){
+//cursor
+            d3.selectAll(".handler").style("cursor", "initial");
             this.parentNode.insertBefore(this, refNode);
             refNode = this;
 
@@ -344,7 +346,7 @@ Template.GroupPageBothConflicts.onRendered(function() {
 
         voter_circle
         .append("circle")
-        .attr("r", 7)
+        .attr("r", 5)
         .attr("cx", function(d, i) {
             return d.x = title_width + padding_x + rect_width / 10 * score_bar[i + 1]; })
             .attr("cy", function(d, i) { return d.y = padding_y * (+a + 1); })
@@ -355,6 +357,8 @@ Template.GroupPageBothConflicts.onRendered(function() {
         var refNode1 = d3.select(refNode1_id).node().parentNode.firstChild;
         d3.selectAll(".voter_dot")
             .on("mouseover", function(d){
+//cursor
+                d3.select(this).style("cursor", "auto");
                 d3.select("#argument_div")
                 .classed("argument", true)
                 .html(argu[d.code]);
@@ -413,31 +417,20 @@ Template.GroupPageBothConflicts.onRendered(function() {
         });
 
 
-        if(str[2] != 0){
+        // if(str[2] != 0){
 
-            d3.select(".voter_panel")
-            .append("circle")
-            .attr("r", 1)
-            .attr("cx", function(d, i) {
-                return d3.select(str).select("circle").attr("cx"); })
-                .attr("cy", function(d, i) {
-                    return d3.select(str).select("circle").attr("cy"); })
-                    .attr("fill", "black")
-                    .attr("id", "voter_original_vote");
-                }
+        //     d3.select(".voter_panel")
+        //     .append("circle")
+        //     .attr("r", 1)
+        //     .attr("cx", function(d, i) {
+        //         return d3.select(str).select("circle").attr("cx"); })
+        //         .attr("cy", function(d, i) {
+        //             return d3.select(str).select("circle").attr("cy"); })
+        //             .attr("fill", "black")
+        //             .attr("id", "voter_original_vote");
+        // }
 
 
-        //ballon
-        voter_circle
-        .append("path")
-        .attr("class", "float_path")
-        .attr("d", function(d) {
-            return "M " + d.x.toString() + " " + d.y.toString() + "L " + d.x.toString() + " " + d.y.toString();
-        })
-        .attr("stroke", "grey")
-        .attr("stroke-width", "2")
-        .attr("opacity", 0.6)
-        ;
         //text: voter_name
 
         d3.select(str)
@@ -445,12 +438,24 @@ Template.GroupPageBothConflicts.onRendered(function() {
         .attr("class", "voter_name")
         .text(function(d) {return d.name;})
         .style("text-anchor", "end")
+        .style("fill", "grey")
         .attr("transform", function(d, i){
             d.x = title_width + padding_x + rect_width / 10 * score_bar[i + 1];
             d.y = padding_y * (+a + 1);
             return "translate(" + d.x + "," + (d.y + r + 4) + ") rotate(-40)";
         })
         ;
+
+        d3.select(str)
+        .select("circle")
+        .attr("r", 5)
+        .style("stroke", function(d){ 
+            //return color[this.parentNode.id[2] - 1];
+            return "black";
+        })
+        .style("stroke-width", "1px")
+        .style("opacity", 1);
+
         //text: voter_score
         voter_circle
         .append("text")
@@ -525,6 +530,7 @@ Template.GroupPageBothConflicts.onRendered(function() {
         d3.selectAll(".voter_panel").remove();
         d3.selectAll(".legend").attr("opacity", 1);
         d3.selectAll(".checkbox").style("visibility", "visible");
+        //cursor
 
     }
 
@@ -568,6 +574,7 @@ Template.GroupPageBothConflicts.onRendered(function() {
         //do it on purpose: in order to click small dot behind big dot. The problem only exist in two conflicts condition.
         //                            this.parentNode.appendChild(this);
 
+    d3.select(this).style("cursor", "zoom-in");
     d3.select(this).append("text")
         .text(function(d){
             return candid[d.col-1].candid;})
@@ -769,7 +776,7 @@ Template.GroupPageBothConflicts.onRendered(function() {
         .attr('x', 12)
         .attr('y', 129)
         .style("font-size", "12px")
-        .text("Committee");
+        .text("Committee Average");
 
         little_and_large_circle
         .append("circle")
@@ -816,7 +823,7 @@ Template.GroupPageBothConflicts.onRendered(function() {
         .attr("x", -12)
         .attr("y", function(d, i){ return candidate_num * legend_height + legend_padding * 4 + 70;})
         .style("font-size", "12px")
-        .text("committee & you")
+        .text("committee average & you")
 
         score_variance_image
         .append("image")
@@ -837,7 +844,7 @@ Template.GroupPageBothConflicts.onRendered(function() {
         .attr("x", -12)
         .attr("y", function(d, i){ return candidate_num * legend_height + legend_padding * 4 + 147;})
         .style("font-size", "12px")
-        .text("committee")
+        .text("all committee")
 
 
 
@@ -1048,7 +1055,7 @@ Template.GroupPageBothConflicts.onRendered(function() {
                     append("circle")
                     .attr("class", "indivudial_vote")
                     .attr("id", "v" + i.toString() + j.toString())
-                    .attr("r", r)
+                    .attr("r", 5)
                     .attr("cx", function(){
                         return title_width + padding_x + rect_width / 10 * (voter[i][j][d.code]);
                     })
