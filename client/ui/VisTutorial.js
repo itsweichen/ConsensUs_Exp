@@ -36,9 +36,9 @@ Template.VisTutorial.onRendered(function() {
 });
 
 Template.VisTutorial.helpers({
-    cond5_6: function() {
+    cond1_2: function() {
         var taskId = FlowRouter.getParam("taskId");
         var task = Tasks.findOne({_id: taskId});
-        return (task.condition === 5) || (task.condition === 6);
-    },
+        return (task.condition === 1) || (task.condition === 2);
+    }
 });
