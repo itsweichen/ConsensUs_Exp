@@ -14,10 +14,10 @@ var tourTemplate = "<div class='popover tour-tour tour-tour-3 fade top in'>\
 individualTour = new Tour({
     steps: [
         {
-            element: "#click-info",
+            element: "#candi-info",
             title: "Step 1 (1/3)",
-            content: "Click here to read the candidates' information.",
-            placement: 'bottom'
+            content: "Read through the candidates' information.",
+            placement: 'top'
         }, {
             element: "#a12",
             title: "Step 2 (2/3)",

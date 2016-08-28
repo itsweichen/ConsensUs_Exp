@@ -3,6 +3,21 @@
         li {
             font-size: medium;
         }
+        table.tableizer-table {
+            font-size: 12px;
+            border: 1px solid #CCC;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        .tableizer-table td {
+            padding: 4px;
+            margin: 3px;
+            border: 1px solid #CCC;
+        }
+        .tableizer-table th {
+            background-color: #ACACAC;
+            color: #FFF;
+            font-weight: bold;
+        }
     </style>
             <div class="container">
                 <div class="row">
@@ -19,10 +34,6 @@
                     </p>
                 </div>
 
-                <div class="row">
-                    <h4>Candidates' information</h4>
-                    {{> CandidateInfo}}
-                </div>
                 <br>
                 <div class="row" style="background-color: Gainsboro; height:450px">
                     <div class="col-md-12">
@@ -32,9 +43,13 @@
                 </div>
 
                 <div class="row" style="text-align: right;">
-                    <!-- <textarea  class="col-md-8" style="margin-left:50px; margin-bottom:10px; width: 590px" name="arguments" placeholder="Reasons for your scores..."></textarea> -->
-                    <!-- <p class="col-md-1" style="margin-bottom:10px"><span id="word_counter">0</span>Words</p> -->
                     <a href="" class="btn btn-lg btn-default" id="btn-next">Next</a>
                 </div>
+
+                <div class="row" id="candi-info">
+                    <h4>Candidates' information</h4>
+                    {{> CandidateInfo}}
+                </div>
+
             </div>
 </template>
