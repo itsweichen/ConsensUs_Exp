@@ -166,13 +166,10 @@ Template.GroupPageBothConflicts.onRendered(function() {
 
 
         var overall = new Array(criteria_num + 1);
-        var conflict1 = new Array(criteria_num + 1);
-        var conflict2 = new Array(criteria_num + 1);
-
+        var conflict = new Array(criteria_num + 1);
         for(i = 0; i <=criteria_num; i++){
             overall[i]=new Array(candidate_num + 1);
-            conflict1[i]=new Array(candidate_num + 1);
-            conflict2[i]=new Array(candidate_num + 1);
+            conflict[i]=new Array(candidate_num + 1);
         }
 
         // var argu = new Array(user_num + 1);
@@ -182,8 +179,9 @@ Template.GroupPageBothConflicts.onRendered(function() {
         // argu[3] = "score and arguments.Your task is to answer the questions below the visualization.This is an average of everyone's score.Difference between committee and you indicates the amount of disagreement between you and other voters.Click on the dots to see others' votes. Hover over voters to see their score and arguments.Your task is to answer the questions below the visualization.Your task is to answer the questions below the visualization.This is an average of everyone's score.Difference between committee and you indicates the amount of disagreement between you and other voters.Click on the dots to see ";
         //
         calculateAvg();
-        calculateConflict1();
-        calculateConflict2();
+        calculateConflict();
+
+        Conflict.insert({userId: Meteor.userId(), conflict: conflict});
 
 
         var str = "[";
@@ -197,7 +195,7 @@ Template.GroupPageBothConflicts.onRendered(function() {
                 str += ", score: ";
                 str += overall[i][j];
                 str += ", conflict: ";
-                str += conflict1[i][j];
+                str += conflict[i][j];
                 str += ", id:\""
                 str += i;
                 str += j;
@@ -578,7 +576,6 @@ Template.GroupPageBothConflicts.onRendered(function() {
         d3.select(this).style("cursor", "zoom-in");
     }
     d3.select(this).append("text")
-        .attr("id", "current_name")
         .text(function(d){
             return candid[d.col-1].candid;})
             .style("text-anchor", "end")
@@ -596,7 +593,7 @@ Template.GroupPageBothConflicts.onRendered(function() {
             this.parentNode.insertBefore(this, refNode);
             refNode = this;
 
-            d3.select("#current_name").remove();
+            d3.select(this).selectAll("text").remove();
 
             d3.select(this)
             .select("path")
@@ -608,8 +605,7 @@ Template.GroupPageBothConflicts.onRendered(function() {
         ;
 
     d3.selectAll(".large_dot")
-        .each(function(d){
-            if(d.conflict != 0){
+        .on("mouseover", function(d){
             d3.select(this.parentNode)
             .append("path")
             .classed("conflict_bar", true)
@@ -636,29 +632,33 @@ Template.GroupPageBothConflicts.onRendered(function() {
             .attr("stroke", "orangeRed")
             .attr("stroke-width", 0.5);
 
-            // d3.select(this.parentNode)
-            // .append("text")
-            // .classed("conflict_bar", true)
-            // .attr("x", function(d) { return title_width + padding_x + rect_width / 10 * d.score; })
-            // .attr("y", function(d) { return padding_y * (d.row + 1) - 22; })
-            // .style("text-anchor", "middle")
-            // .style("font-size", "10px")
-            // .style("fill", "orangeRed")
-            // .text(function(d) { return d3.round(d.conflict, 1);});
-        }
+            d3.select(this.parentNode)
+            .append("text")
+            .classed("conflict_bar", true)
+            .attr("x", function(d) { return title_width + padding_x + rect_width / 10 * d.score; })
+            .attr("y", function(d) { return padding_y * (d.row + 1) - 22; })
+            .style("text-anchor", "middle")
+            .style("font-size", "10px")
+            .style("fill", "orangeRed")
+            .text(function(d) { return d3.round(d.conflict, 1);});
+        })
+        .on("mouseout", function(d){
+            d3.selectAll(".conflict_bar").remove();
+            d3.select(this)
+            .attr("stroke-width", 0.5);
+            d3.select(this.parentNode).select(".small_dot")
+            .attr("stroke-width", 0.5);
         });
 
     d3.selectAll(".small_dot")
-        .each(function(d){
-            if(conflict2[d.id[0]][d.id[1]]!= 0){
-            console.log("aaaa");
+        .on("mouseover", function(d){
             d3.select(this.parentNode)
             .append("path")
             .classed("conflict_bar", true)
             .attr("d", function(d){
                 var x1 = title_width + padding_x + rect_width / 10 * d.score;
                 var x2 = title_width + padding_x + rect_width / 10 * voter[d.id[0]][d.id[1]][1];
-                var y = padding_y * (d.row + 1) + 15;
+                var y = padding_y * (d.row + 1) + 30;
                 return "M " + x1.toString() + " " + (y).toString() +
                 "L " + x2.toString() + " " + (y).toString();
             })
@@ -671,7 +671,7 @@ Template.GroupPageBothConflicts.onRendered(function() {
             .attr("d", function(d){
                 var x = title_width + padding_x + rect_width / 10 * d.score;
                 var y1 = padding_y * (d.row + 1);
-                var y2 = padding_y * (d.row + 1) + 15;
+                var y2 = padding_y * (d.row + 1) + 30;
 
                 return "M " + x.toString() + " " + (y1).toString() +
                 "L " + x.toString() + " " + (y2).toString();
@@ -685,7 +685,7 @@ Template.GroupPageBothConflicts.onRendered(function() {
             .attr("d", function(d){
                 var x = title_width + padding_x + rect_width / 10 * voter[d.id[0]][d.id[1]][1];
                 var y1 = padding_y * (d.row + 1);
-                var y2 = padding_y * (d.row + 1) + 15;
+                var y2 = padding_y * (d.row + 1) + 30;
 
                 return "M " + x.toString() + " " + (y1).toString() +
                 "L " + x.toString() + " " + (y2).toString();
@@ -693,25 +693,31 @@ Template.GroupPageBothConflicts.onRendered(function() {
             .attr("stroke", "orangeRed")
             .attr("stroke-width", "2");
 
-            // d3.select(this.parentNode)
-            // .append("text")
-            // .classed("conflict_bar", true)
-            // .attr("x", function(d) {
-            //     var x1 = title_width + padding_x + rect_width / 10 * d.score;
-            //     var x2 = title_width + padding_x + rect_width / 10 * voter[d.id[0]][d.id[1]][1];
-            //     var x = (x1 + x2) / 2;
-            //     return x;
-            //  })
-            // .attr("y", function(d) { return padding_y * (d.row + 1) + 40; })
-            // .style("text-anchor", "middle")
-            // .style("font-size", "10px")
-            // .style("fill", "orangeRed")
-            // .text(function(d) {
-            //     console.log(d3.round(Math.abs(d.score - voter[d.id[0]][d.id[1]][1]), 1));
-            //     return d3.round(Math.abs(d.score - voter[d.id[0]][d.id[1]][1]), 1);
-            // });
-        }
+            d3.select(this.parentNode)
+            .append("text")
+            .classed("conflict_bar", true)
+            .attr("x", function(d) {
+                var x1 = title_width + padding_x + rect_width / 10 * d.score;
+                var x2 = title_width + padding_x + rect_width / 10 * voter[d.id[0]][d.id[1]][1];
+                var x = (x1 + x2) / 2;
+                return x;
+             })
+            .attr("y", function(d) { return padding_y * (d.row + 1) + 40; })
+            .style("text-anchor", "middle")
+            .style("font-size", "10px")
+            .style("fill", "orangeRed")
+            .text(function(d) {
+                return d3.round(Math.abs(d.score - voter[d.id[0]][d.id[1]][1]), 1);
+            });
+        })
+        .on("mouseout", function(d){
+            d3.selectAll(".conflict_bar").remove();
+            d3.select(this)
+            .attr("stroke-width", "0.5");
+            d3.select(this.parentNode).select(".large_dot")
+            .attr("stroke-width", "0.5");
         });
+
 
 
         /* legend */
@@ -769,7 +775,7 @@ Template.GroupPageBothConflicts.onRendered(function() {
         .append('text')
         .attr('x', 12)
         .attr('y', 129)
-        .style("font-size", "10px")
+        .style("font-size", "12px")
         .text("Committee Average");
 
         little_and_large_circle
@@ -785,7 +791,7 @@ Template.GroupPageBothConflicts.onRendered(function() {
         .append('text')
         .attr('x', 13)
         .attr('y', 146)
-        .style("font-size", "10px")
+        .style("font-size", "12px")
         .text("You")
 
         var score_variance_image =
@@ -810,14 +816,14 @@ Template.GroupPageBothConflicts.onRendered(function() {
         .append("text")
         .attr("x", -12)
         .attr("y", function(d, i){ return candidate_num * legend_height + legend_padding * 4 + 58;})
-        .style("font-size", "10px")
-        .text("Biggest point of disagreement");
+        .style("font-size", "12px")
+        .text("Disagreement between");
         score_variance_image
         .append("text")
         .attr("x", -12)
         .attr("y", function(d, i){ return candidate_num * legend_height + legend_padding * 4 + 70;})
-        .style("font-size", "10px")
-        .text("between committee & you")
+        .style("font-size", "12px")
+        .text("committee average & you")
 
         score_variance_image
         .append("image")
@@ -831,14 +837,14 @@ Template.GroupPageBothConflicts.onRendered(function() {
         .append("text")
         .attr("x", -12)
         .attr("y", function(d, i){ return candidate_num * legend_height + legend_padding * 4 + 132;})
-        .style("font-size", "10px")
-        .text("Biggest point of disagreement");
+        .style("font-size", "12px")
+        .text("Disagreement among");
         score_variance_image
         .append("text")
         .attr("x", -12)
         .attr("y", function(d, i){ return candidate_num * legend_height + legend_padding * 4 + 147;})
-        .style("font-size", "10px")
-        .text("within the committee")
+        .style("font-size", "12px")
+        .text("all committee")
 
 
 
@@ -1099,50 +1105,19 @@ Template.GroupPageBothConflicts.onRendered(function() {
             }
         }
 
-        function calculateConflict1(){
-                var max = 0, max_j = 0, tmp = 0, sum = 0;
+        function calculateConflict(){
+                var max = 0, tmp = 0, sum = 0;
 
                 for(i = 0; i<=criteria_num; i++)
                     for(j = 0; j<=candidate_num; j++) {
                         for(k = 1; k<=user_num; k++) {
                             tmp =  (voter[i][j][k] - overall[i][j]) * (voter[i][j][k] - overall[i][j]);
                             sum += tmp;
+
+                            if(tmp > max) max = tmp;
                         }
-                        conflict1[i][j] = tmp;
+                        conflict[i][j] = tmp;
                     }
-
-                for(i = 0; i<=criteria_num; i++){
-                    max = 0, max_j = 0;
-                    for(j = 0; j<=candidate_num; j++){
-                        if(conflict1[i][j] > max)
-                            max = conflict1[i][j], max_j = j; 
-                    }
-                    for(j = 0; j <= candidate_num; j++){
-                        if(j != max_j)
-                            conflict1[i][j] = 0;
-                    }
-                }
-
-        }
-
-        function calculateConflict2(){
-            var max = 0, max_j = 0;
-            for(i = 0; i<=criteria_num; i++)
-                for(j = 0; j<=candidate_num; j++){
-                    conflict2[i][j] = Math.abs(overall[i][j] - voter[i][j][1]);
-                }
-
-            for(i = 0; i<=criteria_num; i++){
-                max = 0, max_j = 0;
-                for(j = 0; j<=candidate_num; j++){
-                    if(conflict2[i][j] > max)
-                        max = conflict2[i][j], max_j = j; 
-                }
-                for(j = 0; j <= candidate_num; j++){
-                        if(j != max_j)
-                            conflict2[i][j] = 0;
-                    }
-            }
 
         }
 
