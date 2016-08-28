@@ -29,8 +29,8 @@ Template.Admin.events({
             confi_1 = confidence_1.confidence;
             will_1 = confidence_1.willingness;
             var confidence_2 = Confidence.findOne({userId: id, order: "2"}) || {confidence: -1, willingness: -1};
-            confi_2 = confidence_1.confidence;
-            will_2 = confidence_1.willingness;
+            confi_2 = confidence_2.confidence;
+            will_2 = confidence_2.willingness;
 
             // score
             score_1 = Scores.findOne({userId: id, order: "1"}) || {score: -1};
