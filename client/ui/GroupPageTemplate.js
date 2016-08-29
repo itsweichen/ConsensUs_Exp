@@ -30,6 +30,10 @@ Template.GroupPageTemplate.helpers({
         var type = FlowRouter.getQueryParam("type");
         return type === '0';
     },
+    'type1p5': () => {
+        var type = FlowRouter.getQueryParam("type");
+        return type === '1.5';
+    },
 });
 
 Template.GroupPageTemplate.events({

@@ -54,9 +54,7 @@ AutoForm.hooks({
       },
       onSuccess: function (insertDoc, updateDoc, currentDoc) {
           timerEnd(2);
-          timerStart(3);
-          $('body, html').animate({ scrollTop: 0 }, 800);
-          FlowRouter.go('/' + FlowRouter.getParam("taskId") + '/group?type='+2);
+          FlowRouter.go('/' + FlowRouter.getParam("taskId") + '/group?type='+1.5);
         }
   }
 });
