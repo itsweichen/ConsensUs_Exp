@@ -24,31 +24,33 @@
     </div>
 </template>
 
-<template name="GroupPageCommNYou">
-    <div class="container">
-    <div class="row">
-        <p style="padding-left: 10px">
-        <h3>Committee's scores</h3>
-        <ol class="task-desc">
-            <li>As committee chair, please look over their scores and reasons.</li>
-            <li>Answer the questions below and then provide your arguments.</li>
-        </ol>
-        </p>
-    </div>
-    <div class="row" style="background-color: Gainsboro; height:450px">
-            <div class="col-lg-9 col-md-12 col-sm-12" id="div-vis">
-                <svg id="left_side_panel"></svg>
-                <svg id="main_panel"></svg>
-                <div id ="right_side_div"></div>
-                <div id= "checkbox1_div"></div>
-            </div>
-            <div class="col-lg-3">
-                <div id ="argument_div" style="margin-top: 34px;">
-                </div>
-            </div>
+<template name="ArguOnly">
+    <div class="container" style="height:500px">
+        <div class="row">
+                <p style="padding-left: 10px">
+                <h3>Committee's scores</h3>
+                <ol class="task-desc">
+                    <li>As committee chair, please look over their scores and reasons.</li>
+                    <li>Answer the questions below and then provide your arguments.</li>
+                </ol>
+                </p>
+        </div>
 
-    </div>
-    <hr>
+        <div class="container" style="height:500px">
+            <div class="row" style="background-color: Gainsboro; height: 40px">
+            </div>
+            <div class="row" style="background-color: Gainsboro">
+                <svg class="col-md-1 col-sm-1 col-xs-1">
+                </svg>
+                <svg class="side_panel col-md-2 col-sm-2 col-xs-2">
+                </svg>
+                      <!-- <div class="main_panel col-md-4 col-sm-5 col-xs-6" id="overall-table"></div> -->
+                <div class="argument_panel col-md-5 col-sm-4 col-xs-6"></div>
+            </div>
+        </div>
+
+
+
     </div>
 </template>
 
