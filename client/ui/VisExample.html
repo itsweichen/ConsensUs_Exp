@@ -1,0 +1,28 @@
+<template name="VisExample">
+    <div class="container">
+        <div class="row">
+            <p style="padding-left: 10px">
+                <h3>Example <a href="" id="tour-start"><span class="label label-info">Restart Tutorial</span></a></h3>
+                <ol class="task-desc">
+                    <li>Please go through the tutorial very carefully and study the following representation.</li>
+                    <li>In the next page, you will use the similar representation with real data to answer some questions.</li>
+                </ol>
+            </p>
+        </div>
+        <div class="row" style="background-color: Gainsboro; height:450px">
+            <div class="col-lg-9 col-md-12 col-sm-12" id="div-vis">
+                <svg id="left_side_panel"></svg>
+                <svg id="main_panel"></svg>
+                <div id ="right_side_div"></div>
+                <div id= "checkbox1_div"></div>
+            </div>
+            <div class="col-lg-3">
+                <!-- <div id ="argument_div" style="margin-top: 34px;"></div> -->
+            </div>
+
+        </div>
+        <div align="right" style="padding-top: 50px">
+            <button id="next-btn" type="button" class="btn btn-default" style="padding: 10px 50px;">Next</button>
+        </div>
+    </div>
+</template>

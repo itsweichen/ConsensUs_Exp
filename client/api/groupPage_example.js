@@ -1,76 +1,18 @@
-Template.GroupPageBothConflicts.onRendered(function() {
+Template.VisExample.onRendered(function() {
     this.autorun(function() {
 
         // backend code
 
-        var taskId = FlowRouter.getParam("taskId");
-        var taskInfo = Tasks.findOne({"_id": taskId});
-        var chairScores = Scores.findOne({"userId": Meteor.userId()});
-
-        // TODO: change to subscribe ready later
-        if (!taskInfo || !chairScores) {
-            return;
-        }
-
-        var criteria_num = taskInfo.criteriaNum, candidate_num = taskInfo.candidateNum, user_num = taskInfo.voterNum + 1;
-
-        var voters = new Array(user_num + 1);
-
-        for (var i = 1; i < user_num; i++) {
-            var voterName = taskInfo.voters[i-1];
-            voters[i] = Voters.findOne({"name": voterName});
-        }
-
-
-        var voter = new Array(criteria_num + 1);
-        for (var i = 0; i < criteria_num + 1; i++) {
-            voter[i] = new Array(candidate_num + 1);
-            for (var j = 0; j < candidate_num + 1; j++) {
-                voter[i][j] = new Array(user_num + 1).fill(0);
-            }
-        }
-
-        for (var i = 0; i <= criteria_num; i++) {
-            for (var j = 1; j <= candidate_num; j++) {
-                voter[i][j][1] = chairScores.score[i][j];
-            }
-        }
-
-        for (var i = 0; i <= criteria_num; i++) {
-            for (var k = 2; k <= user_num; k++) {
-                voter[i][1][k] = voters[k-1].scoresSam[i];
-                voter[i][2][k] = voters[k-1].scoresAdam[i];
-                voter[i][3][k] = voters[k-1].scoresJim[i];
-            }
-        }
-
-        var voter_info = new Array(user_num);
-        voter_info[0] = {code: 1, name: Meteor.user().profile.nickname};
-
-        for (var i = 1; i < user_num; i++) {
-            voter_info[i] = {code: i+1, name: taskInfo.voters[i-1]};
-        }
-
-
-        // arguments
-        var argu = new Array(user_num + 1);
-        argu[1] = "";
-        for (var i = 2; i <= user_num; i++) {
-            argu[i] = voters[i-1].argu;
-        }
-
+        var voter_info  = [{ code:1,  name:"You"}, { code:2,  name:"Member1"},
+                                        { code:3,  name:"Member2"}, { code:4,  name:"Member3"}];
         // end backend code
 
         $("#div-vis").empty();
         $("#div-vis").html('<svg id="left_side_panel"></svg><svg id="main_panel"></svg><div id ="right_side_div"></div><div id= "checkbox1_div"></div>');
 
-
         var height = 400, width = 750;
         var r = 10;
         var i, j, k;
-
-
-
 
         var svg = d3
         .select('#main_panel')
@@ -156,13 +98,13 @@ Template.GroupPageBothConflicts.onRendered(function() {
         //("#d27676", "#32b68b", "#3d8ee4"
 
         var color = new Array("#43a853", "#4285f4", "#fbbc05", "BlueViolet", "brown", "Chartreuse", "Cyan");
-        // var criteria_num = 4, candidate_num = 3, user_num = 4;
-        // var voter = [
-        //     [[0,0,0,0,0],[0,7.84375,3,5.5,4.75],[0,8.45625,6,4.5,6.5],[0,7.906249999999999,5.5,7.75,6.75]],
-        //     [[0,0,0,0,0],[0,8.475,2,1,2],[0,6.275,2,4,7],[0,7.425,8,9,5]],
-        //     [[0,0,0,0,0],[0,7.725,3,8,4],[0,8.4,9,3,6],[0,6.775,7,7,8]],
-        //     [[0,0,0,0,0],[0,8.45,5,6,9],[0,9.325,7,6,7],[0,8.85,5,6,6]],
-        //     [[0,0,0,0,0],[0,6.725,2,7,4],[0,9.825,6,5,6],[0,8.575,2,9,8]]];
+        var criteria_num = 4, candidate_num = 3, user_num = 4;
+        var voter = [
+            [[0,0,0,0,0],[0,7.84375,3,5.5,4.75],[0,8.45625,6,4.5,6.5],[0,7.9,5.5,7.75,6.75]],
+            [[0,0,0,0,0],[0,8.475,2,1,2],[0,6.275,2,4,7],[0,7.425,8,9,5]],
+            [[0,0,0,0,0],[0,7.725,3,8,4],[0,8.4,9,3,6],[0,6.775,7,7,8]],
+            [[0,0,0,0,0],[0,8.45,5,6,9],[0,9.325,7,6,7],[0,8.85,5,6,6]],
+            [[0,0,0,0,0],[0,6.725,2,7,4],[0,9.825,6,5,6],[0,8.575,2,9,8]]];
 
 
         var overall = new Array(criteria_num + 1);
@@ -175,12 +117,13 @@ Template.GroupPageBothConflicts.onRendered(function() {
             conflict2[i]=new Array(candidate_num + 1);
         }
 
-        // var argu = new Array(user_num + 1);
-        //
-        // argu[1] = "This is an average of everyone's score.Difference between committee and you indicates the amount of disagreement between you and other voters.Click on the dots to see others' votes. Hover over voters to see their score and arguments.Your task is to answer the questions below the visualization.This is an average of everyone's score.Difference between committee and you indicates the amount of disagreement between you and other voters.Click on the dots to see others' votes. Hover over voters to see their score and arguments.Your task is to answer the questions below the visualization.Your task is to answer the questions below the visualization.This is an average of everyone's scoreThis is an average of everyone's score.Difference between committee and you indicates the amount of disagreement between you and other voters.Click on the dots to see others' votes. Hover over voters to see their others' votes. Hover over voters to see their score and arguments.Your task is to answer the questions below the visualization."
-        // argu[2] = "score and arguments.Your task is to answer the questions below the visualization.This is an average of everyone's score.Difference between committee and you indicates the amount of disagreement between you and other voters.Click on the dots to see others' votes. Hover over voters to see their score and arguments.Your task is to answer the questions below the visualization.Your task is to answer the questions below the visualization.This is an average of everyone's score.Difference between committee and you indicates the amount of disagreement between you and other voters.Click on the dots to see ";
-        // argu[3] = "score and arguments.Your task is to answer the questions below the visualization.This is an average of everyone's score.Difference between committee and you indicates the amount of disagreement between you and other voters.Click on the dots to see others' votes. Hover over voters to see their score and arguments.Your task is to answer the questions below the visualization.Your task is to answer the questions below the visualization.This is an average of everyone's score.Difference between committee and you indicates the amount of disagreement between you and other voters.Click on the dots to see ";
-        //
+        var argu = new Array(user_num + 1);
+
+        argu[1] = "This is an average of everyone's score.Difference between committee and you indicates the amount of disagreement between you and other voters.Click on the dots to see others' votes. Hover over voters to see their score and arguments.Your task is to answer the questions below the visualization.This is an average of everyone's score.Difference between committee and you indicates the amount of disagreement between you and other voters.Click on the dots to see others' votes. Hover over voters to see their score and arguments.Your task is to answer the questions below the visualization.Your task is to answer the questions below the visualization.This is an average of everyone's scoreThis is an average of everyone's score.Difference between committee and you indicates the amount of disagreement between you and other voters.Click on the dots to see others' votes. Hover over voters to see their others' votes. Hover over voters to see their score and arguments.Your task is to answer the questions below the visualization."
+        argu[2] = "score and arguments.Your task is to answer the questions below the visualization.This is an average of everyone's score.Difference between committee and you indicates the amount of disagreement between you and other voters.Click on the dots to see others' votes. Hover over voters to see their score and arguments.Your task is to answer the questions below the visualization.Your task is to answer the questions below the visualization.This is an average of everyone's score.Difference between committee and you indicates the amount of disagreement between you and other voters.Click on the dots to see ";
+        argu[3] = "score and arguments.Your task is to answer the questions below the visualization.This is an average of everyone's score.Difference between committee and you indicates the amount of disagreement between you and other voters.Click on the dots to see others' votes. Hover over voters to see their score and arguments.Your task is to answer the questions below the visualization.Your task is to answer the questions below the visualization.This is an average of everyone's score.Difference between committee and you indicates the amount of disagreement between you and other voters.Click on the dots to see ";
+
+
         calculateAvg();
         calculateConflict1();
         calculateConflict2();

@@ -13,7 +13,7 @@ Template.ConfidenceSurvey.events({
         Confidence.insert({userId: Meteor.userId(), confidence: confidence, willingness: willingness, order: order});
 
         if (order == "1") {
-            FlowRouter.go('/' + FlowRouter.getParam("taskId") + '/group?type=0');
+            FlowRouter.go('/' + FlowRouter.getParam("taskId") + '/example');
         }
         else {
             FlowRouter.go('/' + FlowRouter.getParam("taskId") + '/done');
