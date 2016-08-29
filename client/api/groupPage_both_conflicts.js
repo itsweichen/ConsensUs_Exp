@@ -652,7 +652,6 @@ Template.GroupPageBothConflicts.onRendered(function() {
     d3.selectAll(".small_dot")
         .each(function(d){
             if(conflict2[d.id[0]][d.id[1]]!= 0){
-            console.log("aaaa");
             d3.select(this.parentNode)
             .append("path")
             .classed("conflict_bar", true)
@@ -1148,61 +1147,113 @@ Template.GroupPageBothConflicts.onRendered(function() {
 
         }
 
-                function q1(){
-                   var scores = new Array(candidate_num + 1);
-                   for(var i = 1; i <= candidate_num; i++){
-                       scores[i] = overall[0][i];
-                   }
-                   return scores;
+        function q1(){
+            //multiple answers
+            var ans = new Array(0);
+            var max = 0;
+
+            for(i = 1; i <= candidate_num; i++){
+                if(overall[0][i] > max)
+                    max = overall[0][i];
+            }
+
+            for(i = 1; i <= candidate_num; i++){
+                if(overall[0][i] == max)
+                    ans.push(i);
+            }
+        }
+
+        function q2(){
+            for(i = 1; i <= candidate_num; i++){
+                if(conflict2[0][i] != 0)
+                    return i;
+            }
+        }
+
+        function q3(){
+        //multiple answers
+            var max = 0, ans = new Array(0);
+            for(i = 1; i <= criteria_num; i++)
+                for(j = 1; j <= candidate_num; j++){
+                    if(conflict2[i][j] > max)
+                        max = conflict2[i][j];
                 }
-
-                function q2(){
-                   var scores = new Array(candidate_num + 1);
-                   for(var i = 1; i <= candidate_num; i++){
-                       scores[i] = overall[3][i];
-                   }
-                   return scores;
+            for(i = 1; i <= criteria_num; i++)
+                for(j = 1; j <= candidate_num; j++){
+                    if(conflict2[i][j] == max)
+                        ans.push(i.toString() + j.toString());
                 }
+            return ans;
+        }
 
-                function q3(){
-               var scores = new Array(candidate_num + 1);
-               for(var i = 1; i <= user_num; i++)
-                   scores[i] = voter[0][1][i];
-               return scores;
-               }
-
-            function q4(){
-               var scores = new Array(candidate_num + 1);
-               for(var i = 1; i <= user_num; i++) {
-                   scores[i] = voter[0][2][i];
-               }
-               return scores;
+        function q4(){
+            for(i = 1; i <= candidate_num; i++){
+                if(conflict1[0][i] != 0)
+                    return i;
             }
+        }
 
-            function q5(){
-               var scores = new Array(candidate_num + 1);
-               for(var i = 1; i <= user_num; i++) {
-                   scores[i] = voter[0][3][i];
-               }
-               return scores;
-            }
 
-            function q6(){
-               var scores = new Array(criteria_num + 1);
-               for(var i = 0; i <= criteria_num; i++){
-                   scores[i] = new Array(candidate_num + 1);
-               }
+        function q5(){
+        //multiple answers
+            var max = 0, ans = new Array(0);
+            for(i = 1; i <= criteria_num; i++)
+                for(j = 1; j <= candidate_num; j++){
+                    if(conflict1[i][j] > max)
+                        max = conflict1[i][j];
+                }
+            for(i = 1; i <= criteria_num; i++)
+                for(j = 1; j <= candidate_num; j++){
+                    if(conflict1[i][j] == max)
+                        ans.push(i.toString() + j.toString());
+                }
+            return ans;
+        }
 
-               for(var i = 1; i <= criteria_num; i++)
-                   for(var j = 1; j <= candidate_num; j++){
-                       scores[i][j] = Math.abs(voter[i][j][0] - overall[i][j]);
-                   }
-               return scores;
-            }
 
-            function q7(){
-               return overall[0];
-            }
+        function q6(){
+        //multiple answers
+            var max = 0, ans = new Array(0);
+            for(i = 1; i <= user_num; i++)
+                for(j = 1; j <= user_num; j++){
+                    if(Math.abs(voter[0][1][i] - voter[0][1][j]) > max)
+                        max = Math.abs(voter[0][1][i] - voter[0][1][j]);
+                }
+            for(i = 1; i <= user_num; i++)
+                for(j = 1; j <= user_num; j++){
+                    if(Math.abs(voter[0][1][i] - voter[0][1][j]) == max)
+                        ans.push(i.toString() + j.toString());
+                }
+            return ans;
+        }
+
+        function q7(){
+        //multiple answers
+            var max = 0, ans = new Array(0);
+            for(i = 2; i <= user_num; i++){
+                    if(Math.abs(voter[2][2][i] - voter[2][2][1]) > max)
+                        max = Math.abs(voter[0][1][i] - voter[0][1][1]);
+                }
+            for(i = 2; i <= user_num; i++){
+                    if(Math.abs(voter[2][2][i] - voter[2][2][1]) == max)
+                        ans.push(i.toString() + j.toString());
+                }
+            return ans;
+        }
+
+        function q8(){
+        //multiple answers
+            var min = 0x3f3f3f3f, ans = new Array(0);
+            for(i = 2; i <= user_num; i++){
+                    if(Math.abs(voter[4][3][i] - voter[0][3][1]) < min)
+                        min = Math.abs(voter[0][1][i] - voter[0][1][1]);
+                }
+            for(i = 2; i <= user_num; i++){
+                    if(Math.abs(voter[4][3][i] - voter[0][3][1]) == min)
+                        ans.push(i.toString() + j.toString());
+                }
+            return ans;
+        }
 
             var q1A = q1();
             var q2A = q2();
@@ -1211,8 +1262,9 @@ Template.GroupPageBothConflicts.onRendered(function() {
             var q5A = q5();
             var q6A = q6();
             var q7A = q7();
+            var q8A = q8();
             if (QuestionsR.findOne({userId: Meteor.userId()}) === undefined){
-                QuestionsR.insert({q1: q1A, q2: q2A, q3: q3A, q4: q4A, q5: q5A, q6: q6A, q7: q7A, userId: Meteor.userId()});
+                QuestionsR.insert({q1: q1A, q2: q2A, q3: q3A, q4: q4A, q5: q5A, q6: q6A, q7: q7A, q8: q8A,userId: Meteor.userId()});
             }
 
 

@@ -62,7 +62,11 @@ AutoForm.hooks({
 });
 
 Template.Questions.onRendered(function() {
+    console.log("question");
     Session.set('hideEndTour', hideEndTour);
     questionTour.init();
     questionTour.start(true);
+    // Session.set('hideEndTour', hideEndTour);
+    // groupVisTour.init();
+    // groupVisTour.start(true);
 })
