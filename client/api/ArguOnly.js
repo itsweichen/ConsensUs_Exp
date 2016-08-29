@@ -46,18 +46,15 @@ Template.ArguOnly.onRendered(function() {
         }
     }
 
-    var voter_info = new Array(user_num);
-    voter_info[0] = {code: 1, name: Meteor.user().username};
-
-    for (var i = 1; i < user_num; i++) {
-        voter_info[i] = {code: i+1, name: taskInfo.voters[i-1]};
+    var voter_info = new Array(user_num - 1);
+    for (var i = 0; i < user_num - 1; i++) {
+        voter_info[i] = {code: i+1, name: taskInfo.voters[i]};
     }
 
     // arguments
     var argu = new Array(user_num + 1);
-    argu[1] = "";
-    for (var i = 2; i <= user_num; i++) {
-        argu[i] = voters[i-1].argu;
+    for (var i = 1; i < user_num; i++) {
+        argu[i] = voters[i].argu;
     }
 
     // end backend
@@ -83,51 +80,15 @@ Template.ArguOnly.onRendered(function() {
 
                         var candidate_info = [{code:1, name:" "}, {code:2, name: "Sam"}, {code:3, name: "Adam"}, {code:4, name: "Jim"}];
 
-    //data
-                        var table = d3.select('.main_panel')
-                        .append('table');
-
-                        var tr = table.selectAll('tr')
-                         .data(data1)
-                         .enter()
-                         .append('tr')
-                         .html(function(d){ return d.name;})
-                         .attr("id", function(d, i){ return "tr" + i.toString();})
-                         .style("border", "1px solid black");
-
-                         tr.selectAll("td")
-                         .data(d3.range(0, candidate_num))
-                         .enter()
-                         .append('td')
-                         .attr('id', function(d, i){
-                             return "td" + this.parentNode.id[2] + (i + 1).toString();})
-                         .style("border", "1px solid black")
-                         .html(function(d) {
-                            return overall[this.id[2]][this.id[3]].toString() + "&nbsp"; });
-
-                         table.insert('tr', ":first-child")
-                         .selectAll('td')
-                        .data(candidate_info)
-                        .enter()
-                        .append('td')
-                        .style("border", "1px solid black")
-                        .html(function(d){ return d.name; })
-
 
                         //indivudial page hover
 
-                        var left_padding_x = 0;
+                        var left_padding_x = 30;
                         var left_padding_y = 20;
                         var svg = d3
                             .select(".side_panel")
                             .attr("width", 100)
                             .attr("height", height);
-
-                        svg
-                            .append("text")
-                            .text("Voters")
-                            .style("text-anchor", "middle")
-                            .attr("transform", "translate(" + (left_padding_x + 25) + ", 0)");
 
                         var voter_list_all =
                             svg
@@ -135,29 +96,15 @@ Template.ArguOnly.onRendered(function() {
                                 .attr("id", "v0");
 
                         voter_list_all
-                            .append("rect")
-                            .attr("x", left_padding_x + 25 - 15)
-                            .attr("y", function(d, i){
-                                return 0;
-                            })
-                            .attr("height", 20)
-                            .attr("width", 30)
-                            .attr("fill", "grey")
-                            .style("border-radius", "100px")
-                        ;
-                        voter_list_all
                             .append("text")
                             .attr("x", function(d){ return  left_padding_x + 25;})
                             .attr("y", function(d, i) {
                                 return 14;
                             })
                             .text(function(d){
-                                return "ALL";
+                                return "other committee";
                             })
-                            .style("text-anchor", "middle")
-                            .style("fill", "White")
-                            .style("font-size", "15px");
-
+                            .style("text-anchor", "middle");
                         var voter_list =
                             svg
                                 .append("g")
@@ -185,6 +132,9 @@ Template.ArguOnly.onRendered(function() {
                             .style("opacity", 0)
                             .style("border-radius", "100px")
                         ;
+
+                        d3.select(".argument_panel").html("argument</br>" + argu[1]);
+
                         voter_list
                             .append("text")
                             .attr("x", function(d){ return  left_padding_x + 25;})
@@ -198,19 +148,20 @@ Template.ArguOnly.onRendered(function() {
                             .style("fill", "grey")
                             .style("font-size", "15px")
                             .on("mouseover", function(d){
+                                if(this.parentNode.id != "v1"){
                                 d3.select(this).style("fill", "white");
                                 var id = "#v" + d.code.toString();
                                 d3.selectAll(id).select("rect").style("fill", "grey").style("opacity", 1);
 
-                                d3.select("#v0").select("rect").style("opacity", 0);
-                                d3.select("#v0").select("text").style("fill", "grey");
+                                d3.select("#v1").select("rect").style("opacity", 0);
+                                d3.select("#v1").select("text").style("fill", "grey");
                                 for(i = 0; i <= criteria_num; i++)
                                     for(j = 1; j <= candidate_num; j++){
                                         var score = voter[i][j][d.code];
                                         d3.select("#td" + i.toString() + j.toString()).html(score);
                                     }
                                 d3.select(".argument_panel").html("argument</br>" + argu[d.code]);
-
+                            }
                             })
                             .on("mouseout", function(d){
 
@@ -218,15 +169,15 @@ Template.ArguOnly.onRendered(function() {
                                 var id = "#v" + d.code.toString();
                                 d3.selectAll(id).select("rect").style("opacity", 0);
 
-                                d3.select("#v0").select("rect").style("fill", "grey").style("opacity", 1);
-                                d3.select("#v0").select("text").style("fill", "white");
+                                d3.select("#v1").select("rect").style("fill", "grey").style("opacity", 1);
+                                d3.select("#v1").select("text").style("fill", "white");
 
                                 for(i = 0; i <= criteria_num; i++)
                                     for(j = 1; j <= candidate_num; j++){
                                         var score = overall[i][j];
                                         d3.select("#td" + i.toString() + j.toString()).html(score);
                                     }
-                                d3.select(".argument_panel").html("");
+                                d3.select(".argument_panel").html("argument</br>" + argu[1]);
 
                             });
 
