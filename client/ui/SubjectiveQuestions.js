@@ -1,11 +1,11 @@
 Template.SubjectiveQuestions.events({
     'submit form': function(e) {
         e.preventDefault();
-        var q1 = $('#q1 input[name="ability"]:checked').val();
-        var q2 = $('#q2 input[name="ability"]:checked').val();
-        var q3 = $('#q3 input[name="ability"]:checked').val();
-        var q4 = $('#q4 input[name="ability"]:checked').val();
-        var q5 = $('#q5 input[name="ability"]:checked').val();
+        var q1 = $('#q1 input[name="q1"]:checked').val();
+        var q2 = $('#q2 input[name="q2"]:checked').val();
+        var q3 = $('#q3 input[name="q3"]:checked').val();
+        var q4 = $('#q4 input[name="q4"]:checked').val();
+        var q5 = $('#q5 input[name="q5"]:checked').val();
 
         if (q1 === undefined || q2 == undefined || q3 == undefined || q4 == undefined || q5 == undefined) {
             alert("Please input your answers before submit.");

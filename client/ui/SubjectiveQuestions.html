@@ -1,45 +1,59 @@
 <template name="SubjectiveQuestions">
     <style media="screen">
-        #confidence-form .flex-container {
+        #subjective-form .flex-container {
             display: flex;
             width: 90%
         }
-        #confidence-form .flex-item {
+        #subjective-form .flex-item {
             margin: 2px 10px;
             text-align: center;
+            flex: 1;
+            justify-content: space-between;
         }
-        #confidence-form .row {
+        #subjective-form .row {
             margin-top: 20px;
+
         }
-        #confidence-form label{
+        #subjective-form label{
             display: block;
         }
     </style>
 
     <div class="container">
         <h3>Survey</h3>
-        <h4>On a scale from 1 - 7, rate your ability to:</h4>
-        <form id="confidence-form">
+        <hr>
+        <h4>Rate your ability to:</h4>
+        <form id="subjective-form">
             <!-- Question 1 -->
-            <div class="row" id="q1">
+            <div class="row panel panel-default" id="q1">
+                <div class="panel-heading">
                 <h4>1. Identify points of disagreement within the committee.</h4>
-                {{> SubjectiveScale}}
+                </div>
+                {{> SubjectiveScale name="q1"}}
             </div>
-            <div class="row" id="q2">
+            <div class="row panel panel-default" id="q2">
+                <div class="panel-heading">
                 <h4>2. Identify points of disagreement between you and the committee.</h4>
-                {{> SubjectiveScale}}
+                </div>
+                {{> SubjectiveScale name="q2"}}
             </div>
-            <div class="row" id="q3">
+            <div class="row panel panel-default" id="q3">
+                <div class="panel-heading">
                 <h4>3. Identify committee members with similar opinions.</h4>
-                {{> SubjectiveScale}}
+                </div>
+                {{> SubjectiveScale name="q3"}}
             </div>
-            <div class="row" id="q4">
+            <div class="row panel panel-default" id="q4">
+                <div class="panel-heading">
                 <h4>4. Identify committee members with outlier perspectives.</h4>
-                {{> SubjectiveScale}}
+                </div>
+                {{> SubjectiveScale name="q4"}}
             </div>
-            <div class="row" id="q5">
+            <div class="row panel panel-default" id="q5">
+                <div class="panel-heading">
                 <h4>5. Summarize the group opinion.</h4>
-                {{> SubjectiveScale}}
+                </div>
+                {{> SubjectiveScale name="q5"}}
             </div>
 
             <div class="row">
@@ -52,34 +66,36 @@
 </template>
 
 <template name="SubjectiveScale">
+    <div class="panel-body">
     <div class="flex-container">
         <div class="flex-item">
-            <label><input type="radio" name="ability" value="1" />
+            <label><input type="radio" value="1" name={{name}} />
             <br>1<br>Entirely Difficult</label>
         </div>
         <div class="flex-item">
-            <label><input type="radio" name="ability" value="2" />
+            <label><input type="radio" value="2" name={{name}} />
             <br>2<br>Mostly Difficult</label>
         </div>
         <div class="flex-item">
-            <label><input type="radio" name="ability" value="3" />
+            <label><input type="radio" value="3" name={{name}} />
             <br>3<br>Somewhat Difficult</label>
         </div>
         <div class="flex-item">
-            <label><input type="radio" name="ability" value="4" />
+            <label><input type="radio" value="4" name={{name}} />
             <br>4<br>Neither Difficult nor Easy</label>
         </div>
         <div class="flex-item">
-            <label><input type="radio" name="ability" value="5" />
+            <label><input type="radio" value="5" name={{name}} />
             <br>5<br>Somewhat Easy</label>
         </div>
         <div class="flex-item">
-            <label><input type="radio" name="ability" value="6" />
+            <label><input type="radio" value="6" name={{name}} />
             <br>6<br>Mostly Easy</label>
         </div>
         <div class="flex-item">
-            <label><input type="radio" name="ability" value="7" />
+            <label><input type="radio" value="7" name={{name}} />
             <br>7<br>Entirely Easy</label>
         </div>
+    </div>
     </div>
 </template>

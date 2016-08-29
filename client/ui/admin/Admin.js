@@ -8,6 +8,7 @@ Template.Admin.events({
     'click #get-result': function(e) {
         var chairs = Meteor.users.find({'username': {$ne : "weichen"}});
         var mturk_id, name, taskId, voterNum, biasedType, confi_1, confi_2, will_1, will_2, score_1, score_2, argu1, argu2;
+        var subjective;
         var time = new Array(4);
         var questions, questionsR, condition;
         chairs.forEach(function(chair) {
@@ -31,6 +32,10 @@ Template.Admin.events({
             var confidence_2 = Confidence.findOne({userId: id, order: "2"}) || {confidence: -1, willingness: -1};
             confi_2 = confidence_2.confidence;
             will_2 = confidence_2.willingness;
+
+            // subjective
+            subjective = Subjective.findOne({userId: id}) || {sub: -1};
+            subjective = JSON.stringify(subjective);
 
             // score
             score_1 = Scores.findOne({userId: id, order: "1"}) || {score: -1};
@@ -72,7 +77,8 @@ Template.Admin.events({
                 argu2: argu2,
                 time: time,
                 questions: questions,
-                questionsR: questionsR
+                questionsR: questionsR,
+                subjective: subjective
             });
         });
         $(e.target).hide();

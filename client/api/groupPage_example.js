@@ -1,4 +1,175 @@
-Template.VisExample.onRendered(function() {
+Template.VisExampleArguOnly.onRendered(function() {
+    var height = 400, width = 750;
+    var i, j, k;
+
+    //data
+
+    var voter_info  = [{ code:1,  name:"Member1"}, { code:2,  name:"Member2"},
+                                    { code:3,  name:"Member3"}];
+
+    var criteria_num = 4, candidate_num = 3, user_num = 4;
+    var voter = [
+        [[0,0,0,0,0],[0,7.84375,3,5.5,4.75],[0,8.45625,6,4.5,6.5],[0,7.9,5.5,7.75,6.75]],
+        [[0,0,0,0,0],[0,8.475,2,1,2],[0,6.275,2,4,7],[0,7.425,8,9,5]],
+        [[0,0,0,0,0],[0,7.725,3,8,4],[0,8.4,9,3,6],[0,6.775,7,7,8]],
+        [[0,0,0,0,0],[0,8.45,5,6,9],[0,9.325,7,6,7],[0,8.85,5,6,6]],
+        [[0,0,0,0,0],[0,6.725,2,7,4],[0,9.825,6,5,6],[0,8.575,2,9,8]]];
+
+
+
+    // arguments
+    var argu = new Array(user_num + 1);
+    argu[1] = "This is the arguments written by Member1 for why s/he prefer the candidate.";
+    argu[2] = "This is the arguments written by Member2 for why s/he prefer the candidate.";
+    argu[3] = "This is the arguments written by Member3 for why s/he prefer the candidate.";
+
+    // end backend
+
+
+
+                        var height = 400, width = 750;
+                        var i, j, k;
+
+    //data
+
+
+                        var data1 = [{rect:0, name:"Overall"},{rect:1, name:"Academic"},{rect:2, name:"Activities"},{rect:3, name:"Recommendation Letter"},{rect:4, name:"Readiness for Engineering"}];
+
+
+                        var overall = new Array(criteria_num + 1);
+                        for(i = 0; i <=criteria_num; i++){
+                                overall[i]=new Array(candidate_num + 1);
+                        }
+
+                        calculateAvg();
+
+
+                        var candidate_info = [{code:1, name:" "}, {code:2, name: "Sam"}, {code:3, name: "Adam"}, {code:4, name: "Jim"}];
+
+
+                        //indivudial page hover
+
+                        var left_padding_x = 30;
+                        var left_padding_y = 20;
+                        var svg = d3
+                            .select(".side_panel")
+                            .attr("width", 100)
+                            .attr("height", height);
+
+                        var voter_list_all =
+                            svg
+                                .append("g")
+                                .attr("id", "v0");
+
+                        voter_list_all
+                            .append("text")
+                            .attr("x", function(d){ return  left_padding_x + 25;})
+                            .attr("y", function(d, i) {
+                                return 14;
+                            })
+                            .text(function(d){
+                                return "other members";
+                            })
+                            .style("text-anchor", "middle");
+                        var voter_list =
+                            svg
+                                .append("g")
+                                .selectAll("rect")
+                                .data(voter_info)
+                                .enter()
+                                .append("g")
+                                .attr("id", function(d, i){
+                                    return "v" + (i + 1).toString();
+                                })
+                            ;
+
+                        voter_list
+                            .append("rect")
+                            .attr("x", function(d){
+                                return left_padding_x + 25 - d.name.length * 10 / 2;
+                            })
+                            .attr("y", function(d, i){
+                                return 2 + left_padding_y * (i + 1);
+                            })
+                            .attr("height", left_padding_y)
+                            .attr("width", function(d){
+                                return d.name.length * 10;
+                            })
+                            .style("opacity", 0)
+                            .style("border-radius", "100px")
+                        ;
+
+                        d3.select(".argument_panel").html("argument</br>" + argu[1]);
+
+                        voter_list
+                            .append("text")
+                            .attr("x", function(d){ return  left_padding_x + 25;})
+                            .attr("y", function(d, i) {
+                                return 17 + left_padding_y * (i + 1);
+                            })
+                            .text(function(d){
+                                return d.name;
+                            })
+                            .style("text-anchor", "middle")
+                            .style("fill", "grey")
+                            .style("font-size", "15px")
+                            .on("mouseover", function(d){
+                                if(this.parentNode.id != "v1"){
+                                d3.select(this).style("fill", "white");
+                                var id = "#v" + d.code.toString();
+                                d3.selectAll(id).select("rect").style("fill", "grey").style("opacity", 1);
+
+                                d3.select("#v1").select("rect").style("opacity", 0);
+                                d3.select("#v1").select("text").style("fill", "grey");
+                                for(i = 0; i <= criteria_num; i++)
+                                    for(j = 1; j <= candidate_num; j++){
+                                        var score = voter[i][j][d.code];
+                                        d3.select("#td" + i.toString() + j.toString()).html(score);
+                                    }
+                                d3.select(".argument_panel").html("argument</br>" + argu[d.code]);
+                            }
+                            })
+                            .on("mouseout", function(d){
+
+                                d3.select(this).style("fill", "grey");
+                                var id = "#v" + d.code.toString();
+                                d3.selectAll(id).select("rect").style("opacity", 0);
+
+                                d3.select("#v1").select("rect").style("fill", "grey").style("opacity", 1);
+                                d3.select("#v1").select("text").style("fill", "white");
+
+                                for(i = 0; i <= criteria_num; i++)
+                                    for(j = 1; j <= candidate_num; j++){
+                                        var score = overall[i][j];
+                                        d3.select("#td" + i.toString() + j.toString()).html(score);
+                                    }
+                                d3.select(".argument_panel").html("argument</br>" + argu[1]);
+
+                            });
+
+
+
+
+                function calculateAvg(){
+                    for(i = 0; i <= criteria_num; i++)
+                        for(j = 1; j <= candidate_num; j++){
+                            var sum = 0;
+                            for(k = 1; k <= user_num; k++){
+                                sum += voter[i][j][k];
+                            }
+                        sum /= user_num;
+                        overall[i][j] = d3.round(sum, 1);
+                        }
+                    }
+
+
+});
+
+
+
+
+
+Template.VisExampleVis.onRendered(function() {
     this.autorun(function() {
 
         // backend code
@@ -1091,72 +1262,6 @@ Template.VisExample.onRendered(function() {
 
         }
 
-                function q1(){
-                   var scores = new Array(candidate_num + 1);
-                   for(var i = 1; i <= candidate_num; i++){
-                       scores[i] = overall[0][i];
-                   }
-                   return scores;
-                }
-
-                function q2(){
-                   var scores = new Array(candidate_num + 1);
-                   for(var i = 1; i <= candidate_num; i++){
-                       scores[i] = overall[3][i];
-                   }
-                   return scores;
-                }
-
-                function q3(){
-               var scores = new Array(candidate_num + 1);
-               for(var i = 1; i <= user_num; i++)
-                   scores[i] = voter[0][1][i];
-               return scores;
-               }
-
-            function q4(){
-               var scores = new Array(candidate_num + 1);
-               for(var i = 1; i <= user_num; i++) {
-                   scores[i] = voter[0][2][i];
-               }
-               return scores;
-            }
-
-            function q5(){
-               var scores = new Array(candidate_num + 1);
-               for(var i = 1; i <= user_num; i++) {
-                   scores[i] = voter[0][3][i];
-               }
-               return scores;
-            }
-
-            function q6(){
-               var scores = new Array(criteria_num + 1);
-               for(var i = 0; i <= criteria_num; i++){
-                   scores[i] = new Array(candidate_num + 1);
-               }
-
-               for(var i = 1; i <= criteria_num; i++)
-                   for(var j = 1; j <= candidate_num; j++){
-                       scores[i][j] = Math.abs(voter[i][j][0] - overall[i][j]);
-                   }
-               return scores;
-            }
-
-            function q7(){
-               return overall[0];
-            }
-
-            var q1A = q1();
-            var q2A = q2();
-            var q3A = q3();
-            var q4A = q4();
-            var q5A = q5();
-            var q6A = q6();
-            var q7A = q7();
-            if (QuestionsR.findOne({userId: Meteor.userId()}) === undefined){
-                QuestionsR.insert({q1: q1A, q2: q2A, q3: q3A, q4: q4A, q5: q5A, q6: q6A, q7: q7A, userId: Meteor.userId()});
-            }
 
 
 

@@ -1161,6 +1161,7 @@ Template.GroupPageBothConflicts.onRendered(function() {
                 if(overall[0][i] == max)
                     ans.push(i);
             }
+            return ans;
         }
 
         function q2(){
@@ -1181,7 +1182,7 @@ Template.GroupPageBothConflicts.onRendered(function() {
             for(i = 1; i <= criteria_num; i++)
                 for(j = 1; j <= candidate_num; j++){
                     if(conflict2[i][j] == max)
-                        ans.push(i.toString() + j.toString());
+                        ans.push(i.toString());
                 }
             return ans;
         }
@@ -1215,12 +1216,12 @@ Template.GroupPageBothConflicts.onRendered(function() {
         //multiple answers
             var max = 0, ans = new Array(0);
             for(i = 1; i <= user_num; i++)
-                for(j = 1; j <= user_num; j++){
+                for(j = 1; j < i; j++){
                     if(Math.abs(voter[0][1][i] - voter[0][1][j]) > max)
                         max = Math.abs(voter[0][1][i] - voter[0][1][j]);
                 }
             for(i = 1; i <= user_num; i++)
-                for(j = 1; j <= user_num; j++){
+                for(j = 1; j < i; j++){
                     if(Math.abs(voter[0][1][i] - voter[0][1][j]) == max)
                         ans.push(i.toString() + j.toString());
                 }
@@ -1232,7 +1233,7 @@ Template.GroupPageBothConflicts.onRendered(function() {
             var max = 0, ans = new Array(0);
             for(i = 2; i <= user_num; i++){
                     if(Math.abs(voter[2][2][i] - voter[2][2][1]) > max)
-                        max = Math.abs(voter[0][1][i] - voter[0][1][1]);
+                        max = Math.abs(voter[2][2][i] - voter[2][2][1]);
                 }
             for(i = 2; i <= user_num; i++){
                     if(Math.abs(voter[2][2][i] - voter[2][2][1]) == max)
@@ -1245,15 +1246,16 @@ Template.GroupPageBothConflicts.onRendered(function() {
         //multiple answers
             var min = 0x3f3f3f3f, ans = new Array(0);
             for(i = 2; i <= user_num; i++){
-                    if(Math.abs(voter[4][3][i] - voter[0][3][1]) < min)
-                        min = Math.abs(voter[0][1][i] - voter[0][1][1]);
+                    if(Math.abs(voter[4][3][i] - voter[4][3][1]) < min)
+                        min = Math.abs(voter[4][3][i] - voter[4][3][1]);
                 }
             for(i = 2; i <= user_num; i++){
-                    if(Math.abs(voter[4][3][i] - voter[0][3][1]) == min)
+                    if(Math.abs(voter[4][3][i] - voter[4][3][1]) == min)
                         ans.push(i.toString() + j.toString());
                 }
             return ans;
         }
+
 
             var q1A = q1();
             var q2A = q2();

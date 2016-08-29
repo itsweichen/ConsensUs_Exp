@@ -2,9 +2,13 @@ Template.Questions.helpers({
     voterOptions: () => {
         // TODO: according to specific tasks
         var voters = Voters.find({});
+        var chair = Meteor.user().profile.nickname;
         var options = [];
+        var count = 1;
+        options.push({label: chair, value: 1})
         voters.forEach(function(item) {
-            options.push({label: item.name, value: item.name})
+            count = count + 1;
+            options.push({label: item.name, value: count})
         });
         return options;
     },
@@ -54,6 +58,7 @@ AutoForm.hooks({
       },
       onSuccess: function (insertDoc, updateDoc, currentDoc) {
           timerEnd(2);
+          $('body, html').animate({ scrollTop: 0 }, 800);
           FlowRouter.go('/' + FlowRouter.getParam("taskId") + '/group?type='+1.5);
         }
   }
