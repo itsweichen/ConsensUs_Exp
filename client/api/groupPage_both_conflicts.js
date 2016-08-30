@@ -574,24 +574,26 @@ Template.GroupPageBothConflicts.onRendered(function() {
     .on("mouseover", function(d){
         //do it on purpose: in order to click small dot behind big dot. The problem only exist in two conflicts condition.
         //                            this.parentNode.appendChild(this);
-    if(d3.select(".checkbox").style("visibility") == "visible"){
-        d3.select(this).style("cursor", "zoom-in");
-    }
-    d3.select(this).append("text")
-        .attr("id", "current_name")
-        .text(function(d){
-            return candid[d.col-1].candid;})
-            .style("text-anchor", "end")
-            .attr("transform", function(d, i){
-                return "translate(" + d.x + "," + (d.y + r + 4) + ") rotate(-40)";
-            });
+        d3.select(this).selectAll("path").style("stroke-width", "2.5px");
+
+        if(d3.select(".checkbox").style("visibility") == "visible"){
+            d3.select(this).style("cursor", "zoom-in");
+        }
+        d3.select(this).append("text")
+            .attr("id", "current_name")
+            .text(function(d){
+                return candid[d.col-1].candid;})
+                .style("text-anchor", "end")
+                .attr("transform", function(d, i){
+                    return "translate(" + d.x + "," + (d.y + r + 4) + ") rotate(-40)";
+                });
 
             d3.select(this).select(".large_dot")
             .attr("stroke-width", 1);
             d3.select(this).select(".small_dot")
             .attr("stroke-width", 1);
         })
-        .on("mouseout", function(d){
+    .on("mouseout", function(d){
 
             this.parentNode.insertBefore(this, refNode);
             refNode = this;
@@ -599,8 +601,7 @@ Template.GroupPageBothConflicts.onRendered(function() {
             d3.select("#current_name").remove();
 
             d3.select(this)
-            .select("path")
-            .style("stroke", "red")
+            .selectAll("path")
             .style("stroke-width", "2px")
             ;
 
@@ -615,8 +616,8 @@ Template.GroupPageBothConflicts.onRendered(function() {
             .classed("conflict_bar", true)
             .classed("large_dot_path", true)
             .attr("d", function(d){
-                var x1 = title_width + padding_x + rect_width / 10 * d.score - d.conflict * 15 / 2;
-                var x2 = title_width + padding_x + rect_width / 10 * d.score + d.conflict  * 15 / 2;
+                var x1 = title_width + padding_x + rect_width / 10 * d.score - d.conflict * 15;
+                var x2 = title_width + padding_x + rect_width / 10 * d.score + d.conflict  * 15;
                 var y = padding_y * (d.row + 1) - 20;
                 return "M " + x1.toString() + " " + y.toString() +
                 "L " + x2.toString() + " " + y.toString();
@@ -1110,6 +1111,13 @@ Template.GroupPageBothConflicts.onRendered(function() {
                             sum += tmp;
                         }
                         conflict1[i][j] = tmp;
+                        if(tmp > max)
+                            max = tmp;
+                    }
+
+                for(i = 0; i<=criteria_num; i++)
+                    for(j = 0; j<=candidate_num; j++){
+                        conflict1[i][j] /= tmp;
                     }
 
                 for(i = 0; i<=criteria_num; i++){

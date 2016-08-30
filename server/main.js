@@ -10,22 +10,6 @@ Meteor.startup(function() {
             flag: 2
             },
             {
-            name: "Haley",
-            scoresSam: [7.5,9.8,8.7,7.5,4.2],
-            scoresAdam: [8.5,8.8,8.5,8.6,8.3],
-            scoresJim: [9.6,9.5,9.8,9.4,9.6],
-            argu: "I feel like Jim may have the least perfect experience but from his parents divorcing and his studies and his recommendation letters he is the best candidate. I feel like Sam feels like he can gain easy access especially since his parents have close occupations and he attended private school.I also feel that his alcohol suspension is completely unacceptable. I feel like Adam is average. He is the mediocre one and is okay but not better than Jim. Adam would probably succeed but not better than Jim because of tough background.",
-            flag: 3
-            },
-            {
-            name: "Wesley",
-            scoresSam: [5.6,9.8,8.5,2,2],
-            scoresAdam: [7.4,9.5,8,3,9],
-            scoresJim: [8.8,9.6,7.5,9,9.2],
-            argu: "Sam scored the lowest in recommendation, he got a recommendation letter for acting. Adam got a recommendation letter but the letter lacked detail. Jim received a letter claiming he was well prepared for math related subjects.  The most ready student is Jim. Sam doesn’t know what he wants to study. Adam seems to know what he wants and goes for it and is very responsible but isn’t taking the necessary classes. Jim’s teachers see this and have recommended him to the course though he has not chosen what subject he wants to major in and has many choices to choose from.",
-            flag: 3
-            },
-            {
             name: "Cindy",
             scoresSam: [7.5,8.2,7,5,10],
             scoresAdam: [7.8,5,7.8,8.5,10],
@@ -48,6 +32,22 @@ Meteor.startup(function() {
             scoresJim: [6,8.4,2.6,8,5.1],
             argu: "sam is taking ap classes , he does well academically, he is involved  and taking engineering classes. however, was suspended for consuming alcohol on a field trip. He got a recommendation letter from his teacher though, stating that he was a well rounded student.  adam is involved and has a great recommendation letter. he isn’t taking engineering classes and has the lowest gpa of the other two students. however he is the leader of the engineering club. jim does well academically , taking ap classes. he is not very involved with actives, but he does have a great recommendation letter.",
             flag: 2
+            },
+            {
+             name: "Tom",
+             scoresSam: [8.3,9.7,9.3,9.2,5.1],
+             scoresAdam: [8.8,6.8,8.8,9.8,9.8],
+             scoresJim: [7.9,8.3,7.2,7.9,8.2],
+             argu: "Overall Adams I feel is most prepared to excel the farthest in an engineering curriculum due to his activities. JIm is also very strong academically and would also do very well. Sam has a good background but appears to be least qualified of the candidates due to lack of strong experience and recommendation for engineering aptitude despite doing well academically.",
+             flag: 2
+            },
+            {
+             name: "John",
+             scoresSam: [5.9,9.8,5.2,5.4,3.1],
+             scoresAdam: [8.6,8,8.9,8.9,8.7],
+             scoresJim: [8.3,8.4,8.1,8.4,8.3],
+             argu: "Sam is the least suitable. He has not really done anything in his high school career to prepare him for an engineering program. He is also unsure what he wants to do and should take some pre-req classes before entering a program to be sure he wants to do it. Adam is probably the most suitable. He seems to be preparing himself the most for a career in engineering, and has the activities supporting that. Jim would be my second choice. He has the math skills necessary, and seems to be sure of the direction he wants to go with his education.",
+             flag: 2
             }
         ];
         _.each(voters, function(voter) {
