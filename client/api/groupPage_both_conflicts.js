@@ -1167,7 +1167,7 @@ Template.GroupPageBothConflicts.onRendered(function() {
         function q2(){
             for(i = 1; i <= candidate_num; i++){
                 if(conflict2[0][i] != 0)
-                    return i;
+                    return [i];
             }
         }
 
@@ -1190,10 +1190,9 @@ Template.GroupPageBothConflicts.onRendered(function() {
         function q4(){
             for(i = 1; i <= candidate_num; i++){
                 if(conflict1[0][i] != 0)
-                    return i;
+                    return [i];
             }
         }
-
 
         function q5(){
         //multiple answers
@@ -1206,11 +1205,10 @@ Template.GroupPageBothConflicts.onRendered(function() {
             for(i = 1; i <= criteria_num; i++)
                 for(j = 1; j <= candidate_num; j++){
                     if(conflict1[i][j] == max)
-                        ans.push(i.toString() + j.toString());
+                        ans.push(i.toString());
                 }
             return ans;
         }
-
 
         function q6(){
         //multiple answers
@@ -1223,7 +1221,7 @@ Template.GroupPageBothConflicts.onRendered(function() {
             for(i = 1; i <= user_num; i++)
                 for(j = 1; j < i; j++){
                     if(Math.abs(voter[0][1][i] - voter[0][1][j]) == max)
-                        ans.push(i.toString() + j.toString());
+                        ans.push(j.toString() + i.toString());
                 }
             return ans;
         }
@@ -1237,7 +1235,7 @@ Template.GroupPageBothConflicts.onRendered(function() {
                 }
             for(i = 2; i <= user_num; i++){
                     if(Math.abs(voter[2][2][i] - voter[2][2][1]) == max)
-                        ans.push(i.toString() + j.toString());
+                        ans.push(i.toString());
                 }
             return ans;
         }
@@ -1251,7 +1249,7 @@ Template.GroupPageBothConflicts.onRendered(function() {
                 }
             for(i = 2; i <= user_num; i++){
                     if(Math.abs(voter[4][3][i] - voter[4][3][1]) == min)
-                        ans.push(i.toString() + j.toString());
+                        ans.push(i.toString());
                 }
             return ans;
         }
@@ -1265,6 +1263,7 @@ Template.GroupPageBothConflicts.onRendered(function() {
             var q6A = q6();
             var q7A = q7();
             var q8A = q8();
+
             if (QuestionsR.findOne({userId: Meteor.userId()}) === undefined){
                 QuestionsR.insert({q1: q1A, q2: q2A, q3: q3A, q4: q4A, q5: q5A, q6: q6A, q7: q7A, q8: q8A,userId: Meteor.userId()});
             }

@@ -1,5 +1,9 @@
 <template name="GroupPageTemplate">
 
+    <div class="container">
+
+
+
     {{#if cond1_2}}
         {{> GroupPageBothConflicts}}
     {{/if}}
@@ -27,7 +31,7 @@
                 {{> Questions}}
             {{else}}
                 <base target="_blank">
-                <div class="container">
+                <div>
                     <h3>Re-evaluate and Choose Your Best Candidate</h3>
                     <ul>
                         <li>Please make changes to your scores if you have different opinions now.</li>
@@ -48,7 +52,7 @@
             </div>
 
 
-            <div class="container" id="argu-textarea-1">
+            <div id="argu-textarea-1">
                 <h4>Explain why you changed (or did not change) your score.</h4>
                 <textarea name="argu1"  rows="8" cols="30" class="form-control" placeholder="At least 30 words"></textarea>
                 <div align="right">
@@ -56,7 +60,7 @@
                 </div>
             </div>
 
-            <div class="container" id="argu-textarea-2">
+            <div id="argu-textarea-2">
                 <h4>Explain your final scores to the specific committee members that disagree with you. When possible, address the committee members by name.</h4>
                 <textarea name="argu2"  rows="8" cols="30" class="form-control" placeholder="At least 30 words"></textarea>
                 <div align="right">
@@ -75,5 +79,6 @@
         {{/if}}
 
 
+    </div>
     </div>
     </template>

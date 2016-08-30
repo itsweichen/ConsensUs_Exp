@@ -4,6 +4,31 @@ Template.Admin.helpers({
     }
 });
 
+function checkAnswer(users, rightPool) {
+    if (users === undefined || rightPool === undefined) {
+        return null;
+    }
+    for (var i = 0; i < rightPool.length; i++) {
+        if (users == rightPool[i]) {
+            return true;
+        }
+    }
+    return false;
+}
+
+function checkAnswerQ6(users, rightPool) {
+    if (users === undefined || rightPool === undefined) {
+        return null;
+    }
+    for (var i = 0; i < rightPool.length; i++) {
+        if (users.join("") == rightPool[i]) {
+            return true;
+        }
+    }
+    return false;
+}
+
+
 Template.Admin.events({
     'click #get-result': function(e) {
         var chairs = Meteor.users.find({'username': {$ne : "weichen"}});
@@ -38,10 +63,17 @@ Template.Admin.events({
             subjective = JSON.stringify(subjective);
 
             // score
-            score_1 = Scores.findOne({userId: id, order: "1"}) || {score: -1};
-            score_2 = Scores.findOne({userId: id, order: "2"}) || {score: -1};
+            score_1 = Scores.findOne({userId: id, order: "1"}) || {score: [[-1]]};
+            score_2 = Scores.findOne({userId: id, order: "2"}) || {score: [[-1]]};
             score_1 = score_1.score;
             score_2 = score_2.score;
+
+            var scoreDis = 0;
+            for (var i = 0; i < score_1.length; i++) {
+                for (var j = 0; j < score_2.length; j++) {
+                    scoreDis += Math.abs(score_1[i][j] - score_2[i][j]);
+                }
+            }
 
             // argu
             argu = Arguments.findOne({userId: id}) || {argu1: "null", argu2: "null"};
@@ -53,10 +85,23 @@ Template.Admin.events({
                 time[i] = tmp.time;
             }
 
-            questions = Questions.findOne({userId: id}) || {q: null};
-            questions = JSON.stringify(questions);
+            questions = Questions.findOne({userId: id}) || {q1: null};
+            questionsR = QuestionsR.findOne({userId: id}) || {q1:null};
 
-            questionsR = QuestionsR.findOne({userId: id}) || {q:null};
+            questionCheck = new Array(8);
+
+            if (questions.q1 !== null && questionsR.q1 !== null) {
+                questionCheck[0] = checkAnswer(questions.q1, questionsR.q1);
+                questionCheck[1] = checkAnswer(questions.q2, questionsR.q2);
+                questionCheck[2] = checkAnswer(questions.q3, questionsR.q3);
+                questionCheck[3] = checkAnswer(questions.q4, questionsR.q4);
+                questionCheck[4] = checkAnswer(questions.q5, questionsR.q5);
+                questionCheck[5] = checkAnswerQ6(questions.q6, questionsR.q6);
+                questionCheck[6] = checkAnswer(questions.q7, questionsR.q7);
+                questionCheck[7] = checkAnswer(questions.q8, questionsR.q8);
+            }
+
+            questions = JSON.stringify(questions);
             questionsR = JSON.stringify(questionsR);
 
             Results.insert({
@@ -71,13 +116,15 @@ Template.Admin.events({
                 confi_2: confi_2,
                 will_1: will_1,
                 will_2: will_2,
+                scoreDis: scoreDis,
                 score_1: score_1,
                 score_2: score_2,
                 argu1: argu1,
                 argu2: argu2,
                 time: time,
+                questionCheck: questionCheck,
                 questions: questions,
-                questionsR: questionsR,
+                questionsRight: questionsR,
                 subjective: subjective
             });
         });
