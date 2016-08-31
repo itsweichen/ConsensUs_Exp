@@ -1,14 +1,14 @@
 Template.Questions.helpers({
     voterOptions: () => {
         // TODO: according to specific tasks
-        var voters = Voters.find({});
+        var voters = Meteor.user().profile.voters;
         var chair = Meteor.user().profile.nickname;
         var options = [];
         var count = 1;
         options.push({label: chair, value: 1})
         voters.forEach(function(item) {
             count = count + 1;
-            options.push({label: item.name, value: count})
+            options.push({label: item, value: count})
         });
         return options;
     },

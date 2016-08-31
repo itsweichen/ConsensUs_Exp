@@ -6,11 +6,14 @@ Template.GroupPageBothConflicts.onRendered(function() {
         var taskId = FlowRouter.getParam("taskId");
         var taskInfo = Tasks.findOne({"_id": taskId});
         var chairScores = Scores.findOne({"userId": Meteor.userId()});
+        var votersInfo = Meteor.users.findOne({_id: Meteor.userId()});
 
         // TODO: change to subscribe ready later
-        if (!taskInfo || !chairScores) {
+        if (!taskInfo || !chairScores || !votersInfo) {
             return;
         }
+
+        taskInfo.voters = votersInfo.profile.voters;
 
         var criteria_num = taskInfo.criteriaNum, candidate_num = taskInfo.candidateNum, user_num = taskInfo.voterNum + 1;
 
@@ -50,6 +53,8 @@ Template.GroupPageBothConflicts.onRendered(function() {
         for (var i = 1; i < user_num; i++) {
             voter_info[i] = {code: i+1, name: taskInfo.voters[i-1]};
         }
+
+        console.log("voter_info", voter_info);
 
 
         // arguments
@@ -616,8 +621,8 @@ Template.GroupPageBothConflicts.onRendered(function() {
             .classed("conflict_bar", true)
             .classed("large_dot_path", true)
             .attr("d", function(d){
-                var x1 = title_width + padding_x + rect_width / 10 * d.score - d.conflict * 15;
-                var x2 = title_width + padding_x + rect_width / 10 * d.score + d.conflict  * 15;
+                var x1 = title_width + padding_x + rect_width / 10 * d.score - d.conflict * 60;
+                var x2 = title_width + padding_x + rect_width / 10 * d.score + d.conflict  * 60;
                 var y = padding_y * (d.row + 1) - 20;
                 return "M " + x1.toString() + " " + y.toString() +
                 "L " + x2.toString() + " " + y.toString();
@@ -1102,37 +1107,38 @@ Template.GroupPageBothConflicts.onRendered(function() {
         }
 
         function calculateConflict1(){
-                var max = 0, max_j = 0, tmp = 0, sum = 0;
+                       var max = 0, max_j = 0, tmp = 0, sum = 0;
 
-                for(i = 0; i<=criteria_num; i++)
-                    for(j = 0; j<=candidate_num; j++) {
-                        for(k = 1; k<=user_num; k++) {
-                            tmp =  (voter[i][j][k] - overall[i][j]) * (voter[i][j][k] - overall[i][j]);
-                            sum += tmp;
-                        }
-                        conflict1[i][j] = tmp;
-                        if(tmp > max)
-                            max = tmp;
-                    }
+                       for(i = 0; i<=criteria_num; i++)
+                           for(j = 0; j<=candidate_num; j++) {
+                               for(k = 1; k<=user_num; k++) {
+                                   tmp =  (voter[i][j][k] - overall[i][j]) * (voter[i][j][k] - overall[i][j]);
+                                   sum += tmp;
+                               }
+                               conflict1[i][j] = tmp;
+                               if(tmp > max)
+                                   max = tmp;
+                           }
 
-                for(i = 0; i<=criteria_num; i++)
-                    for(j = 0; j<=candidate_num; j++){
-                        conflict1[i][j] /= tmp;
-                    }
+                       for(i = 0; i<=criteria_num; i++)
+                           for(j = 1; j<=candidate_num; j++){
+                               conflict1[i][j] /= max;
+                           }
+                            console.log(conflict1);
 
-                for(i = 0; i<=criteria_num; i++){
-                    max = 0, max_j = 0;
-                    for(j = 0; j<=candidate_num; j++){
-                        if(conflict1[i][j] > max)
-                            max = conflict1[i][j], max_j = j;
-                    }
-                    for(j = 0; j <= candidate_num; j++){
-                        if(j != max_j)
-                            conflict1[i][j] = 0;
-                    }
-                }
+                       for(i = 0; i<=criteria_num; i++){
+                           max = 0, max_j = 0;
+                           for(j = 1; j<=candidate_num; j++){
+                               if(conflict1[i][j] > max)
+                                   max = conflict1[i][j], max_j = j;
+                           }
+                           for(j = 1; j <= candidate_num; j++){
+                               if(j != max_j)
+                                   conflict1[i][j] = 0;
+                           }
+                       }
 
-        }
+               }
 
         function calculateConflict2(){
             var max = 0, max_j = 0;

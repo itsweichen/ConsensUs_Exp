@@ -9,11 +9,14 @@ Template.ArguOnly.onRendered(function() {
     var taskId = FlowRouter.getParam("taskId");
     var taskInfo = Tasks.findOne({"_id": taskId});
     var chairScores = Scores.findOne({"userId": Meteor.userId()});
+    var votersInfo = Meteor.users.findOne({_id: Meteor.userId()});
 
     // TODO: change to subscribe ready later
-    if (!taskInfo || !chairScores) {
+    if (!taskInfo || !chairScores || !votersInfo) {
         return;
     }
+
+    taskInfo.voters = votersInfo.profile.voters;
 
     var criteria_num = taskInfo.criteriaNum, candidate_num = taskInfo.candidateNum, user_num = taskInfo.voterNum + 1;
 
@@ -253,7 +256,7 @@ Template.ArguOnly.onRendered(function() {
                         }
 
                     }
-                    
+
                             function q1(){
                                 //multiple answers
                                 var ans = new Array(0);

@@ -56,10 +56,10 @@ arguTour = new Tour({
 individualTour = new Tour({
     steps: [
         {
-            element: "#candi-info",
+            element: "#click-info",
             title: "Step 1 (1/3)",
-            content: "Read through the candidates' information.",
-            placement: 'top'
+            content: "Click here to open the document about the candidates.",
+            placement: 'bottom'
         }, {
             element: "#a12",
             title: "Step 2 (2/3)",
