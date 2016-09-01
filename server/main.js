@@ -26,13 +26,13 @@ Meteor.startup(function() {
     		flag: 2
     	   },
            {
-            name: "Ruby",
-            scoresSam: [9,9.4,8.9,9.4,8.2],
-            scoresAdam: [9,8.3,9.4,8.9,9.3],
-            scoresJim: [8.5,8.8,8.3,8.4,8.7],
-            argu: "Upon viewing the candidate information, I gave all three candidates the score of suitable overall, in academic, in activity, in recommendation letter, and in readiness for engineering. Sam Smith is taking three Science/Engineering related AP classes including Calculus, Statistics and Computer Science. Adampps physics teacher has written a letter of recommendation saying that he is a proactive student who is able to successfully develop plans and implement them. And Jim Jones intends to major in math-related majors. ",
-            flag: 1
-        },
+               name: "Ruby",
+               scoresSam: [8, 9.7, 8, 6.9, 7.5],
+               scoresAdam: [7.2, 6.5, 7.8, 6, 8.5],
+               scoresJim: [7.8, 7.5, 7, 7.9, 8.8],
+               argu: "Sam’s academics ranked the highest because he had the highest SAT scores and AP classes.  Adam had lower SAT scores and didn’t take any AP classes while Jim took AP classes and placed 2nd in terms of SAT scores. For activity, Sam was highest due to drama, innovation project, and football. Jim last because of 1 competition. Jim first for recommendation because he had relevant letters for his major. Adam 3rd due to short letters.Jim highest readiness due to chosen major. Adam 2nd because he has chosen an engineering major. Sam third because he has not yet chosen his major.",
+               flag: 1
+           },
     	      {
     		name: "Wesley",
     		scoresSam: [5.6,9.8,8.5,2,2],

@@ -19,10 +19,10 @@ arguTour = new Tour({
             content: "Please follow the tutorial very carefully. This is an example to show you how to interprete the representation in the next page.",
             placement: "top"
         }, {
-            element: "#side_panel",
+            element: ".side_panel",
             title: "Step 2 (2/4)",
             content: "Here are all the members in your committee.",
-            placement: 'bottom'
+            placement: 'top'
         }, {
             element: "#v2",
             title: "Hoving on the NAME (3/4)",
@@ -81,6 +81,80 @@ individualTour = new Tour({
             $("#tour-end").removeClass("display-none");
         }
     }
+});
+
+groupVisExampleBoth = new Tour({
+    steps: [
+        {
+            element: "#main_panel",
+            title: "Heads Up (1/6)",
+            content: "Please follow the tutorial very carefully. This is an example to show you how to interprete the representation in the next page.",
+            placement: "top"
+        }, {
+            element: "#a11",
+            title: "Dots (2/6)",
+            content: "Big dots: Average scores across the committee. || Small dots: Your scores.",
+            placement: 'bottom'
+        }, {
+            element: "#a11 .small_dot_path",
+            title: "Biggest point of disagreement between committee & you (3/6)",
+            content: "For example, this shows <b>regarding 'Academic', Sam has the biggest point of disagreement between committee & you</b>.",
+            placement: 'right'
+        }, {
+            element: "#a21 .large_dot_path",
+            title: "Biggest point of disagreement within the committee (4/6)",
+            content: "For example, this shows <b>regarding 'Activities', Sam has the biggest point of disagreement within the committee</b>.",
+            placement: 'top'
+        }, {
+            element: "#a12 .large_dot",
+            title: "Click on the dots(4/6)",
+            content: "Please click the blue big dot.",
+            placement: 'top',
+            onShow: function(tour) {
+                $('#a22 .large_dot').addClass("tour-step-element-reflex");
+            },
+            onHidden: function(tour) {
+                $('#a22 .large_dot').triggerSVGEvent('click');
+            },
+            reflex: true
+        }, {
+            element: "#a2",
+            title: "Every member's score (4/6)",
+            content: "This is <b>everyone's score for Adam in Academic</b>. You can hover on the dots to see who gave the score.",
+            placement: 'top',
+            onHidden: function(tour) {
+                if( $('#r1 text') !== undefined ) {
+                    $('#r1 text').triggerSVGEvent('mousedown');
+                }
+            }
+        }, {
+            element: "#v2",
+            title: "Hoving on the NAME (5/6)",
+            content: "You'll see his/her scores and arguments (ON THE RIGHT) on hovering.",
+            placement: 'top',
+            onShown: function(tour) {
+                $('#v2').triggerSVGEvent('mouseover');
+            },
+            onHidden: function(tour) {
+                $('#v2').triggerSVGEvent('mouseout');
+            }
+        }, {
+            element: "#main_panel",
+            title: "Next Step (6/6)",
+            content: "Please study the representation. After you finish, please click 'Next'.",
+            placement: 'top',
+            onShown: function(tour) {
+                $("#tour-end").removeClass("display-none");
+            }
+        }
+    ],
+    template: tourTemplate,
+    onShown: function() {
+        if (!Session.get("hideEndTour")) {
+            $("#tour-end").removeClass("display-none");
+        }
+    },
+    storage: window.sessionStorage
 });
 
 groupVisExample = new Tour({
@@ -155,7 +229,7 @@ groupVisExample = new Tour({
         }
     },
     storage: window.sessionStorage
-})
+});
 
 groupVisTour = new Tour({
     steps: [

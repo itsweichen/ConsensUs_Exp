@@ -290,10 +290,9 @@ Template.VisExampleVis.onRendered(function() {
 
         var argu = new Array(user_num + 1);
 
-        argu[1] = "This is an average of everyone's score.Difference between committee and you indicates the amount of disagreement between you and other voters.Click on the dots to see others' votes. Hover over voters to see their score and arguments.Your task is to answer the questions below the visualization.This is an average of everyone's score.Difference between committee and you indicates the amount of disagreement between you and other voters.Click on the dots to see others' votes. Hover over voters to see their score and arguments.Your task is to answer the questions below the visualization.Your task is to answer the questions below the visualization.This is an average of everyone's scoreThis is an average of everyone's score.Difference between committee and you indicates the amount of disagreement between you and other voters.Click on the dots to see others' votes. Hover over voters to see their others' votes. Hover over voters to see their score and arguments.Your task is to answer the questions below the visualization."
-        argu[2] = "score and arguments.Your task is to answer the questions below the visualization.This is an average of everyone's score.Difference between committee and you indicates the amount of disagreement between you and other voters.Click on the dots to see others' votes. Hover over voters to see their score and arguments.Your task is to answer the questions below the visualization.Your task is to answer the questions below the visualization.This is an average of everyone's score.Difference between committee and you indicates the amount of disagreement between you and other voters.Click on the dots to see ";
-        argu[3] = "score and arguments.Your task is to answer the questions below the visualization.This is an average of everyone's score.Difference between committee and you indicates the amount of disagreement between you and other voters.Click on the dots to see others' votes. Hover over voters to see their score and arguments.Your task is to answer the questions below the visualization.Your task is to answer the questions below the visualization.This is an average of everyone's score.Difference between committee and you indicates the amount of disagreement between you and other voters.Click on the dots to see ";
-
+        argu[1] = "This is the arguments written by Member1 for why s/he prefer the candidate.";
+        argu[2] = "This is the arguments written by Member2 for why s/he prefer the candidate.";
+        argu[3] = "This is the arguments written by Member3 for why s/he prefer the candidate.";
 
         calculateAvg();
         calculateConflict1();

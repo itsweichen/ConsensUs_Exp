@@ -32,7 +32,7 @@ function checkAnswerQ6(users, rightPool) {
 Template.Admin.events({
     'click #get-result': function(e) {
         var chairs = Meteor.users.find({'username': {$ne : "weichen"}});
-        var mturk_id, name, taskId, voterNum, biasedType, confi_1, confi_2, will_1, will_2, score_1, score_2, argu1, argu2;
+        var mturk_id, name, taskId, voterNum, biasedType, confi_1, confi_2, will_1, will_2, score_1, score_2, argu1;
         var subjective;
         var time = new Array(4);
         var questions, questionsR, condition;
@@ -76,9 +76,8 @@ Template.Admin.events({
             }
 
             // argu
-            argu = Arguments.findOne({userId: id}) || {argu1: "null", argu2: "null"};
+            argu = Arguments.findOne({userId: id}) || {argu1: "null"};
             argu1 = argu.argu1;
-            argu2 = argu.argu2;
 
             for (var i = 0; i < 3; i++){
                 var tmp = Timer.findOne({userId: id, stage: i+1}) || {time: -1};
@@ -108,6 +107,7 @@ Template.Admin.events({
                 userId: id,
                 mturk_id: mturk_id,
                 name: name,
+                votersConfig: JSON.stringify(chair.profile.votersConfig),
                 taskId: taskId,
                 condition: condition,
                 voterNum: voterNum,
@@ -120,7 +120,6 @@ Template.Admin.events({
                 score_1: score_1,
                 score_2: score_2,
                 argu1: argu1,
-                argu2: argu2,
                 time: time,
                 questionCheck: questionCheck,
                 questions: questions,

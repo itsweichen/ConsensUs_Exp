@@ -7,7 +7,7 @@
             <li>As committee chair, please look over their scores and reasons.</li>
             <li>Answer the following questions, choose your best candidate and then provide your arguments.</li>
         </ol>
-        <i>Note that other members in the committee may have different information for the candidates (as in the real-world case).</i>
+        <!-- <i>Note that other members in the committee may have different information for the candidates (as in the real-world case).</i> -->
         </p>
     </div>
     <div class="row" style="background-color: Gainsboro; height:450px">
@@ -18,11 +18,14 @@
                 <div id= "checkbox1_div"></div>
             </div>
             <div class="col-lg-3">
-                <!-- <div id ="argument_div" style="margin-top: 34px;"></div> -->
+                {{#if cond4}}
+                <div id ="argument_div" style="margin-top: 34px;"></div>
+                {{/if}}
             </div>
 
     </div>
 </template>
+
 
 <template name="ArguOnly">
     <div style="height:600px">
@@ -34,9 +37,9 @@
                     <li>Answer the questions below and then provide your arguments.</li>
                 </ol>
                 </p>
-                <p>
-                    <i>Note that other members in the committee may have different information for the candidates (as in the real-world case).</i>
-                </p>
+                <!-- <p> -->
+                    <!-- <i>Note that other members in the committee may have different information for the candidates (as in the real-world case).</i> -->
+                <!-- </p> -->
         </div>
 
             <div class="row" style="background-color: Gainsboro; height: 40px">

@@ -28,31 +28,45 @@
                 <div class="panel-heading">
                 <h4>1. Identify points of disagreement within the committee.</h4>
                 </div>
+                <div class="panel-body">
                 {{> SubjectiveScale name="q1"}}
+                <p><b>Please briefy provide your reasons.</b></p>
+                <input type="text" name="q1w" class="form-control">
+                </div>
             </div>
             <div class="row panel panel-default" id="q2">
                 <div class="panel-heading">
                 <h4>2. Identify points of disagreement between you and the committee.</h4>
                 </div>
+                <div class="panel-body">
                 {{> SubjectiveScale name="q2"}}
+                <p><b>Please briefy provide your reasons.</b></p>
+                <input type="text" name="q2w" class="form-control">
+                </div>
             </div>
             <div class="row panel panel-default" id="q3">
                 <div class="panel-heading">
                 <h4>3. Identify committee members with similar opinions.</h4>
                 </div>
+                <div class="panel-body">
                 {{> SubjectiveScale name="q3"}}
+                </div>
             </div>
             <div class="row panel panel-default" id="q4">
                 <div class="panel-heading">
                 <h4>4. Identify committee members with outlier perspectives.</h4>
                 </div>
+                <div class="panel-body">
                 {{> SubjectiveScale name="q4"}}
+                </div>
             </div>
             <div class="row panel panel-default" id="q5">
                 <div class="panel-heading">
                 <h4>5. Summarize the group opinion.</h4>
                 </div>
+                <div class="panel-body">
                 {{> SubjectiveScale name="q5"}}
+                </div>
             </div>
 
             <div class="row">
@@ -64,7 +78,7 @@
 </template>
 
 <template name="SubjectiveScale">
-    <div class="panel-body">
+
     <div class="flex-container">
         <div class="flex-item">
             <label><input type="radio" value="1" name={{name}} />
@@ -95,5 +109,5 @@
             <br>7<br>Entirely Easy</label>
         </div>
     </div>
-    </div>
+
 </template>
