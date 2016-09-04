@@ -47,6 +47,17 @@ Template.individualPage.helpers({
     ord1: function() {
         var ord = FlowRouter.getQueryParam("order");
         return ord == "1";
+    },
+    info_url: function() {
+        var urls = new Array(6);
+        urls[0] = "https://docs.google.com/spreadsheets/d/1Is_kRroJXgTj9ZseQ9sfw44Crh7FfSTaqgj7Sbd7b1k/edit?usp=sharing";
+        urls[1] = "https://docs.google.com/spreadsheets/d/1ijPtrQiyFO9L6TxoL2tL-UpoX0EPOzKjoisKm6NoO6Q/edit?usp=sharing";
+        urls[2] = "https://docs.google.com/spreadsheets/d/1Pj1W9RGk0BgqyxTtVn-qjMu0GXvE9mTJT6dAS-r3pIs/edit?usp=sharing";
+        urls[3] = "https://docs.google.com/spreadsheets/d/1X8dYwE2eX-FU0CMH5AgPAoYXgDOuHyyrkAYBsqFBX44/edit?usp=sharing";
+        urls[4] = "https://docs.google.com/spreadsheets/d/1dsyL5JzRIcoC02BXGgOHrjSya65zBpXwCCDaWNARCtI/edit?usp=sharing";
+        urls[5] = "https://docs.google.com/spreadsheets/d/1_6EZsLCbNCX5DOU_WyEBwq3OTOGVQnUeaf-S9pxUQkQ/edit?usp=sharing";
+        shuffle(urls);
+        return urls[0];
     }
 });
 
@@ -55,12 +66,15 @@ Template.individualPage.events({
     'click #btn-next': (event) => {
 
         // check scores
-        for (var i = 1; i < 4; i++) {
-            if (scores[0][i] == -1) {
-                alert("Please give score to each candidate regarding each criterion before submit.");
-                return;
+        if (!devMode) {
+            for (var i = 1; i < 4; i++) {
+                if (scores[0][i] == -1) {
+                    alert("Please give score to each candidate regarding each criterion before submit.");
+                    return;
+                }
             }
         }
+
 
         // save scores
         const FLAG = 1;

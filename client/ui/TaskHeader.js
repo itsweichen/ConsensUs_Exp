@@ -1,6 +1,6 @@
 Template.TaskHeader.helpers({
     chairName: function() {
-        return Meteor.user().profile.nickname;
+        return Meteor.user() && Meteor.user().profile && Meteor.user().profile.nickname;
     }
 });
 

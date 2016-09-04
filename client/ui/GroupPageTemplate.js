@@ -39,6 +39,7 @@ Template.GroupPageTemplate.helpers({
 Template.GroupPageTemplate.events({
     'click .submitArgu': function() {
         var argu1 = $('#argu-textarea-1 textarea').val();
+        var argu2 = $('#argu-textarea-2 textarea').val();
         var argu1Len = argu1.split(/[^\s]+/).length - 1;
         // var argu2 = $('#argu-textarea-2 textarea').val();
         // var argu2Len = argu2.split(/[^\s]+/).length - 1;
@@ -53,22 +54,21 @@ Template.GroupPageTemplate.events({
             return;
         }
         timerEnd(3);
-        // Arguments.insert({userId: Meteor.userId(), argu1: argu1, argu2: argu2});
-        Arguments.insert({userId: Meteor.userId(), argu1: argu1});
+        Arguments.insert({userId: Meteor.userId(), argu1: argu1, argu2: argu2});
         Scores.insert({userId:  Meteor.userId(), score: document.getElementById('indi2').contentWindow.scores, order: "2" });
 
         Subjective.update({_id: Subjective.findOne({userId: Meteor.userId()})._id}, {$set: {g1: g1, g2: g2, g3: g3}});
 
         FlowRouter.go('/' + FlowRouter.getParam("taskId") + '/confidence?order=2');
     },
-    'keydown textarea': function(e) {
+    'keydown #argu1': function(e) {
         s = e.target.value;
         var numm = s.split(/[^\s]+/).length - 1;
-        if (e.target.name === "argu1") {
-            $("#argu-textarea-1 .word_counter").html(numm);
-        } else {
-            $("#argu-textarea-2 .word_counter").html(numm);
-        }
+        //if (e.target.name === "argu1") {
+        $("#argu-textarea-1 .word_counter").html(numm);
+        //} else {
+        //    $("#argu-textarea-2 .word_counter").html(numm);
+        //}
 
     }
 

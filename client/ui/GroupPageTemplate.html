@@ -17,7 +17,7 @@
 
     <hr>
 
-    <div class="row">
+    <div class="row" id="scroll-to">
         {{#if type1p5}}
             <!-- {{> VisTutorial}} -->
             {{> SubjectiveQuestions}}
@@ -52,10 +52,19 @@
                 <h4>Explain why you changed (or did not change) your score.</h4>
                 </div>
                 <div class="panel-body">
-                <textarea name="argu1"  rows="8" cols="30" class="form-control" placeholder="At least 30 words"></textarea>
+                <textarea id="argu1" name="argu1"  rows="6" cols="30" class="form-control" placeholder="At least 30 words"></textarea>
                 <div align="right">
                     <span class="word_counter">0</span> Words<br/>
                 </div>
+                </div>
+            </div>
+
+            <div id="argu-textarea-2" class="row panel panel-default">
+                <div class="panel-heading">
+                <h4>What do you think of your committee members?</h4>
+                </div>
+                <div class="panel-body">
+                <textarea name="argu2" rows="4" cols="30" class="form-control"></textarea>
                 </div>
             </div>
 

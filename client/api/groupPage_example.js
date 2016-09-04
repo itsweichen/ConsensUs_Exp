@@ -765,7 +765,6 @@ Template.VisExampleVis.onRendered(function() {
     d3.selectAll(".small_dot")
         .each(function(d){
             if(conflict2[d.id[0]][d.id[1]]!= 0){
-            console.log("aaaa");
             d3.select(this.parentNode)
             .append("path")
             .classed("conflict_bar", true)
