@@ -11,7 +11,7 @@ Template.UserSignIn.events({
                 $('.form-signin').prepend(errorHTML);
             }
             else{
-                FlowRouter.go('/'+taskId+'/group?type=1');
+                FlowRouter.go('/'+taskId+'/group?type=s');
             }
         });
     }

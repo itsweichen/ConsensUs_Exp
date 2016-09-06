@@ -5,7 +5,8 @@ Template.GroupPageTemplate.helpers({
     cond1_2: function() {
         var taskId = FlowRouter.getParam("taskId");
         var task = Tasks.findOne({_id: taskId});
-        return (task.condition === 1) || (task.condition === 2) || (task.condition === 4);
+        var type = type = FlowRouter.getQueryParam("type");
+        return (task.condition === 1) || (task.condition === 2) || (task.condition === 4) || (type === "s");
     },
     cond5_6: function() {
         var taskId = FlowRouter.getParam("taskId");
@@ -15,12 +16,14 @@ Template.GroupPageTemplate.helpers({
     cond3: function() {
         var taskId = FlowRouter.getParam("taskId");
         var task = Tasks.findOne({_id: taskId});
-        return task.condition === 3;
+        var type = FlowRouter.getQueryParam("type");
+        return task.condition === 3 && type !== "s";
     },
     cond4: function() {
         var taskId = FlowRouter.getParam("taskId");
         var task = Tasks.findOne({_id: taskId});
-        return task.condition === 4;
+        var type = FlowRouter.getQueryParam("type");
+        return task.condition === 4 && type !== "s";
     },
     'type1': () => {
         var type = FlowRouter.getQueryParam("type");
@@ -38,6 +41,9 @@ Template.GroupPageTemplate.helpers({
 
 Template.GroupPageTemplate.events({
     'click .submitArgu': function() {
+        console.log(document.getElementById('indi2').contentWindow.scores);
+        return;
+
         var argu1 = $('#argu-textarea-1 textarea').val();
         var argu2 = $('#argu-textarea-2 textarea').val();
         var argu1Len = argu1.split(/[^\s]+/).length - 1;
@@ -55,6 +61,7 @@ Template.GroupPageTemplate.events({
         }
         timerEnd(3);
         Arguments.insert({userId: Meteor.userId(), argu1: argu1, argu2: argu2});
+
         Scores.insert({userId:  Meteor.userId(), score: document.getElementById('indi2').contentWindow.scores, order: "2" });
 
         Subjective.update({_id: Subjective.findOne({userId: Meteor.userId()})._id}, {$set: {g1: g1, g2: g2, g3: g3}});

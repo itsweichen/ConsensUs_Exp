@@ -20,8 +20,8 @@ Template.VisExampleArguOnly.onRendered(function() {
     // arguments
     var argu = new Array(user_num + 1);
     argu[1] = "This is the arguments written by Member1 for why s/he prefer the candidate.";
-    argu[2] = "This is the arguments written by Member2 for why s/he prefer the candidate.";
-    argu[3] = "This is the arguments written by Member3 for why s/he prefer the candidate.";
+    argu[2] = "Arguments written by Member2 for why s/he prefer the candidate.";
+    argu[3] = "You will see the true arguments in the next page.";
 
     // end backend
 
@@ -290,9 +290,10 @@ Template.VisExampleVis.onRendered(function() {
 
         var argu = new Array(user_num + 1);
 
-        argu[1] = "This is the arguments written by Member1 for why s/he prefer the candidate.";
-        argu[2] = "This is the arguments written by Member2 for why s/he prefer the candidate.";
-        argu[3] = "This is the arguments written by Member3 for why s/he prefer the candidate.";
+        argu[1] = "";
+        argu[2] = "Arguments written by Member2 for why s/he prefer the candidate.";
+        argu[3] = "You will see the true arguments in the next page.";
+        argu[4] = "You will see the true arguments in the next page.";
 
         calculateAvg();
         calculateConflict1();

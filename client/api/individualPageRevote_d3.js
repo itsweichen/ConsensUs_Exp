@@ -1,8 +1,8 @@
-Template.individualPage.onRendered(function() {
+Template.individualPageRevote.onRendered(function() {
     this.autorun(function() {
-        var criteria_num = 4;
+
+        var criteria_num = 0;
         var candidate_num = 3;
-        var user_num = 6;
         var i = 0, j = 0, k = 0;
 
         var height = 450, width = 1050;
@@ -34,7 +34,7 @@ Template.individualPage.onRendered(function() {
         .attr("height", height)
         .attr("width", width);
 
-        var data1 = [{rect:0, name:"Overall"},{rect:1, name:"Academic"},{rect:2, name:"Activities"},{rect:3, name:"Recommendation Letter"},{rect:4, name:"Readiness for Engineering"}];
+        var data1 = [{rect:0, name:"Overall"}];
 
         var title_width = 200;
         var rect_height = 2, rect_width=400;
@@ -62,27 +62,11 @@ Template.individualPage.onRendered(function() {
         .attr("width", rect_width)
         .attr("fill", "#C0C0C0")
         .attr('y', function(d, i){
-            if(i == 0)
             return (d.rect + 1) * padding_y - r;
-            else
-            return (d.rect + 1) * padding_y;
         })
-        .attr("height", function(d, i){
-            if(i == 0)
-            return r * 2;
-            return rect_height;
-        })
-        .attr("rx", function(d, i){
-            if(i == 0)
-            return r;
-            return 0;
-        })
-        .attr("ry", function(d, i){
-            if(i == 0)
-            return r;
-            return 0;
-        })
-        ;
+        .attr("height", r * 2)
+        .attr("rx", r)
+        .attr("ry", r);
 
 
         rect
@@ -99,31 +83,12 @@ Template.individualPage.onRendered(function() {
         var color = new Array("#43a853", "#4285f4", "#fbbc05", "BlueViolet", "brown", "Chartreuse", "Cyan");
 
 
-        var order = FlowRouter.getQueryParam("order");
-        if (order == "1") {
-            scores = new Array();
-            for(k=0;k<=criteria_num;k++){
-                scores[k]=new Array();
-                for(j=0;j<=candidate_num;j++)
-                scores[k][j]=0;
 
-            }
-
-            scores = [
-                [0, -1, -1, -1], // overall [invalid, candidate1, candidate2, candidate 3]
-                [0, -1, -1, -1],  //criteria 1
-                [0, -1, -1, -1],
-                [0, -1, -1, -1],
-                [0, -1, -1, -1]
-            ];
-        } else {
-            scores = Scores.findOne({userId: Meteor.userId(), order: "1"});
-            if (scores === undefined) {
-                return;
-            }
-            scores = scores.score;
+        scores = Scores.findOne({userId: Meteor.userId(), order: "1"});
+        if (scores === undefined) {
+            return;
         }
-
+        scores = scores.score;
 
 
         var str = "[";
@@ -227,9 +192,6 @@ Template.individualPage.onRendered(function() {
 
         circle.selectAll("circle")
         .style("filter", function(d){
-            if(d.id[0] == 0)
-            return;
-
             return "url(#drop-shadow)"});
 
 
@@ -244,59 +206,21 @@ Template.individualPage.onRendered(function() {
             .on("drag", dragMove)
             .on('dragend', dragEnd);
 
-            var drag1 = d3.behavior.drag()
-            .origin(Object)
-            .on("dragstart", function(d){
-
-                d3.event.sourceEvent.preventDefault();
-
-                d3.select(this)
-                .append("svg:image")
-                .attr('x',function(d){ return d.x + 5;})
-                .attr('y',function(d){ return d.y + 5;})
-                .attr('width', 20)
-                .attr('height', 24)
-                .attr("xlink:href","../forbidden-sign.png");
-
-                d3.selectAll(".handler")
-                    .select("circle")
-                    .style("stroke-width", function(d){
-                        console.log(this.parentNode.id);
-                        if(this.parentNode.id[1] == 0){
-                            return 0;
-                        }
-                        else{
-                            return "2px";
-                        }
-                    })
-                    .style("stroke", function(d){
-                        return color[this.parentNode.id[2]-1];
-                    });
-
-            })
-            .on('dragend', function(d){
-                d3.select(this).select("image").remove();
-                d3.selectAll(".handler").select("circle").style("stroke-width", 0);
-            });
-
             d3.selectAll(".handler").each(function(d){
-                if(d.id[0]!=0){
                     d3.select(this).call(drag);
-                }
-                else
-                d3.select(this).call(drag1);
-            })
+            });
 
 
             d3.selectAll(".handler").select("circle")
             .on("mouseover", function(d){
-                if(this.parentNode.id[1] != 0){
+
+                this.parentNode.appendChild(this);
+
                     d3.select(this)
-                    .attr("stroke-width", "2px")
-                    .attr("stroke", function(d){
+                    .style("stroke-width", "2px")
+                    .style("stroke", function(d){
                         return color[this.parentNode.id[2]-1];
                     });
-                }
 
                 d3.select(this.parentNode).append("text")
                 .attr("class", "voter_name")
@@ -314,7 +238,7 @@ Template.individualPage.onRendered(function() {
                     refNode = this.parentNode;
 
                     d3.select(this)
-                    .attr("stroke-width", 0);
+                    .style("stroke-width", 0);
 
                     d3.selectAll(".voter_name").remove();
 
@@ -353,8 +277,6 @@ Template.individualPage.onRendered(function() {
                     this.parentNode.insertBefore(this, refNode);
                     refNode = this;
 
-
-                    //                        d3.select(this.parentNode).append(this);
 
                     d3.select(this)
                     .select("circle")
@@ -431,44 +353,7 @@ Template.individualPage.onRendered(function() {
                                     return x;
 
                                 })
-                                .attr("x",
-                                Math.max(title_width + padding_x, d3.event.x) );
-
-                                //                                    Math.max(title_width + padding_x, Math.min(title_width + padding_x + rect_width, d3.event.x)) );
-
-
-                                var score_num = d3.round((d.x - title_width - padding_x)/rect_width * 10, 1);
-                                if(score_num > 10) score_num = -1;
-                                scores[d.row][d.col] = score_num;
-                                //php
-                                //                           calculateTable();
-                                var overall = 0;
-                                for(i = 1; i <= criteria_num; i++){
-                                    if(scores[i][d.col] == -1) break;       //if any of the criteria is not scored
-                                    overall += scores[i][d.col];
-                                }
-
-                                if(i == criteria_num + 1)
-                                overall /= criteria_num;
-                                else
-                                overall = -1;
-
-                                scores[0][d.col] = overall;
-                                var overall_id = "#a0" + d.col.toString();
-                                d3.select(overall_id).select("circle").attr("cx", function(d) {
-                                    if(overall == -1){
-                                        d.x = 600 + d.col * 30
-                                        return d.x;
-                                    }
-                                    else{
-                                        d.x = title_width + padding_x + overall * rect_width /10;
-                                        return d.x;
-                                    }
-
-                                }
-
-                            );
-
+                                .attr("x", Math.max(title_width + padding_x, d3.event.x) );
 
                         }
 
@@ -490,44 +375,9 @@ Template.individualPage.onRendered(function() {
                             .select("text")
                             .text('');
 
-
-
-                            var score_num = d3.round((d.x - title_width - padding_x)/rect_width * 10, 1);
-                            if(score_num > 10) score_num = -1;
-                            scores[d.row][d.col] = score_num;
-                            //php
-                            //                           calculateTable();
-                            var overall = 0;
-                            for(i = 1; i <= criteria_num; i++){
-                                if(scores[i][d.col] == -1) break;       //if any of the criteria is not scored
-                                overall += scores[i][d.col];
                             }
 
-                            if(i == criteria_num + 1)
-                            overall /= criteria_num;
-                            else
-                            overall = -1;
 
-                            scores[0][d.col] = d3.round(overall, 1);
-                            var overall_id = "#a0" + d.col.toString();
-                            d3.select(overall_id).select("circle").attr("cx", function(d) {
-                                if(overall == -1){
-                                    d.x = 600 + d.col * 30;
-                                    return d.x;
-                                }
-                                else{
-                                    d.x = title_width + padding_x + overall * rect_width /10;
-                                    return d.x;
-                                }
-
-                            }
-
-                        );
-
-
-                        //                            save();
-
-                        //recover bar name
                         d3.selectAll(".bar").on("mouseover", function(d){
                             var row = this.id[1];
                             for(i = 1; i <= candidate_num; i++){
@@ -544,29 +394,6 @@ Template.individualPage.onRendered(function() {
                             }
 
                         });
-
-                        d3.selectAll(".handler").select("circle")
-                        .on("mouseover", function(d){
-                            if(this.parentNode.id[1] != 0){
-                                d3.select(this)
-                                .attr("stroke-width", "2px")
-                                .attr("stroke", function(d){
-                                    return color[this.parentNode.id[2]-1];
-                                });
-                            }
-
-                            d3.select(this.parentNode).append("text")
-                            .attr("class", "voter_name")
-                            .text(function(d){
-                                return candid[d.col-1].candid;})
-                                .style("text-anchor", "end")
-                                .attr("transform", function(d, i){
-                                    return "translate(" + d.x + "," + (d.y + r + 4) + ") rotate(-40)";
-                                });
-
-                            });
-
-                        }
 
 
 
@@ -610,8 +437,8 @@ Template.individualPage.onRendered(function() {
                             .select("#checkbox_panel")
                             .classed("checkbox", true)
                             .style("position", "absolute")
-                            .style("left", 790  + "px")
-                            .style("top", function() { return 260 + "px";})
+                            .style("left", 788  + "px")
+                            .style("top", function() { return 150 + "px";})
                             .append('input')
                             .attr('type','checkbox')
                             .property("checked", false);
@@ -656,5 +483,5 @@ Template.individualPage.onRendered(function() {
                                     d3.selectAll(".axis").style("visibility", "hidden");
                                 }
                             })
-                        });
-                    });
+});
+});

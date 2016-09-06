@@ -32,7 +32,7 @@ function checkAnswerQ6(users, rightPool) {
 Template.Admin.events({
     'click #get-result': function(e) {
         var chairs = Meteor.users.find({'username': {$ne : "weichen"}});
-        var mturk_id, name, taskId, voterNum, biasedType, confi_1, confi_2, will_1, will_2, score_1, score_2, argu1;
+        var mturk_id, name, taskId, voterNum, biasedType, confi_1, confi_2, will_1, will_2, score_1, score_2, argu1, argu2;
         var subjective;
         var time = new Array(4);
         var questions, questionsR, condition;
@@ -52,32 +52,22 @@ Template.Admin.events({
 
             // confidence
             var confidence_1 = Confidence.findOne({userId: id, order: "1"}) || {confidence: -1, willingness: -1};
-            confi_1 = confidence_1.confidence;
-            will_1 = confidence_1.willingness;
             var confidence_2 = Confidence.findOne({userId: id, order: "2"}) || {confidence: -1, willingness: -1};
-            confi_2 = confidence_2.confidence;
-            will_2 = confidence_2.willingness;
 
             // subjective
             subjective = Subjective.findOne({userId: id}) || {sub: -1};
-            subjective = JSON.stringify(subjective);
 
             // score
             score_1 = Scores.findOne({userId: id, order: "1"}) || {score: [[-1]]};
             score_2 = Scores.findOne({userId: id, order: "2"}) || {score: [[-1]]};
             score_1 = score_1.score;
             score_2 = score_2.score;
-
-            var scoreDis = 0;
-            for (var i = 0; i < score_1.length; i++) {
-                for (var j = 0; j < score_2.length; j++) {
-                    scoreDis += Math.abs(score_1[i][j] - score_2[i][j]);
-                }
-            }
+            console.log(score_2);
 
             // argu
-            argu = Arguments.findOne({userId: id}) || {argu1: "null"};
+            argu = Arguments.findOne({userId: id}) || {argu1: "null", argu2: "null"};
             argu1 = argu.argu1;
+            argu2 = argu.argu2;
 
             for (var i = 0; i < 3; i++){
                 var tmp = Timer.findOne({userId: id, stage: i+1}) || {time: -1};
@@ -100,6 +90,13 @@ Template.Admin.events({
                 questionCheck[7] = checkAnswer(questions.q8, questionsR.q8);
             }
 
+            var question_right_count = 0;
+            for (var i = 0; i < 8; i++) {
+                if (questionCheck[i]){
+                    question_right_count += 1;
+                }
+            }
+
             questions = JSON.stringify(questions);
             questionsR = JSON.stringify(questionsR);
 
@@ -107,24 +104,32 @@ Template.Admin.events({
                 userId: id,
                 mturk_id: mturk_id,
                 name: name,
-                votersConfig: JSON.stringify(chair.profile.votersConfig),
                 taskId: taskId,
                 condition: condition,
-                voterNum: voterNum,
-                biasedType: biasedType,
-                confi_1: confi_1,
-                confi_2: confi_2,
-                will_1: will_1,
-                will_2: will_2,
-                scoreDis: scoreDis,
+                confi_1: confidence_1.confidence,
+                confi_2: confidence_2.confidence,
+                will_1: confidence_1.willingness,
+                will_2: confidence_2.willingness,
                 score_1: score_1,
                 score_2: score_2,
                 argu1: argu1,
+                argu2: argu2,
                 time: time,
-                questionCheck: questionCheck,
-                questions: questions,
-                questionsRight: questionsR,
-                subjective: subjective
+                question_right_count: question_right_count,
+                sub_q1: subjective.q1,
+                sub_q2: subjective.q2,
+                sub_q3: subjective.q3,
+                sub_q4: subjective.q4,
+                sub_q5: subjective.q5,
+                sub_q1w: subjective.q1w,
+                sub_g1: subjective.g1,
+                sub_g2: subjective.g2,
+                sub_g3: subjective.g3,
+                question_check: questionCheck
+                // for debugging
+                // subjective: JSON.stringify(subjective),
+                // questions: questions,
+                // questionsRight: questionsR,
             });
         });
         $(e.target).hide();

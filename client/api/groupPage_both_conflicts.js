@@ -54,9 +54,6 @@ Template.GroupPageBothConflicts.onRendered(function() {
             voter_info[i] = {code: i+1, name: taskInfo.voters[i-1]};
         }
 
-        console.log("voter_info", voter_info);
-
-
         // arguments
         var argu = new Array(user_num + 1);
         argu[1] = "";
@@ -1124,7 +1121,6 @@ Template.GroupPageBothConflicts.onRendered(function() {
                            for(j = 1; j<=candidate_num; j++){
                                conflict1[i][j] /= max;
                            }
-                            console.log(conflict1);
 
                        for(i = 0; i<=criteria_num; i++){
                            max = 0, max_j = 0;

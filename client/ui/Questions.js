@@ -58,14 +58,13 @@ AutoForm.hooks({
       },
       onSuccess: function (insertDoc, updateDoc, currentDoc) {
           timerEnd(2);
-          $('body, html').animate({ scrollTop: 0 }, 800);
+          $('body, html').animate({ scrollTop: $("#scroll-to").offset().top - 100 }, 800);
           FlowRouter.go('/' + FlowRouter.getParam("taskId") + '/group?type='+1.5);
         }
   }
 });
 
 Template.Questions.onRendered(function() {
-    console.log("question");
     Session.set('hideEndTour', hideEndTour);
     questionTour.init();
     questionTour.start(true);
