@@ -87,27 +87,27 @@ groupVisExampleBoth = new Tour({
     steps: [
         {
             element: "#main_panel",
-            title: "Heads Up (1/6)",
+            title: "Heads Up (1/8)",
             content: "Please follow the tutorial very carefully. This is an example to show you how to interprete the representation in the next page.",
             placement: "top"
         }, {
             element: "#a11",
-            title: "Dots (2/6)",
+            title: "Dots (2/8)",
             content: "Big dots: Average scores across the committee. || Small dots: Your scores.",
             placement: 'bottom'
         }, {
             element: "#a11 .small_dot_path",
-            title: "Biggest point of disagreement between committee & you (3/6)",
+            title: "Biggest point of disagreement between committee & you (3/8)",
             content: "For example, this shows <b>regarding 'Academic', Sam has the biggest point of disagreement between committee & you</b>.",
             placement: 'right'
         }, {
             element: "#a21 .large_dot_path",
-            title: "Biggest point of disagreement within the committee (4/6)",
+            title: "Biggest point of disagreement within the committee (4/8)",
             content: "For example, this shows <b>regarding 'Activities', Sam has the biggest point of disagreement within the committee</b>.",
             placement: 'top'
         }, {
             element: "#a12 .large_dot",
-            title: "Click on the dots(4/6)",
+            title: "Click on the dots(5/8)",
             content: "Please click the blue big dot.",
             placement: 'top',
             onShow: function(tour) {
@@ -119,7 +119,7 @@ groupVisExampleBoth = new Tour({
             reflex: true
         }, {
             element: "#a2",
-            title: "Every member's score (4/6)",
+            title: "Every member's score (6/8)",
             content: "This is <b>everyone's score for Adam in Academic</b>. You can hover on the dots to see who gave the score.",
             placement: 'top',
             onHidden: function(tour) {
@@ -129,7 +129,7 @@ groupVisExampleBoth = new Tour({
             }
         }, {
             element: "#v2",
-            title: "Hoving on the NAME (5/6)",
+            title: "Hoving on the NAME (7/8)",
             content: "You'll see his/her scores and arguments (ON THE RIGHT) on hovering.",
             placement: 'top',
             onShown: function(tour) {
@@ -140,7 +140,7 @@ groupVisExampleBoth = new Tour({
             }
         }, {
             element: "#main_panel",
-            title: "Next Step (6/6)",
+            title: "Next Step (8/8)",
             content: "Please study the representation. After you finish, please click 'Next'.",
             placement: 'top',
             onShown: function(tour) {
@@ -161,27 +161,27 @@ groupVisExample = new Tour({
     steps: [
         {
             element: "#main_panel",
-            title: "Heads Up (1/6)",
+            title: "Heads Up (1/8)",
             content: "Please follow the tutorial very carefully. This is an example to show you how to interprete the representation in the next page.",
             placement: "top"
         }, {
             element: "#a11",
-            title: "Dots (2/6)",
+            title: "Dots (2/8)",
             content: "Big dots: Average scores across the committee. || Small dots: Your scores.",
             placement: 'bottom'
         }, {
             element: "#a11 .small_dot_path",
-            title: "Biggest point of disagreement between committee & you (3/6)",
+            title: "Biggest point of disagreement between committee & you (3/8)",
             content: "For example, this shows <b>regarding 'Academic', Sam has the biggest point of disagreement between committee & you</b>.",
             placement: 'right'
         }, {
             element: "#a21 .large_dot_path",
-            title: "Biggest point of disagreement within the committee (4/6)",
+            title: "Biggest point of disagreement within the committee (4/8)",
             content: "For example, this shows <b>regarding 'Activities', Sam has the biggest point of disagreement within the committee</b>.",
             placement: 'top'
         }, {
             element: "#a12 .large_dot",
-            title: "Click on the dots(4/6)",
+            title: "Click on the dots(5/8)",
             content: "Please click the blue big dot.",
             placement: 'top',
             onShow: function(tour) {
@@ -193,7 +193,7 @@ groupVisExample = new Tour({
             reflex: true
         }, {
             element: "#a2",
-            title: "Every member's score (4/6)",
+            title: "Every member's score (6/8)",
             content: "This is <b>everyone's score for Adam in Academic</b>. You can hover on the dots to see who gave the score.",
             placement: 'top',
             onHidden: function(tour) {
@@ -203,7 +203,7 @@ groupVisExample = new Tour({
             }
         }, {
             element: "#v2",
-            title: "Hoving on the NAME (5/6)",
+            title: "Hoving on the NAME (7/8)",
             content: "You'll see his/her scores on hovering.",
             placement: 'top',
             onShown: function(tour) {
@@ -214,7 +214,7 @@ groupVisExample = new Tour({
             }
         }, {
             element: "#main_panel",
-            title: "Next Step (6/6)",
+            title: "Next Step (8/8)",
             content: "Please study the representation. After you finish, please click 'Next'.",
             placement: 'top',
             onShown: function(tour) {

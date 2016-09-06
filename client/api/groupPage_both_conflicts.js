@@ -1278,6 +1278,15 @@ Template.GroupPageBothConflicts.onRendered(function() {
                 QuestionsR.insert({q1: q1A, q2: q2A, q3: q3A, q4: q4A, q5: q5A, q6: q6A, q7: q7A, q8: q8A,userId: Meteor.userId()});
             }
 
+            Meteor.users.update(
+                {_id: Meteor.userId()},
+                {$set:
+                    {
+                        "profile.group": voter,
+                    }
+                }
+            );
+
 
 
 

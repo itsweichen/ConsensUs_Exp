@@ -6,7 +6,7 @@ Template.SubjectiveQuestions.events({
         var q3 = $('#q3 input[name="q3"]:checked').val();
         var q4 = $('#q4 input[name="q4"]:checked').val();
         var q5 = $('#q5 input[name="q5"]:checked').val();
-        var q1w = $('#q1 input[name="q1w"]').val();
+        var q1w = $('#q1 textarea[name="q1w"]').val();
 
         if (q1 === undefined || q2 == undefined || q3 == undefined || q4 == undefined || q5 == undefined || q1w == "") {
             alert("Please input your answers for all of the questions before submit.");

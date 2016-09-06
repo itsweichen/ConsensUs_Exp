@@ -38,6 +38,7 @@ Template.Admin.events({
         var questions, questionsR, condition;
         chairs.forEach(function(chair) {
             id = chair._id;
+            var group = chair.profile.group;
             mturk_id = chair.username;
             if (Results.findOne({mturk_id: mturk_id})) {
                 console.log(mturk_id + " already exists.");
@@ -62,7 +63,6 @@ Template.Admin.events({
             score_2 = Scores.findOne({userId: id, order: "2"}) || {score: [[-1]]};
             score_1 = score_1.score;
             score_2 = score_2.score;
-            console.log(score_2);
 
             // argu
             argu = Arguments.findOne({userId: id}) || {argu1: "null", argu2: "null"};
@@ -74,7 +74,7 @@ Template.Admin.events({
                 time[i] = tmp.time;
             }
 
-            questions = Questions.findOne({userId: id}) || {q1: null};
+            questions = Questions.findOne({userId: id}) || {q1: null, q2w: "null"};
             questionsR = QuestionsR.findOne({userId: id}) || {q1:null};
 
             questionCheck = new Array(8);
@@ -116,6 +116,7 @@ Template.Admin.events({
                 argu2: argu2,
                 time: time,
                 question_right_count: question_right_count,
+                que_q2w: questions.q2w,
                 sub_q1: subjective.q1,
                 sub_q2: subjective.q2,
                 sub_q3: subjective.q3,
@@ -125,6 +126,7 @@ Template.Admin.events({
                 sub_g1: subjective.g1,
                 sub_g2: subjective.g2,
                 sub_g3: subjective.g3,
+                group: group,
                 question_check: questionCheck
                 // for debugging
                 // subjective: JSON.stringify(subjective),
