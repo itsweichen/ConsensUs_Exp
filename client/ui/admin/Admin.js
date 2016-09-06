@@ -78,6 +78,7 @@ Template.Admin.events({
             questionsR = QuestionsR.findOne({userId: id}) || {q1:null};
 
             questionCheck = new Array(8);
+            var que_q2w = questions.q2w;
 
             if (questions.q1 !== null && questionsR.q1 !== null) {
                 questionCheck[0] = checkAnswer(questions.q1, questionsR.q1);
@@ -97,9 +98,6 @@ Template.Admin.events({
                 }
             }
 
-            questions = JSON.stringify(questions);
-            questionsR = JSON.stringify(questionsR);
-
             Results.insert({
                 userId: id,
                 mturk_id: mturk_id,
@@ -116,7 +114,7 @@ Template.Admin.events({
                 argu2: argu2,
                 time: time,
                 question_right_count: question_right_count,
-                que_q2w: questions.q2w,
+                que_q2w: que_q2w,
                 sub_q1: subjective.q1,
                 sub_q2: subjective.q2,
                 sub_q3: subjective.q3,
@@ -130,8 +128,8 @@ Template.Admin.events({
                 question_check: questionCheck
                 // for debugging
                 // subjective: JSON.stringify(subjective),
-                // questions: questions,
-                // questionsRight: questionsR,
+                // questions: JSON.stringify(questions),
+                // questionsRight: JSON.stringify(questionsR),
             });
         });
         $(e.target).hide();

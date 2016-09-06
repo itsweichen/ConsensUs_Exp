@@ -75,13 +75,39 @@ Template.individualPage.events({
             }
         }
 
+        $('#myModal').modal();
+        var overall = scores[0].slice(1,4);
+        var names = ["Sam", "Adam", "Jim"];
+        var pair = {};
+        for (var i = 0; i < 3; i++) {
+            pair[names[i]] = overall[i];
+        }
+        var sortable = [];
+        for (var name in pair)
+              sortable.push([name, pair[name]]);
 
+        sortable.sort(
+            function(a, b) {
+                return b[1] - a[1];
+            }
+        )
+
+        overall.sort();
+        var names_rank = new Array(3);
+        for (var i = 0; i < 3; i++) {
+            names_rank[i] = names[scores[0].indexOf(overall[2-i])];
+        }
+
+        $('#1').html("<b>" + sortable[0][0] + "</b>; overall score: " + sortable[0][1]);
+        $('#2').html("<b>" + sortable[1][0] + "</b>; overall score: " + sortable[1][1]);
+        $('#3').html("<b>" + sortable[2][0] + "</b>; overall score: " + sortable[2][1]);
+    },
+    'click #btn-confirm': (event) => {
         // save scores
         const FLAG = 1;
         var order = FlowRouter.getQueryParam("order");
 
         Scores.insert({userId:  Meteor.userId(), score: scores, order: order });
-
 
         // **************
         // random select voters
@@ -111,10 +137,6 @@ Template.individualPage.events({
 
         // **************
 
-        // save Arguments
-        //var argu = $('textarea#arguments').val();
-        //console.log("argu: " + argu);
-        //Arguments.insert({userId: userId, arguments: argu});
 
         if (order == "1") {
             timerEnd(1);

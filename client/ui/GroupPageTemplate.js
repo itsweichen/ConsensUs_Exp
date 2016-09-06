@@ -41,13 +41,9 @@ Template.GroupPageTemplate.helpers({
 
 Template.GroupPageTemplate.events({
     'click .submitArgu': function() {
-
         var argu1 = $('#argu-textarea-1 textarea').val();
         var argu2 = $('#argu-textarea-2 textarea').val();
         var argu1Len = argu1.split(/[^\s]+/).length - 1;
-        // var argu2 = $('#argu-textarea-2 textarea').val();
-        // var argu2Len = argu2.split(/[^\s]+/).length - 1;
-
 
         var g1 = $('#g1 input[name="g1"]:checked').val();
         var g2 = $('#g2 input[name="g2"]:checked').val();
@@ -57,7 +53,44 @@ Template.GroupPageTemplate.events({
             $('.div-alert').html('<div class="alert alert-danger" role="alert">Your arguments should be at least 30 words for the reasons (first question).</div>');
             return;
         }
+
+        $('#myModal').modal();
+        var scores = document.getElementById('indi2').contentWindow.scores;
+        var overall = scores[0].slice(1,4);
+        var names = ["Sam", "Adam", "Jim"];
+        var pair = {};
+        for (var i = 0; i < 3; i++) {
+            pair[names[i]] = overall[i];
+        }
+        var sortable = [];
+        for (var name in pair)
+              sortable.push([name, pair[name]]);
+
+        sortable.sort(
+            function(a, b) {
+                return b[1] - a[1];
+            }
+        )
+
+        overall.sort();
+        var names_rank = new Array(3);
+        for (var i = 0; i < 3; i++) {
+            names_rank[i] = names[scores[0].indexOf(overall[2-i])];
+        }
+
+        $('#1').html("<b>" + sortable[0][0] + "</b>; overall score: " + sortable[0][1]);
+        $('#2').html("<b>" + sortable[1][0] + "</b>; overall score: " + sortable[1][1]);
+        $('#3').html("<b>" + sortable[2][0] + "</b>; overall score: " + sortable[2][1]);
+    },
+    'click #btn-confirm': (event) => {
         timerEnd(3);
+
+        var argu1 = $('#argu-textarea-1 textarea').val();
+        var argu2 = $('#argu-textarea-2 textarea').val();
+        var g1 = $('#g1 input[name="g1"]:checked').val();
+        var g2 = $('#g2 input[name="g2"]:checked').val();
+        var g3 = $('#g3 input[name="g3"]:checked').val();
+        
         Arguments.insert({userId: Meteor.userId(), argu1: argu1, argu2: argu2});
 
         Scores.insert({userId:  Meteor.userId(), score: document.getElementById('indi2').contentWindow.scores, order: "2" });

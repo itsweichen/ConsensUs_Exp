@@ -52,4 +52,31 @@
                 </div> -->
 
             </div>
+
+            <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Confirm your ranking</h4>
+              </div>
+              <div class="modal-body">
+                <p>
+                    According to the overall scores, your ranking of the three candidates is:
+                </p>
+                <ol>
+                    <li><span id="1"></span></li>
+                    <li><span id="2"></span></li>
+                    <li><span id="3"></span></li>
+                </ol>
+                <div class="alert alert-warning" role="alert">Please go back and change the scores if necessary.</div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Go Back and Change</button>
+                <button type="button" class="btn btn-default" id="btn-confirm">That's My Ranking</button>
+              </div>
+            </div>
+          </div>
+        </div>
 </template>

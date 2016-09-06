@@ -1282,7 +1282,7 @@ Template.GroupPageBothConflicts.onRendered(function() {
                 {_id: Meteor.userId()},
                 {$set:
                     {
-                        "profile.group": voter,
+                        "profile.group": overall,
                     }
                 }
             );
