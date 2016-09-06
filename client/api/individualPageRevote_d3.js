@@ -375,6 +375,10 @@ Template.individualPageRevote.onRendered(function() {
                             .select("text")
                             .text('');
 
+                            var score_num = d3.round((d.x - title_width - padding_x)/rect_width * 10, 1);
+                            if(score_num > 10) score_num = -1;
+                            scores[d.row][d.col] = score_num;
+
                             }
 
 
