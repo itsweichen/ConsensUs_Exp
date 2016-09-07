@@ -170,7 +170,6 @@ Template.VisExampleArguOnly.onRendered(function() {
 
 
 Template.VisExampleVis.onRendered(function() {
-    this.autorun(function() {
 
         // backend code
 
@@ -1260,10 +1259,4 @@ Template.VisExampleVis.onRendered(function() {
             }
 
         }
-
-
-
-
-
-                                                });
                                             });

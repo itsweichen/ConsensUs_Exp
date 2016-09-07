@@ -14,4 +14,3 @@ timerEnd = function(stage) {
     console.log("timer - stage: " + stage + " time: " + range);
     Timer.update({_id: Timer.findOne({userId: Meteor.userId(), stage:stage})._id}, {$set: {time: range}});
 }
-·

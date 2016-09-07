@@ -78,9 +78,12 @@ Template.GroupPageTemplate.events({
             names_rank[i] = names[scores[0].indexOf(overall[2-i])];
         }
 
-        $('#1').html("<b>" + sortable[0][0] + "</b>; overall score: " + sortable[0][1]);
-        $('#2').html("<b>" + sortable[1][0] + "</b>; overall score: " + sortable[1][1]);
-        $('#3').html("<b>" + sortable[2][0] + "</b>; overall score: " + sortable[2][1]);
+        $('#1_name').html(sortable[0][0]);
+        $('#2_name').html(sortable[1][0]);
+        $('#3_name').html(sortable[2][0]);
+        $('#1_score').html(sortable[0][1]);
+        $('#2_score').html(sortable[1][1]);
+        $('#3_score').html(sortable[2][1]);
     },
     'click #btn-confirm': (event) => {
         timerEnd(3);
@@ -90,7 +93,7 @@ Template.GroupPageTemplate.events({
         var g1 = $('#g1 input[name="g1"]:checked').val();
         var g2 = $('#g2 input[name="g2"]:checked').val();
         var g3 = $('#g3 input[name="g3"]:checked').val();
-        
+
         Arguments.insert({userId: Meteor.userId(), argu1: argu1, argu2: argu2});
 
         Scores.insert({userId:  Meteor.userId(), score: document.getElementById('indi2').contentWindow.scores, order: "2" });

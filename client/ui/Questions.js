@@ -71,4 +71,5 @@ Template.Questions.onRendered(function() {
     // Session.set('hideEndTour', hideEndTour);
     // groupVisTour.init();
     // groupVisTour.start(true);
+    $('#step').html("2/3");
 })

@@ -16,6 +16,7 @@ Template.SubjectiveQuestions.events({
         Subjective.insert({userId: Meteor.userId(), q1: q1, q2: q2, q3: q3, q4: q4, q5: q5, q1w: q1w});
         timerStart(3);
         $('body, html').animate({ scrollTop: $("#scroll-to").offset().top - 100 }, 800);
+        $('#step').html("3/3");
         FlowRouter.go('/' + FlowRouter.getParam("taskId") + '/group?type='+2);
     }
 });

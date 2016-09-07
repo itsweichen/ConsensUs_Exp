@@ -98,9 +98,12 @@ Template.individualPage.events({
             names_rank[i] = names[scores[0].indexOf(overall[2-i])];
         }
 
-        $('#1').html("<b>" + sortable[0][0] + "</b>; overall score: " + sortable[0][1]);
-        $('#2').html("<b>" + sortable[1][0] + "</b>; overall score: " + sortable[1][1]);
-        $('#3').html("<b>" + sortable[2][0] + "</b>; overall score: " + sortable[2][1]);
+        $('#1_name').html(sortable[0][0]);
+        $('#2_name').html(sortable[1][0]);
+        $('#3_name').html(sortable[2][0]);
+        $('#1_score').html(sortable[0][1]);
+        $('#2_score').html(sortable[1][1]);
+        $('#3_score').html(sortable[2][1]);
     },
     'click #btn-confirm': (event) => {
         // save scores
@@ -160,5 +163,7 @@ Template.individualPage.onRendered(function() {
         //     display = document.querySelector('#time');
         // startIndiTimer(time, display);
     }
+
+    $('#step').html("1/3");
 
 });

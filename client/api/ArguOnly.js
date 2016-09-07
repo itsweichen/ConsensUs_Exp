@@ -62,8 +62,10 @@ Template.ArguOnly.onRendered(function() {
     }
 
     // end backend
+    console.log("running...");
 
-
+    $("#div-vis").empty();
+    $("#div-vis").html('<svg class="col-md-1 col-sm-1 col-xs-1"></svg><svg class="side_panel col-md-2 col-sm-2 col-xs-2"></svg><div class="argument_panel col-md-5 col-sm-4 col-xs-6"></div>');
 
                         var height = 400, width = 750;
                         var i, j, k;
