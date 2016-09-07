@@ -129,10 +129,10 @@ Meteor.startup(function() {
     	   },
     	   {
     		name: "Betty",
-    		scoresSam: [4,9.6,6.1,0,0],
-    		scoresAdam: [9.9,9.9,9.9,9.9,10],
-    		scoresJim: [9.8,9.9,9.9,9.6,9.8],
-    		argu: "Adam and Jim seem to have all the requisite type courses of study and Sam doesn’t. Sam’s focus has been more on team sports and drama while Adam and Jim’s focus has been strong in mathematics and both Adam and Jim have reasonable recommendation letters. It almost seems that Sam is hedging that his father’s job in some way will help him get in and attain the points he is basically lacking.",
+    		scoresSam: [8.1,9,8.5,7,7.8],
+    		scoresAdam: [9.1,9.4,9.5,8,9.3],
+    		scoresJim: [8.2,8,8,8,8.6],
+    		argu: "I give my rank as below: 1. Adam Adams - He has the most relevant experience and has expressed an explicit interest in engineering. His grades certainly suggest he can handle the academic rigor of the engineering program. Overall his application consistently indicates a strong background and interest in engineering. 2. Jim Jones - He appears to have the academic ability to successfully complete an engineering program. Some academic shortcomings but strong in the relevant field (math). I think he has done very well if you factor in his socioeconomic background. 3. Sam Smith - He is certainly academically capable. His experience is a mixed bag of somewhat relevant to irrelevant experiences. I think he would do well in the program and would accept him, but I rank him last because of experience and commitment concerns (undeclared) and to be frank I believe a man of his higher socioeconomic background has a large enough safety net to handle a rejection from this program.",
     		flag: 2,
     		gender: 2
     	   },
