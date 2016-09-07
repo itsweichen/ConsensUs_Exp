@@ -1,24 +1,4 @@
 
-Template.VisExample.onRendered(function() {
-    this.autorun(function() {
-    Session.set('hideEndTour', hideEndTour);
-    var taskId = FlowRouter.getParam("taskId");
-    var task = Tasks.findOne({_id: taskId});
-    if (!taskId || !task) {
-        return;
-    }
-    if ((task.condition === 1) || (task.condition === 2)) {
-        groupVisExample.init();
-        groupVisExample.start(true);
-    } else if (task.condition === 3) {
-        arguTour.init();
-        arguTour.start(true);
-    } else {
-        groupVisExampleBoth.init();
-        groupVisExampleBoth.start(true);
-    }
-});
-});
 
 Template.VisExample.events({
     'click #tour-start': (event) => {

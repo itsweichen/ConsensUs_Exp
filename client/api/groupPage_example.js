@@ -1,4 +1,5 @@
 Template.VisExampleArguOnly.onRendered(function() {
+
     var height = 400, width = 750;
     var i, j, k;
 
@@ -162,6 +163,10 @@ Template.VisExampleArguOnly.onRendered(function() {
                         }
                     }
 
+                    Session.set('hideEndTour', hideEndTour);
+                    arguTour.init();
+                    arguTour.start(true);
+
 
 });
 
@@ -170,8 +175,14 @@ Template.VisExampleArguOnly.onRendered(function() {
 
 
 Template.VisExampleVis.onRendered(function() {
-
+        this.autorun(function() {
         // backend code
+        var taskId = FlowRouter.getParam("taskId");
+        var task = Tasks.findOne({_id: taskId});
+        if (!taskId || !task) {
+            return;
+        }
+
 
         var voter_info  = [{ code:1,  name:"You"}, { code:2,  name:"Member1"},
                                         { code:3,  name:"Member2"}, { code:4,  name:"Member3"}];
@@ -1259,4 +1270,16 @@ Template.VisExampleVis.onRendered(function() {
             }
 
         }
-                                            });
+
+        Session.set('hideEndTour', hideEndTour);
+        if ((task.condition === 1) || (task.condition === 2)) {
+            groupVisExample.init();
+            groupVisExample.start(true);
+        } else if (task.condition === 4) {
+            groupVisExampleBoth.init();
+            groupVisExampleBoth.start(true);
+        }
+
+});
+
+});

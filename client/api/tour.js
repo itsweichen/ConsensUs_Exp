@@ -163,7 +163,6 @@ groupVisExampleBoth = new Tour({
             $("#tour-end").removeClass("display-none");
         }
     },
-    storage: window.sessionStorage
 });
 
 groupVisExample = new Tour({
@@ -240,7 +239,6 @@ groupVisExample = new Tour({
             $("#tour-end").removeClass("display-none");
         }
     },
-    storage: window.sessionStorage
 });
 
 // groupVisTour = new Tour({
