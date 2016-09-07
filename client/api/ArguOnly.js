@@ -194,6 +194,8 @@ Template.ArguOnly.onRendered(function() {
 
                             });
 
+                    d3.select("#v1").select("rect").style("fill", "grey").style("opacity", 1);
+                    d3.select("#v1").select("text").style("fill", "white");
 
 
 
