@@ -62,7 +62,6 @@ Template.ArguOnly.onRendered(function() {
     }
 
     // end backend
-    console.log("running...");
 
     $("#div-vis").empty();
     $("#div-vis").html('<svg class="col-md-1 col-sm-1 col-xs-1"></svg><svg class="side_panel col-md-2 col-sm-2 col-xs-2"></svg><div class="argument_panel col-md-5 col-sm-4 col-xs-6"></div>');
@@ -380,15 +379,16 @@ Template.ArguOnly.onRendered(function() {
                                     QuestionsR.insert({q1: q1A, q2: q2A, q3: q3A, q4: q4A, q5: q5A, q6: q6A, q7: q7A, q8: q8A,userId: Meteor.userId()});
                                 }
 
-                                Meteor.users.update(
-                                    {_id: Meteor.userId()},
-                                    {$set:
-                                        {
-                                            "profile.group": overall,
+                                if ( Meteor.users.findOne({_id: Meteor.userId(), 'profile.group': {$exists: true}}) === undefined) {
+                                    Meteor.users.update(
+                                        {_id: Meteor.userId()},
+                                        {$set:
+                                            {
+                                                "profile.group": overall,
+                                            }
                                         }
-                                    }
-                                );
-
+                                    );
+                                }
 
 });
 });

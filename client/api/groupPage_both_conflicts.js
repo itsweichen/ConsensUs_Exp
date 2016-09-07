@@ -8,10 +8,10 @@ Template.GroupPageBothConflicts.onRendered(function() {
         var chairScores = Scores.findOne({"userId": Meteor.userId()});
         var votersInfo = Meteor.users.findOne({_id: Meteor.userId()});
 
-        // TODO: change to subscribe ready later
-        if (!taskInfo || !chairScores || !votersInfo) {
-            return;
-        }
+        // // TODO: change to subscribe ready later
+        // if (!taskInfo || !chairScores || !votersInfo) {
+        //     return;
+        // }
 
         taskInfo.voters = votersInfo.profile.voters;
 
@@ -70,9 +70,6 @@ Template.GroupPageBothConflicts.onRendered(function() {
         var height = 400, width = 750;
         var r = 10;
         var i, j, k;
-
-
-
 
         var svg = d3
         .select('#main_panel')
@@ -1278,14 +1275,17 @@ Template.GroupPageBothConflicts.onRendered(function() {
                 QuestionsR.insert({q1: q1A, q2: q2A, q3: q3A, q4: q4A, q5: q5A, q6: q6A, q7: q7A, q8: q8A,userId: Meteor.userId()});
             }
 
-            Meteor.users.update(
-                {_id: Meteor.userId()},
-                {$set:
-                    {
-                        "profile.group": overall,
+            if ( Meteor.users.findOne({_id: Meteor.userId(), 'profile.group': {$exists: true}}) === undefined) {
+                Meteor.users.update(
+                    {_id: Meteor.userId()},
+                    {$set:
+                        {
+                            "profile.group": overall,
+                        }
                     }
-                }
-            );
+                );
+            }
+
 
 
 
