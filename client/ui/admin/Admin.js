@@ -38,7 +38,15 @@ Template.Admin.events({
         var questions, questionsR, condition;
         chairs.forEach(function(chair) {
             id = chair._id;
-            var group = chair.profile.group;
+            var group = chair.profile.group || [[-1]];
+
+            for (var i = 0; i < group.length; i++) {
+                for (var j = 0; j < group[0].length; j++) {
+                    group[i][j] = d3.round(group[i][j], 1);
+                }
+            }
+
+            var url = chair.profile.url;
             mturk_id = chair.username;
             if (Results.findOne({mturk_id: mturk_id})) {
                 console.log(mturk_id + " already exists.");
@@ -78,7 +86,7 @@ Template.Admin.events({
             questionsR = QuestionsR.findOne({userId: id}) || {q1:null};
 
             questionCheck = new Array(8);
-            var que_q2w = questions.q2w;
+            var que_q2w = questions.q2w || "null";
 
             if (questions.q1 !== null && questionsR.q1 !== null) {
                 questionCheck[0] = checkAnswer(questions.q1, questionsR.q1);
@@ -102,6 +110,7 @@ Template.Admin.events({
                 userId: id,
                 mturk_id: mturk_id,
                 name: name,
+                url: url,
                 taskId: taskId,
                 condition: condition,
                 confi_1: confidence_1.confidence,
@@ -115,21 +124,21 @@ Template.Admin.events({
                 time: time,
                 question_right_count: question_right_count,
                 que_q2w: que_q2w,
-                sub_q1: subjective.q1,
-                sub_q2: subjective.q2,
-                sub_q3: subjective.q3,
-                sub_q4: subjective.q4,
-                sub_q5: subjective.q5,
-                sub_q1w: subjective.q1w,
-                sub_g1: subjective.g1,
-                sub_g2: subjective.g2,
-                sub_g3: subjective.g3,
+                sub_q1: subjective.q1 || "null",
+                sub_q2: subjective.q2 || "null",
+                sub_q3: subjective.q3 || "null",
+                sub_q4: subjective.q4 || "null",
+                sub_q5: subjective.q5 || "null",
+                sub_q1w: subjective.q1w || "null",
+                sub_g1: subjective.g1 || "null",
+                sub_g2: subjective.g2 || "null",
+                sub_g3: subjective.g3 || "null",
                 group: group,
-                question_check: questionCheck
+                question_check: questionCheck,
                 // for debugging
                 // subjective: JSON.stringify(subjective),
-                // questions: JSON.stringify(questions),
-                // questionsRight: JSON.stringify(questionsR),
+                questions: JSON.stringify(questions) || "null",
+                questionsRight: JSON.stringify(questionsR) || "null"
             });
         });
         $(e.target).hide();

@@ -57,6 +57,14 @@ Template.individualPage.helpers({
         urls[4] = "https://docs.google.com/spreadsheets/d/1dsyL5JzRIcoC02BXGgOHrjSya65zBpXwCCDaWNARCtI/edit?usp=sharing";
         urls[5] = "https://docs.google.com/spreadsheets/d/1_6EZsLCbNCX5DOU_WyEBwq3OTOGVQnUeaf-S9pxUQkQ/edit?usp=sharing";
         shuffle(urls);
+        Meteor.users.update(
+            {_id: Meteor.userId()},
+            {$set:
+                {
+                    "profile.url": urls[0],
+                }
+            }
+        );
         return urls[0];
     }
 });
@@ -143,9 +151,9 @@ Template.individualPage.events({
 
         if (order == "1") {
             timerEnd(1);
-        } else {
-            //timerEnd(4);
         }
+        $("body").removeClass("modal-open");
+        $('body, html').animate({ scrollTop: 0 }, 800);
         FlowRouter.go('/' + FlowRouter.getParam("taskId") + '/confidence?order='+order);
     }
 });
