@@ -158,10 +158,6 @@ Template.individualPage.onRendered(function() {
         Session.set('hideEndTour', hideEndTour);
         individualTour.init();
         individualTour.start(true);
-
-        // var time = 60 * 10,
-        //     display = document.querySelector('#time');
-        // startIndiTimer(time, display);
     }
 
     $('#step').html("1/3");

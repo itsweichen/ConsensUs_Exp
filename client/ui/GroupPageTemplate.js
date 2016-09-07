@@ -114,14 +114,3 @@ Template.GroupPageTemplate.events({
     }
 
 });
-
-Template.GroupPageTemplate.onRendered(function() {
-    var type = FlowRouter.getQueryParam("type");
-
-
-    if (type === "2") {
-        Session.set('hideEndTour', hideEndTour);
-        revoteTour.init();
-        revoteTour.start(true);
-    }
-});

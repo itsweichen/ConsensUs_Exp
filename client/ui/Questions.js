@@ -65,11 +65,5 @@ AutoForm.hooks({
 });
 
 Template.Questions.onRendered(function() {
-    Session.set('hideEndTour', hideEndTour);
-    questionTour.init();
-    questionTour.start(true);
-    // Session.set('hideEndTour', hideEndTour);
-    // groupVisTour.init();
-    // groupVisTour.start(true);
     $('#step').html("2/3");
 })
