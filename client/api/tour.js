@@ -17,7 +17,11 @@ arguTour = new Tour({
             element: "#main_panel",
             title: "Heads Up (1/4)",
             content: "Please follow the tutorial very carefully. This is an example to show you how to interprete the representation in the next page.",
-            placement: "top"
+            placement: "top",
+            onShow: function (tour) {
+                console.log("argu tour starting...");
+                console.log($("#main_panel"));
+            }
         }, {
             element: ".side_panel",
             title: "Step 2 (2/4)",
@@ -52,7 +56,8 @@ arguTour = new Tour({
         if (!Session.get("hideEndTour")) {
             $("#tour-end").removeClass("display-none");
         }
-    }
+    },
+    storage: false,
 });
 
 
@@ -86,7 +91,8 @@ individualTour = new Tour({
         if (!Session.get("hideEndTour")) {
             $("#tour-end").removeClass("display-none");
         }
-    }
+    },
+    storage: false
 });
 
 groupVisExampleBoth = new Tour({
@@ -163,6 +169,7 @@ groupVisExampleBoth = new Tour({
             $("#tour-end").removeClass("display-none");
         }
     },
+    storage: false
 });
 
 groupVisExample = new Tour({
@@ -239,6 +246,7 @@ groupVisExample = new Tour({
             $("#tour-end").removeClass("display-none");
         }
     },
+    storage: false
 });
 
 // groupVisTour = new Tour({

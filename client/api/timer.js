@@ -9,8 +9,11 @@ timerEnd = function(stage) {
     var endTime = Date.now();
     var range = (endTime - startTime)/1000;
     if (startTime == -1) {
-        range = -1
+        range = -1;
     }
     console.log("timer - stage: " + stage + " time: " + range);
-    Timer.update({_id: Timer.findOne({userId: Meteor.userId(), stage:stage})._id}, {$set: {time: range}});
+    var timerId = Timer.findOne({userId: Meteor.userId(), stage:stage});
+    if(timerId) {
+        Timer.update({_id: timerId._id}, {$set: {time: range}});
+    }
 }
